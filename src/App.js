@@ -5,6 +5,7 @@ import GameSettings from './Components/Settings/Game';
 import TitleScreen from './Components/TitleScreen';
 import MultiplayerOptions from './Components/Settings/MultiplayerOptions';
 import Instructions from './Components/Instructions';
+import GameScreen from './Components/Game/GameScreen';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/gamesettings" element={<GameSettings />} />
           <Route path="/multiplayeroptions" element={<MultiplayerOptions />} />
           <Route path="/instructions" element={<Instructions />} />
+          <Route path="/game" element={<GameScreen />} />
         </Routes>
       </BrowserRouter>
     </>
