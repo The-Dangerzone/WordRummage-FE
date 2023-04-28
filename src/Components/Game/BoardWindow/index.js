@@ -17,41 +17,35 @@ function BoardWindow() {
   
   function wordBreak() {
     let randAnswer = wordArray[Math.floor(Math.random() * wordArray.length)].toUpperCase();
-    setAnswer(randAnswer.split(''));
-    
+    setAnswer(randAnswer.split('')); 
   }
+
+
   function fillBoard() {
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const board = [];
-    for (let i = 0; i < boardSize * boardSize; i++) {
-      const randLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
-      board.push(randLetter);
+    for (let i = 0; i < boardSize; i++) {
+      const row = [];
+      for (let j = 0; j < boardSize; j++) {
+        const randLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+        row.push(randLetter);
+      }
+      board.push(row);
     }
     setLetters(board);
   }
 
   function renderBoard() {
-    const rows = [];
-    for (let i = 0; i < boardSize; i++) {
-      const blocks = [];
-      for (let j = 0; j < boardSize; j++) {
-        const index = i * boardSize + j;
-        const blockId = `block-${index}`;
-        blocks.push(
-          <div key={blockId} id={blockId} className="letter-block">
-            {letters[index]}
-          </div>
-        );
-      }
-      const rowId = `row-${i + 1}`;
-      rows.push(
-        <div key={rowId} id={rowId} className="letter-row">
-          {blocks}
+  return letters.map((row, i) => (
+    <div key={`row-${i}`} className="letter-row">
+      {row.map((letter, j) => (
+        <div key={`block-${i}-${j}`} id={`block-${i}-${j}`} className="letter-block">
+          {letter}
         </div>
-      );
-    }
-    return rows;
-  }
+      ))}
+    </div>
+  ));
+}
 
   return (
     <>
