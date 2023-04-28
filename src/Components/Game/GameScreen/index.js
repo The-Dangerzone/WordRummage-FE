@@ -1,8 +1,8 @@
-
+import BoardWindow from "../BoardWindow";
 const GameScreen = () => {
   return (
     <>
-      <p>This is where the magic happens</p>
+      <BoardWindow/>
     </>
   );
 }
