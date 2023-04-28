@@ -1,0 +1,28 @@
+.game-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: centesr;
+    align-items: center;
+    height: 700px;
+    width: 700px;
+    border: 1px solid black;
+}
+.letter-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    
+}
+.letter-block{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid black;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+
+}
