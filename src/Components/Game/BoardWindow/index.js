@@ -66,7 +66,6 @@ function BoardWindow() {
 
     console.log(board);
     setLetters(board);
-    // letters = board;
   }
 
   function handleClick(e) {
@@ -77,7 +76,7 @@ function BoardWindow() {
         if (correctLetters.length === answer.length) {
           wordBreak();
           correctLetters = [];
-          
+
         }
     }
   }
