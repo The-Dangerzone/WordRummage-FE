@@ -16,7 +16,17 @@
     width: 100%;
     
 }
-.letter-block{
+.true {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid black;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+
+}
+.false {
   display: flex;
   flex-direction: column;
   justify-content: center;
