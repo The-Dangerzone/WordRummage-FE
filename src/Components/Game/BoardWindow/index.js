@@ -8,11 +8,9 @@ function BoardWindow() {
   const [letters, setLetters] = useState([]);
   const [answer, setAnswer] = useState([]);
   let correctLetters = [];
-  // let answer = [];
 
   useEffect(() => {
     wordBreak();
-    // fillBoard();
     console.log('Test useEffect')
   }, []);
 
@@ -21,15 +19,15 @@ function BoardWindow() {
       fillBoard();
     }
   }, [answer]);
-  
+
   // temp
-  const boardSize = 5;
-  
+  const boardSize = 6;
+
   function wordBreak() {
     let randAnswer = wordArray[Math.floor(Math.random() * wordArray.length)].toUpperCase();
-    console.log('randAnswer  ->',randAnswer)
-    setAnswer(randAnswer.split('')); 
-    // answer = randAnswer.split('');
+    console.log('randAnswer  ->', randAnswer)
+    setAnswer(randAnswer.split(''));
+
   }
 
 
@@ -41,27 +39,61 @@ function BoardWindow() {
       const row = [];
       for (let j = 0; j < boardSize; j++) {
         const randLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
-        row.push({letter: randLetter, isTarget: false});
+        row.push({ letter: randLetter, isTarget: false });
       }
       board.push(row);
-      
+
     }
-    let directionSelector = 0;
+
+    //  Why does this forEach work properly???? Above the board is set to all false and overwritten below to true. If you remove this forEach though it will keep the colors from the previous word.
+    document.querySelectorAll('.true').forEach(block => {
+      block.style.backgroundColor = 'white';
+    });
+
+    let directionSelector = 1;
     // let directionSelector = Math.floor(Math.random() * 3);
     if (directionSelector === 0) {
       // horizontal
       let randRow = Math.floor(Math.random() * boardSize);
-      console.log('answer length', answer)
-      let randCol = Math.floor(Math.random() * (boardSize - answer.length));
+      let randCol = Math.floor(Math.random() * boardSize);
       console.log('randRow ->', randRow)
       console.log('randCol ->', randCol)
-      for (let i = 0; i < answer.length; i++) {
-        board[randRow][randCol + i].letter = answer[i];
-        board[randRow][randCol + i].isTarget = true;
+      if (randCol + answer.length > boardSize) {
+        for (let i = 0; i < answer.length; i++) {
+          board[randRow][randCol - i].letter = answer[i];
+          board[randRow][randCol - i].isTarget = true;
+        }
+      } else {
+        for (let i = 0; i < answer.length; i++) {
+          board[randRow][randCol + i].letter = answer[i];
+          board[randRow][randCol + i].isTarget = true;
+        }
       }
+    } else if (directionSelector === 1) {
+      // vertical
+      let randRow = Math.floor(Math.random() * boardSize);
+      let randCol = Math.floor(Math.random() * boardSize);
+      console.log('randRow ->', randRow)
+      console.log('randCol ->', randCol)
+      if (randRow + answer.length > boardSize) {
+        for (let i = 0; i < answer.length; i++) {
+          board[randRow - i][randCol].letter = answer[i];
+          board[randRow - i][randCol].isTarget = true;
+        }
+      }
+      else {
+        for (let i = 0; i < answer.length; i++) {
+          board[randRow + i][randCol].letter = answer[i];
+          board[randRow + i][randCol].isTarget = true;
+        }
+      }
+    } else if (directionSelector === 2) {
+      // diagonal
+      let randRow = Math.floor(Math.random() * boardSize);
+      let randCol = Math.floor(Math.random() * boardSize);
+      console.log('randRow ->', randRow)
+      console.log('randCol ->', randCol)
     }
-
-
 
 
     console.log(board);
@@ -71,29 +103,40 @@ function BoardWindow() {
   function handleClick(e) {
     console.log(e.target.className)
     if (e.target.className === 'true') {
-      e.target.className = 'true clicked';
-      correctLetters.push(e.target.innerHTML);
-        if (correctLetters.length === answer.length) {
-          wordBreak();
-          correctLetters = [];
+      e.target.style.backgroundColor = 'green';
+      if (!correctLetters.includes(e.target.id)) {
+        correctLetters.push(e.target.id);
 
-        }
+      }
+      console.log('correctLetters ->', correctLetters)
+      if (correctLetters.length === answer.length) {
+        setTimeout(() => {
+          correctLetters = [];
+          wordBreak();
+        }, 1000);
+
+      }
+    } else {
+      e.target.style.backgroundColor = 'red';
+      setTimeout(() => {
+        e.target.style.backgroundColor = 'white';
+      }, 1000);
     }
   }
 
   function renderBoard() {
     console.log('Test renderBoard')
     console.log('->>>>>>>>>>>>', answer)
-  return letters.map((row, i) => (
-    <div key={`row-${i}`} className="letter-row">
-      {row.map((obj, j) => (
-        <div key={`block-${i}-${j}`} id={`block-${i}-${j}`} className={`${obj.isTarget}`} onClick={(e)=>handleClick(e)}>
-          {obj.letter}
-        </div>
-      ))}
-    </div>
-  ));
-}
+    return letters.map((row, i) => (
+      <div key={`row-${i}`} className="letter-row">
+        {row.map((obj, j) => (
+          <div key={`block-${i}-${j}`} id={`block-${i}-${j}`} className={`${obj.isTarget}`} onClick={(e) => handleClick(e)}>
+            {obj.letter}
+          </div>
+        ))}
+      </div>
+    ));
+  }
 
 
 
