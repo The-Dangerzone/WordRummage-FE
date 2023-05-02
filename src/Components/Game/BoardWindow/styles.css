@@ -24,9 +24,31 @@
   height: 100%;
   width: 100%;
   text-align: center;
+  background-color: white;
+  user-select: none;
+}
 
+.true:hover{
+  background-color: #e6e6e6;
+  cursor: pointer;
 }
 .false {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid black;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  background-color: white;
+  user-select: none;
+
+}
+.false:hover{
+  background-color: #e6e6e6;
+  cursor: pointer;
+}
+.true-clicked {
   display: flex;
   flex-direction: column;
   justify-content: center;
