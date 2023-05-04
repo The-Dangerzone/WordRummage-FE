@@ -1,7 +1,30 @@
+.board-window{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.target-word{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 100%;
+    font-size: 30px;
+    font-weight: bolder;
+    margin-bottom: 20px;
+    user-select: none;
+}
+
 .game-container{
     display: flex;
     flex-direction: column;
-    justify-content: centesr;
+    justify-content: center;
     align-items: center;
     height: 700px;
     width: 700px;
@@ -27,9 +50,12 @@
   background-color: white;
   user-select: none;
 }
-
 .true:hover{
-  background-color: #e6e6e6;
+  /* background-color: #e6e6e6; */
+  box-shadow: 0 0 10px 10px rgba(0,0,0,0.5);
+  transform: scale(1.1);
+  font-size: x-large;
+  font-weight: bolder;
   cursor: pointer;
 }
 .false {
@@ -45,7 +71,11 @@
 
 }
 .false:hover{
-  background-color: #e6e6e6;
+  /* background-color: #e6e6e6 !important; */
+  box-shadow: 0 0 10px 10px rgba(0,0,0,0.5);
+  transform: scale(1.1);
+  font-size: x-large;
+  font-weight: bolder;
   cursor: pointer;
 }
 .true-clicked {
