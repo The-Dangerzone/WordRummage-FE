@@ -149,7 +149,7 @@ function BoardWindow() {
       e.target.style.backgroundColor = 'red';
       setTimeout(() => {
         e.target.style.backgroundColor = 'white';
-      }, 1000);
+      }, 1500);
     }
   }
 
