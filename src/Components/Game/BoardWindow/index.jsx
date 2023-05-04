@@ -9,6 +9,7 @@ function BoardWindow() {
   const [answer, setAnswer] = useState([]);
   let correctLetters = [];
 
+
   useEffect(() => {
     wordBreak();
     console.log('Test useEffect')
@@ -16,7 +17,9 @@ function BoardWindow() {
 
   useEffect(() => {
     if (answer.length > 0) {
+      // wipeBoard();
       fillBoard();
+      // renderBoard();
     }
   }, [answer]);
 
@@ -50,7 +53,7 @@ function BoardWindow() {
       block.style.backgroundColor = 'white';
     });
 
-    let directionSelector = 1;
+    let directionSelector = 2;
     // let directionSelector = Math.floor(Math.random() * 3);
     if (directionSelector === 0) {
       // horizontal
@@ -93,6 +96,32 @@ function BoardWindow() {
       let randCol = Math.floor(Math.random() * boardSize);
       console.log('randRow ->', randRow)
       console.log('randCol ->', randCol)
+      if (randRow + answer.length > boardSize) {
+        if (randCol + answer.length > boardSize) {
+          for (let i = 0; i < answer.length; i++) {
+            board[randRow - i][randCol - i].letter = answer[i];
+            board[randRow - i][randCol - i].isTarget = true;
+          }
+        } else {
+          for (let i = 0; i < answer.length; i++) {
+            board[randRow - i][randCol + i].letter = answer[i];
+            board[randRow - i][randCol + i].isTarget = true;
+          }
+        }
+      } else {
+        if (randCol + answer.length > boardSize) {
+          for (let i = 0; i < answer.length; i++) {
+            board[randRow + i][randCol - i].letter = answer[i];
+            board[randRow + i][randCol - i].isTarget = true;
+          }
+        } else {
+          for (let i = 0; i < answer.length; i++) {
+            board[randRow + i][randCol + i].letter = answer[i];
+            board[randRow + i][randCol + i].isTarget = true;
+          }
+        }
+      }
+
     }
 
 
@@ -124,13 +153,15 @@ function BoardWindow() {
     }
   }
 
+
   function renderBoard() {
     console.log('Test renderBoard')
     console.log('->>>>>>>>>>>>', answer)
+
     return letters.map((row, i) => (
       <div key={`row-${i}`} className="letter-row">
         {row.map((obj, j) => (
-          <div key={`block-${i}-${j}`} id={`block-${i}-${j}`} className={`${obj.isTarget}`} onClick={(e) => handleClick(e)}>
+          <div key={`block-${i}-${j}`} id={`block-${i}-${j}`} className={`${obj.isTarget}`} onClick={(e) => handleClick(e)} >
             {obj.letter}
           </div>
         ))}
