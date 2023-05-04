@@ -28,7 +28,7 @@
   user-select: none;
 }
 
-.true:hover{
+.true:hover, .false:hover{
   background-color: #e6e6e6;
   cursor: pointer;
 }
@@ -44,10 +44,10 @@
   user-select: none;
 
 }
-.false:hover{
+/* .false:hover{
   background-color: #e6e6e6;
   cursor: pointer;
-}
+} */
 .true-clicked {
   display: flex;
   flex-direction: column;
