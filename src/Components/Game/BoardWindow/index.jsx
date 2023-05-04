@@ -147,7 +147,7 @@ function BoardWindow() {
       console.log('ALL TRUE UP IN HER');
       let randomIdx = Math.floor(Math.random() * functionsArr.length);
       functionsArr[randomIdx](randRow, randCol, board);
-    
+
     } else if (bool1 && bool2 && bool3) {
       console.log('bool1 && bool2 && bool3, cant print up');
       let functionsArr = [fillHorizontalLeft, fillHorizontalRight, fillVerticalDown, fillDiagonalDownLeft, fillDiagonalDownRight];
@@ -196,7 +196,7 @@ function BoardWindow() {
       let randomIdx = Math.floor(Math.random() * functionsArr.length);
       functionsArr[randomIdx](randRow, randCol, board);
 
-    } 
+    }
 
 
     // console.log(board);
@@ -248,8 +248,10 @@ function BoardWindow() {
 
   return (
     <>
-      <div className="target-word">Target Word: {answer.join('')}</div>
-      <div className="game-container">{renderBoard()}</div>;
+      <div className="board-window">
+        <div className="target-word">Target Word: {answer.join('')}</div>
+        <div className="game-container">{renderBoard()}</div>
+      </div>
     </>
   );
 }

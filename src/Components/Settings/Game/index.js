@@ -20,10 +20,10 @@ const GameSettings = () => {
       </FormGroup>
       <Box sx={{ width: 300 }}>
         <Typography id="discrete-slider" gutterBottom>
-          Board Size (6-20)
+          Starting Board Size (6-20)
         </Typography>
         <Slider
-          defaultValue={boardSize}
+          defaultValue={6}
           valueLabelDisplay="auto"
           step={1}
           marks
