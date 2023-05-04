@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { SettingsContext } from '../../../Context/Settings';
 import './styles.css';
 import wordArray from './wordList';
 
@@ -9,6 +10,8 @@ function BoardWindow() {
   const [answer, setAnswer] = useState([]);
   let correctLetters = [];
 
+  const { boardSize } = useContext(SettingsContext);
+
 
   useEffect(() => {
     wordBreak();
@@ -17,14 +20,12 @@ function BoardWindow() {
 
   useEffect(() => {
     if (answer.length > 0) {
-      // wipeBoard();
       fillBoard();
-      // renderBoard();
     }
   }, [answer]);
 
   // temp
-  const boardSize = 6;
+  // const boardSize = 6;
 
   function wordBreak() {
     let randAnswer = wordArray[Math.floor(Math.random() * wordArray.length)].toUpperCase();
