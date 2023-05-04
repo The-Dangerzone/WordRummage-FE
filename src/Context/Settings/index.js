@@ -7,6 +7,7 @@ const SettingsProvider = ({ children }) => {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [score, setScore] = useState(0);
+    const [boardSize, setBoardSize] = useState(6);
 
 
 
@@ -15,6 +16,7 @@ const SettingsProvider = ({ children }) => {
     const values = {
         isLoggedIn, setIsLoggedIn,
         score, setScore,
+        boardSize, setBoardSize,
     }
 
   return (
