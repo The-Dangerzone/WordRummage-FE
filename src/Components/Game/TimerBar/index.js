@@ -5,8 +5,9 @@ import { CircularProgress, Typography, Box } from '@mui/material';
 
 
 const TimerBar = () => {
-  const { boardSize, resetTimer, gameTimer, setGameTimer } = useContext(SettingsContext);
+  const { boardSize, resetTimer } = useContext(SettingsContext);
   const [progress, setProgress] = useState(0);
+  const [gameTimer, setGameTimer] = useState(60);
 
 
   useEffect(() => {
