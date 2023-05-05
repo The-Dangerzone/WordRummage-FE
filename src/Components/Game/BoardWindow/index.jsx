@@ -9,6 +9,7 @@ function BoardWindow() {
   const [letters, setLetters] = useState([]);
   const [answer, setAnswer] = useState([]);
   let correctLetters = [];
+  console.log('Board Window initialized')
 
   const { boardSize, setResetTimer } = useContext(SettingsContext);
 
@@ -219,6 +220,7 @@ function BoardWindow() {
         setResetTimer(true);
         setTimeout(() => {
           correctLetters = [];
+          
           wordBreak();
         }, 1000);
 
