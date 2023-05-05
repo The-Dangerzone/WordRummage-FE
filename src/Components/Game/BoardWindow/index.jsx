@@ -10,7 +10,7 @@ function BoardWindow() {
   const [answer, setAnswer] = useState([]);
   let correctLetters = [];
 
-  const { boardSize } = useContext(SettingsContext);
+  const { boardSize, setResetTimer } = useContext(SettingsContext);
 
 
   useEffect(() => {
@@ -24,13 +24,16 @@ function BoardWindow() {
     }
   }, [answer]);
 
-  // temp
-  // const boardSize = 6;
+ 
+  
+
 
   function wordBreak() {
     let randAnswer = wordArray[Math.floor(Math.random() * wordArray.length)].toUpperCase();
     console.log('randAnswer  ->', randAnswer)
     setAnswer(randAnswer.split(''));
+    setResetTimer(false);
+    
 
   }
 
@@ -204,7 +207,7 @@ function BoardWindow() {
   }
 
   function handleClick(e) {
-    console.log(e.target.className)
+    // console.log(e.target.className)
     if (e.target.className === 'true') {
       e.target.style.backgroundColor = 'green';
       if (!correctLetters.includes(e.target.id)) {
@@ -213,6 +216,7 @@ function BoardWindow() {
       }
       console.log('correctLetters ->', correctLetters)
       if (correctLetters.length === answer.length) {
+        setResetTimer(true);
         setTimeout(() => {
           correctLetters = [];
           wordBreak();
