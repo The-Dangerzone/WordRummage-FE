@@ -5,16 +5,16 @@ import { SettingsContext } from '../../../Context/Settings';
 
 const GameSettings = () => {
 
-  const { boardSize, setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth, resetGame } = useContext(SettingsContext);
+  const { setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth, resetGame } = useContext(SettingsContext);
 
-  
+
   useEffect(() => {
     resetGame();
   }, []);
 
   return (
     <>
-      <h1>Game Settings</h1>
+      <h1 style={{ margin: '20px' }}>Game Settings</h1>
       <Box sx={{ width: 300, margin: 3 }}>
         <FormGroup>
 
@@ -73,10 +73,10 @@ const GameSettings = () => {
         </Box>
       </Box>
 
-
-      <Link to="/"><button>Back</button></Link>
-      <Link to="/game"><button>Start Game</button></Link>
-
+      <Box sx={{ width: 150, margin: 3, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Link to="/"><button>Back</button></Link>
+        <Link to="/game"><button>Start Game</button></Link>
+      </Box>
     </>
   );
 }
