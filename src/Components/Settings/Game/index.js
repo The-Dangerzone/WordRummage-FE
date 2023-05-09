@@ -1,11 +1,16 @@
 import { Link } from 'react-router-dom';
 import { FormGroup, FormControlLabel, Switch, Slider, Box, Typography } from '@mui/material';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { SettingsContext } from '../../../Context/Settings';
 
 const GameSettings = () => {
 
-  const { boardSize, setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth } = useContext(SettingsContext);
+  const { boardSize, setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth, resetGame } = useContext(SettingsContext);
+
+  
+  useEffect(() => {
+    resetGame();
+  }, []);
 
   return (
     <>

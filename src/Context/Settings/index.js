@@ -20,7 +20,22 @@ const SettingsProvider = ({ children }) => {
   const [correctLetters, setCorrectLetters] = useState([]);
 
 
+  function resetGame() {
+    setScore(0);
+    setRound(1);
+    setGameTimer(60);
+    setRoundTimer(0);
+    setResetTimer(true);
+    setDisplayTimer(true);
+    setDisplayRoundTimer(true);
+    setDisplayScore(true);
+    setAllowBoardGrowth(true);
+    setAnswer([]);
+    setCorrectLetters([]);
+  }
+
   const values = {
+    resetGame,
     isLoggedIn, setIsLoggedIn,
     score, setScore,
     round, setRound,
