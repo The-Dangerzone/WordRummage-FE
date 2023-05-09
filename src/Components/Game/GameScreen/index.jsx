@@ -9,9 +9,11 @@ const GameScreen = () => {
 
   return (
     <>
-      <ScoreWindow/>
-      <BoardWindow/>
-      <TimerBar/>
+      <BoardWindow />
+      <div className="score-timer-container">
+        <TimerBar />
+        <ScoreWindow />
+      </div>
     </>
   );
 }

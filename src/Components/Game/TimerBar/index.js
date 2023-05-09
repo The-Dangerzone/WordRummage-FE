@@ -36,7 +36,7 @@ const TimerBar = () => {
   }, [resetTimer]);
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'absolute', left: '50%', transform: 'translate(-50%)' }}>
       {(displayRoundTimer || displayTimer) && (
         <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center', margin: '10px' }}>
           {displayRoundTimer && (
