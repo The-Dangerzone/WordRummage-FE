@@ -9,41 +9,43 @@ const GameSettings = () => {
 
   return (
     <>
-      <p>GameSettings Screen</p>
-      <FormGroup>
-        <FormControlLabel control={
-          <Switch
-            checked={displayRoundTimer}
-            onChange={(e) => setDisplayRoundTimer(e.target.checked)}
-          />}
-          label="Round Timer"
-        />
-        <FormControlLabel control={
-          <Switch
-            checked={displayTimer}
-            onChange={(e) => setDisplayTimer(e.target.checked)}
-          />}
-          label="Game Over Timer"
-        />
-        <FormControlLabel control={<Switch defaultChecked />} label="Score Multiplier" />
-        <FormControlLabel control={<Switch defaultChecked />} label="Growing Board" />
-        <FormControlLabel control={<Switch defaultChecked />} label="Items" />
-        <FormControlLabel control={<Switch defaultChecked />} label="Test" />
+      <h1>Game Settings</h1>
+      <Box sx={{ width: 300, margin: 3 }}>
+        <FormGroup>
+          <FormControlLabel control={
+            <Switch
+              checked={displayRoundTimer}
+              onChange={(e) => setDisplayRoundTimer(e.target.checked)}
+            />}
+            label="Round Timer"
+          />
+          <FormControlLabel control={
+            <Switch
+              checked={displayTimer}
+              onChange={(e) => setDisplayTimer(e.target.checked)}
+            />}
+            label="Game Over Timer"
+          />
+          <FormControlLabel control={<Switch defaultChecked />} label="Score Multiplier" />
+          <FormControlLabel control={<Switch defaultChecked />} label="Growing Board" />
+          <FormControlLabel control={<Switch defaultChecked />} label="Items" />
+          <FormControlLabel control={<Switch defaultChecked />} label="Test" />
 
-      </FormGroup>
-      <Box sx={{ width: 300 }}>
-        <Typography id="discrete-slider" gutterBottom>
-          Starting Board Size (6-20)
-        </Typography>
-        <Slider
-          defaultValue={6}
-          valueLabelDisplay="auto"
-          step={1}
-          marks
-          min={6}
-          max={20}
-          onChange={(e, value) => setBoardSize(value)}
-        />
+        </FormGroup>
+        <Box sx={{ width: 300, margin: 1 }}>
+          <Typography id="discrete-slider" gutterBottom>
+            Starting Board Size (6-20)
+          </Typography>
+          <Slider
+            defaultValue={6}
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={6}
+            max={20}
+            onChange={(e, value) => setBoardSize(value)}
+          />
+        </Box>
       </Box>
 
 

@@ -3,7 +3,6 @@ import { SettingsContext } from '../../../Context/Settings';
 import './styles.css';
 import wordArray from './wordList';
 
-// boardSize as prop
 function BoardWindow() {
   // console.log('Test BoardWindow ----------')
   const [letters, setLetters] = useState([]);
@@ -25,17 +24,11 @@ function BoardWindow() {
     }
   }, [answer]);
 
- 
-  
-
-
   function wordBreak() {
     let randAnswer = wordArray[Math.floor(Math.random() * wordArray.length)].toUpperCase();
     console.log('randAnswer  ->', randAnswer)
     setAnswer(randAnswer.split(''));
     setResetTimer(false);
-    
-
   }
 
   function fillHorizontalLeft(row, col, board) {
@@ -102,8 +95,6 @@ function BoardWindow() {
     }
   }
 
-
-
   function fillBoard() {
 
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -125,7 +116,6 @@ function BoardWindow() {
     document.querySelectorAll('.false').forEach(block => {
       block.style.backgroundColor = 'white';
     });
-
 
     let randRow = Math.floor(Math.random() * boardSize);
     let randCol = Math.floor(Math.random() * boardSize);
@@ -202,7 +192,6 @@ function BoardWindow() {
 
     }
 
-
     // console.log(board);
     setLetters(board);
   }
@@ -233,7 +222,6 @@ function BoardWindow() {
     }
   }
 
-
   function renderBoard() {
     // console.log('Test renderBoard')
     // console.log('->>>>>>>>>>>>', answer)
@@ -249,9 +237,6 @@ function BoardWindow() {
     ));
   }
 
-
-
-
   return (
     <>
       <div className="board-window">
@@ -261,6 +246,5 @@ function BoardWindow() {
     </>
   );
 }
-
 
 export default BoardWindow;
