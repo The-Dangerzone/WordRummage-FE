@@ -5,7 +5,7 @@ import { CircularProgress, Typography, Box } from '@mui/material';
 
 
 const TimerBar = () => {
-  const { boardSize, resetTimer } = useContext(SettingsContext);
+  const { boardSize, resetTimer, displayRoundTimer, displayTimer } = useContext(SettingsContext);
   const [progress, setProgress] = useState(0);
   const [gameTimer, setGameTimer] = useState(60);
 
@@ -37,15 +37,19 @@ const TimerBar = () => {
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', margin: '10px' }}>
-        <Typography variant="caption" marginRight={2} fontSize={20}>Next Round Timer: </Typography>
-        <CircularProgress variant="determinate" value={progress} />
-      </Box>
-      <Box sx={{ display: 'flex', alignItems: 'center', margin: '10px' }}>
-        <Typography variant="caption" marginRight={2} fontSize={20}>Game Timer: {gameTimer}</Typography>
-      </Box>
+      {(displayRoundTimer || displayTimer) && (
+        <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center', margin: '10px' }}>
+          {displayRoundTimer && (
+            <CircularProgress size={80} variant="determinate" value={progress} />
+          )}
+          {displayTimer && (
+            <Typography sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', userSelect: 'none' }} variant="caption" fontSize={30}>{gameTimer}</Typography>
+          )}
+        </Box>
+      )}
     </Box>
   );
+  
 }
 
 export default TimerBar;
