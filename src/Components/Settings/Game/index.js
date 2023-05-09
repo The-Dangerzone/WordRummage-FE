@@ -5,14 +5,27 @@ import { SettingsContext } from '../../../Context/Settings';
 
 const GameSettings = () => {
 
-  const { boardSize, setBoardSize } = useContext(SettingsContext);
+  const { boardSize, setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer } = useContext(SettingsContext);
 
   return (
     <>
       <p>GameSettings Screen</p>
       <FormGroup>
+        <FormControlLabel control={
+          <Switch
+            checked={displayRoundTimer}
+            onChange={(e) => setDisplayRoundTimer(e.target.checked)}
+          />}
+          label="Round Timer"
+        />
+        <FormControlLabel control={
+          <Switch
+            checked={displayTimer}
+            onChange={(e) => setDisplayTimer(e.target.checked)}
+          />}
+          label="Game Over Timer"
+        />
         <FormControlLabel control={<Switch defaultChecked />} label="Score Multiplier" />
-        <FormControlLabel control={<Switch defaultChecked />} label="Round Timer" />
         <FormControlLabel control={<Switch defaultChecked />} label="Growing Board" />
         <FormControlLabel control={<Switch defaultChecked />} label="Items" />
         <FormControlLabel control={<Switch defaultChecked />} label="Test" />
