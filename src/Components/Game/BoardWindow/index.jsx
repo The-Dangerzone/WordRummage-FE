@@ -10,7 +10,7 @@ function BoardWindow() {
   let correctLetters = [];
   console.log('Board Window initialized')
 
-  const { boardSize, setResetTimer } = useContext(SettingsContext);
+  const { setBoardSize, boardSize, setResetTimer, setScore, score, setRound, round, allowBoardGrowth } = useContext(SettingsContext);
 
 
   useEffect(() => {
@@ -209,13 +209,22 @@ function BoardWindow() {
         setResetTimer(true);
         setTimeout(() => {
           correctLetters = [];
-          
+          setScore(score + boardSize);
+          setRound(round + 1);
+          if (allowBoardGrowth) {
+            if (round % 5 === 0) {
+              setBoardSize(boardSize + 1);
+            }
+          }
           wordBreak();
         }, 1000);
 
       }
     } else {
       e.target.style.backgroundColor = 'red';
+      if (score > 0) {
+        setScore(score - (Math.floor(boardSize / 2)));
+      }
       setTimeout(() => {
         e.target.style.backgroundColor = 'white';
       }, 1500);

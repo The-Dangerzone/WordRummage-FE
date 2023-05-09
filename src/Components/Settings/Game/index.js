@@ -5,29 +5,49 @@ import { SettingsContext } from '../../../Context/Settings';
 
 const GameSettings = () => {
 
-  const { boardSize, setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer } = useContext(SettingsContext);
+  const { boardSize, setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth } = useContext(SettingsContext);
 
   return (
     <>
       <h1>Game Settings</h1>
       <Box sx={{ width: 300, margin: 3 }}>
         <FormGroup>
-          <FormControlLabel control={
-            <Switch
-              checked={displayRoundTimer}
-              onChange={(e) => setDisplayRoundTimer(e.target.checked)}
-            />}
+
+          <FormControlLabel
+            control={
+              <Switch
+                checked={displayRoundTimer}
+                onChange={(e) => setDisplayRoundTimer(e.target.checked)}
+              />}
             label="Round Timer"
           />
-          <FormControlLabel control={
-            <Switch
-              checked={displayTimer}
-              onChange={(e) => setDisplayTimer(e.target.checked)}
-            />}
+
+          <FormControlLabel
+            control={
+              <Switch
+                checked={displayTimer}
+                onChange={(e) => setDisplayTimer(e.target.checked)}
+              />}
             label="Game Over Timer"
           />
-          <FormControlLabel control={<Switch defaultChecked />} label="Score Multiplier" />
-          <FormControlLabel control={<Switch defaultChecked />} label="Growing Board" />
+
+          <FormControlLabel
+            control={
+              <Switch
+                checked={displayScore}
+                onChange={(e) => setDisplayScore(e.target.checked)}
+              />}
+            label="Score"
+          />
+
+          <FormControlLabel
+            control={
+              <Switch
+                checked={allowBoardGrowth}
+                onChange={(e) => setAllowBoardGrowth(e.target.checked)}
+              />}
+            label="Growing Board" />
+
           <FormControlLabel control={<Switch defaultChecked />} label="Items" />
           <FormControlLabel control={<Switch defaultChecked />} label="Test" />
 
