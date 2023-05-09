@@ -5,33 +5,36 @@ export const SettingsContext = React.createContext();
 
 const SettingsProvider = ({ children }) => {
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [score, setScore] = useState(0);
-    const [round, setRound] = useState(1);
-    const [boardSize, setBoardSize] = useState(6);
-    const [gameTimer, setGameTimer] = useState(60);
-    const [roundTimer, setRoundTimer] = useState(0);
-    const [resetTimer, setResetTimer] = useState(false);
-    const [displayTimer, setDisplayTimer] = useState(true);
-    const [displayRoundTimer, setDisplayRoundTimer] = useState(true);
-    const [displayScore, setDisplayScore] = useState(true);
-    const [allowBoardGrowth, setAllowBoardGrowth] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [score, setScore] = useState(0);
+  const [round, setRound] = useState(1);
+  const [boardSize, setBoardSize] = useState(6);
+  const [gameTimer, setGameTimer] = useState(60);
+  const [roundTimer, setRoundTimer] = useState(0);
+  const [resetTimer, setResetTimer] = useState(false);
+  const [displayTimer, setDisplayTimer] = useState(true);
+  const [displayRoundTimer, setDisplayRoundTimer] = useState(true);
+  const [displayScore, setDisplayScore] = useState(true);
+  const [allowBoardGrowth, setAllowBoardGrowth] = useState(true);
+  const [answer, setAnswer] = useState([]);
+  const [correctLetters, setCorrectLetters] = useState([]);
 
 
-
-    const values = {
-        isLoggedIn, setIsLoggedIn,
-        score, setScore,
-        round, setRound,
-        boardSize, setBoardSize,
-        gameTimer, setGameTimer,
-        roundTimer, setRoundTimer,
-        resetTimer, setResetTimer,
-        displayTimer, setDisplayTimer,
-        displayRoundTimer, setDisplayRoundTimer,
-        displayScore, setDisplayScore,
-        allowBoardGrowth, setAllowBoardGrowth,
-    }
+  const values = {
+    isLoggedIn, setIsLoggedIn,
+    score, setScore,
+    round, setRound,
+    boardSize, setBoardSize,
+    gameTimer, setGameTimer,
+    roundTimer, setRoundTimer,
+    resetTimer, setResetTimer,
+    displayTimer, setDisplayTimer,
+    displayRoundTimer, setDisplayRoundTimer,
+    displayScore, setDisplayScore,
+    allowBoardGrowth, setAllowBoardGrowth,
+    answer, setAnswer,
+    correctLetters, setCorrectLetters,
+  }
 
   return (
     <SettingsContext.Provider value={values}>

@@ -6,13 +6,31 @@ import wordArray from './wordList';
 function BoardWindow() {
   // console.log('Test BoardWindow ----------')
   const [letters, setLetters] = useState([]);
-  const [answer, setAnswer] = useState([]);
-  let correctLetters = [];
+  // const [answer, setAnswer] = useState([]);
+  // let correctLetters = [];
   console.log('Board Window initialized')
+  const { setBoardSize, boardSize, setResetTimer, setScore, score, setRound, round, allowBoardGrowth, answer, setAnswer, correctLetters, setCorrectLetters } = useContext(SettingsContext);
+  
+  console.log('first render correct letters -->>', correctLetters)
 
-  const { setBoardSize, boardSize, setResetTimer, setScore, score, setRound, round, allowBoardGrowth } = useContext(SettingsContext);
 
+  if (correctLetters.length === answer.length && correctLetters.length !== 0) {
+    setResetTimer(true);
+    setTimeout(() => {
+      // correctLetters = [];
+      setCorrectLetters([]);
+      setScore(score + boardSize);
+      setRound(round + 1);
+      if (allowBoardGrowth) {
+        if (round % 5 === 0) {
+          setBoardSize(boardSize + 1);
+        }
+      }
+      wordBreak();
+    }, 1000);
 
+  }
+  
   useEffect(() => {
     wordBreak();
     // console.log('Test useEffect')
@@ -201,25 +219,27 @@ function BoardWindow() {
     if (e.target.className === 'true') {
       e.target.style.backgroundColor = 'green';
       if (!correctLetters.includes(e.target.id)) {
-        correctLetters.push(e.target.id);
+        setCorrectLetters([...correctLetters, e.target.id]);
+        // correctLetters.push(e.target.id);
 
       }
       console.log('correctLetters ->', correctLetters)
-      if (correctLetters.length === answer.length) {
-        setResetTimer(true);
-        setTimeout(() => {
-          correctLetters = [];
-          setScore(score + boardSize);
-          setRound(round + 1);
-          if (allowBoardGrowth) {
-            if (round % 5 === 0) {
-              setBoardSize(boardSize + 1);
-            }
-          }
-          wordBreak();
-        }, 1000);
+      // if (correctLetters.length === answer.length && correctLetters.length !== 0) {
+      //   setResetTimer(true);
+      //   setTimeout(() => {
+      //     // correctLetters = [];
+      //     setCorrectLetters([]);
+      //     setScore(score + boardSize);
+      //     setRound(round + 1);
+      //     if (allowBoardGrowth) {
+      //       if (round % 5 === 0) {
+      //         setBoardSize(boardSize + 1);
+      //       }
+      //     }
+      //     wordBreak();
+      //   }, 1000);
 
-      }
+      // }
     } else {
       e.target.style.backgroundColor = 'red';
       if (score > 0) {
