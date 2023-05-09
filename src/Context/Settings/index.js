@@ -11,6 +11,8 @@ const SettingsProvider = ({ children }) => {
     const [gameTimer, setGameTimer] = useState(60);
     const [roundTimer, setRoundTimer] = useState(0);
     const [resetTimer, setResetTimer] = useState(false);
+    const [displayTimer, setDisplayTimer] = useState(true);
+    const [displayRoundTimer, setDisplayRoundTimer] = useState(true);
 
 
 
@@ -21,6 +23,8 @@ const SettingsProvider = ({ children }) => {
         gameTimer, setGameTimer,
         roundTimer, setRoundTimer,
         resetTimer, setResetTimer,
+        displayTimer, setDisplayTimer,
+        displayRoundTimer, setDisplayRoundTimer
     }
 
   return (
