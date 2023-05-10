@@ -18,12 +18,13 @@ const SettingsProvider = ({ children }) => {
   const [allowBoardGrowth, setAllowBoardGrowth] = useState(true);
   const [answer, setAnswer] = useState([]);
   const [correctLetters, setCorrectLetters] = useState([]);
-
+  const [gameOver, setGameOver] = useState(false);
 
   function resetGame() {
     setScore(0);
     setRound(1);
     setGameTimer(60);
+    setBoardSize(6);
     setRoundTimer(0);
     setResetTimer(true);
     setDisplayTimer(true);
@@ -32,6 +33,7 @@ const SettingsProvider = ({ children }) => {
     setAllowBoardGrowth(true);
     setAnswer([]);
     setCorrectLetters([]);
+    setGameOver(false);
   }
 
   const values = {
@@ -49,6 +51,7 @@ const SettingsProvider = ({ children }) => {
     allowBoardGrowth, setAllowBoardGrowth,
     answer, setAnswer,
     correctLetters, setCorrectLetters,
+    gameOver, setGameOver,
   }
 
   return (
