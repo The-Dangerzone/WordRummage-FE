@@ -5,17 +5,17 @@ import { CircularProgress, Typography, Box } from '@mui/material';
 
 
 const TimerBar = () => {
-  const { boardSize, resetTimer, displayRoundTimer, displayTimer } = useContext(SettingsContext);
-  const [progress, setProgress] = useState(0);
-  const [gameTimer, setGameTimer] = useState(60);
+  const { boardSize, resetTimer, displayRoundTimer, displayTimer, roundTimer, setRoundTimer, gameTimer,setGameTimer, } = useContext(SettingsContext);
+  // const [progress, setProgress] = useState(0);
+  // const [gameTimer, setGameTimer] = useState(60);
 
 
   useEffect(() => {
-    const roundTimer = setInterval(() => {
-      setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + boardSize));
+    const roundTimerInterval = setInterval(() => {
+      setRoundTimer((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + boardSize));
     }, 1000);
     return () => {
-      clearInterval(roundTimer);
+      clearInterval(roundTimerInterval);
     };
   }, []);
 
@@ -31,7 +31,7 @@ const TimerBar = () => {
 
   useEffect(() => {
     if (resetTimer) {
-      setProgress(0);
+      setRoundTimer(0);
     }
   }, [resetTimer]);
 
@@ -40,7 +40,7 @@ const TimerBar = () => {
       {(displayRoundTimer || displayTimer) && (
         <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center', margin: '10px' }}>
           {displayRoundTimer && (
-            <CircularProgress size={80} variant="determinate" value={progress} />
+            <CircularProgress size={80} variant="determinate" value={roundTimer} />
           )}
           {displayTimer && (
             <Typography sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', userSelect: 'none' }} variant="caption" fontSize={30}>{gameTimer}</Typography>
