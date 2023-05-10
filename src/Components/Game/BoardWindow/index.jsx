@@ -9,11 +9,45 @@ function BoardWindow() {
   // const [answer, setAnswer] = useState([]);
   // let correctLetters = [];
   console.log('Board Window initialized')
-  const { setBoardSize, boardSize, setResetTimer, setScore, score, setRound, round, allowBoardGrowth, answer, setAnswer, correctLetters, setCorrectLetters } = useContext(SettingsContext);
-  
+  const {
+    setBoardSize,
+    boardSize,
+    setResetTimer,
+    setScore,
+    score,
+    setRound,
+    round,
+    allowBoardGrowth,
+    answer,
+    setAnswer,
+    correctLetters,
+    setCorrectLetters,
+    roundTimer,
+    gameTimer,
+    setGameTimer,
+
+  } = useContext(SettingsContext);
+
   console.log('first render correct letters -->>', correctLetters)
 
 
+  // Check for if time runs out for the round
+  if ( roundTimer >= 100) {
+    setResetTimer(true);
+    setTimeout(() => {
+      setCorrectLetters([]);
+      setGameTimer(gameTimer - 3)
+      setRound(round + 1);
+      if (allowBoardGrowth) {
+        if (round % 5 === 0) {
+          setBoardSize(boardSize + 1);
+        }
+      }
+      wordBreak();
+    }, 1000);
+  }
+
+  // Check for if correct word is found
   if (correctLetters.length === answer.length && correctLetters.length !== 0) {
     setResetTimer(true);
     setTimeout(() => {
@@ -30,7 +64,7 @@ function BoardWindow() {
     }, 1000);
 
   }
-  
+
   useEffect(() => {
     wordBreak();
     // console.log('Test useEffect')
