@@ -8,7 +8,7 @@ function BoardWindow() {
   const [letters, setLetters] = useState([]);
   // const [answer, setAnswer] = useState([]);
   // let correctLetters = [];
-  console.log('Board Window initialized')
+  // console.log('Board Window initialized')
   const {
     setBoardSize,
     boardSize,
@@ -25,34 +25,45 @@ function BoardWindow() {
     roundTimer,
     gameTimer,
     setGameTimer,
+    setGameOver,
+    displayRoundTimer,
 
   } = useContext(SettingsContext);
 
-  console.log('first render correct letters -->>', correctLetters)
+  // console.log('first render correct letters -->>', correctLetters)
+
+
+  // Check for if gameover timer runs out
+  if (gameTimer <= 0) {
+    setGameOver(true);
+  }
+
 
 
   // Check for if time runs out for the round
-  if ( roundTimer >= 100) {
-    setResetTimer(true);
-    setTimeout(() => {
+  if (displayRoundTimer) {
+    if (roundTimer >= 100) {
       setCorrectLetters([]);
-      setGameTimer(gameTimer - 3)
-      setRound(round + 1);
-      if (allowBoardGrowth) {
-        if (round % 5 === 0) {
-          setBoardSize(boardSize + 1);
+      setResetTimer(true);
+      setTimeout(() => {
+        setGameTimer(gameTimer - 3)
+        setRound(round + 1);
+        if (allowBoardGrowth) {
+          if (round % 5 === 0) {
+            setBoardSize(boardSize + 1);
+          }
         }
-      }
-      wordBreak();
-    }, 1000);
+        console.log('round timer word break ------------------>')
+        wordBreak();
+      }, 1000);
+    }
   }
-
   // Check for if correct word is found
   if (correctLetters.length === answer.length && correctLetters.length !== 0) {
+    setCorrectLetters([]);
     setResetTimer(true);
     setTimeout(() => {
       // correctLetters = [];
-      setCorrectLetters([]);
       setScore(score + boardSize);
       setRound(round + 1);
       if (allowBoardGrowth) {
@@ -60,6 +71,7 @@ function BoardWindow() {
           setBoardSize(boardSize + 1);
         }
       }
+      console.log('correct word word break ------------------>')  
       wordBreak();
     }, 1000);
 
@@ -67,11 +79,12 @@ function BoardWindow() {
 
   useEffect(() => {
     wordBreak();
-    // console.log('Test useEffect')
+    console.log('Initial wordBreak ------------------>')
   }, []);
 
   useEffect(() => {
     if (answer.length > 0) {
+      console.log('board is filled ------------------>')
       fillBoard();
     }
   }, [answer]);
