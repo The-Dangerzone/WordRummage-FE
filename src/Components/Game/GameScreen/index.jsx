@@ -1,4 +1,5 @@
 import BoardWindow from "../BoardWindow";
+import MultiplierBar from "../MultiplierBar";
 import ScoreWindow from "../ScoreWindow";
 import TimerBar from "../TimerBar";
 import './styles.css';

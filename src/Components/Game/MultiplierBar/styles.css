@@ -1,0 +1,12 @@
+.multiplier-container {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.multiplier-bar {
+  width: 10px;
+  height: 80%;
+  border-radius: 5px;
+}
