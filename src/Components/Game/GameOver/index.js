@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { SettingsContext } from '../../../Context/SettingsContext';
+import { SettingsContext } from '../../../Context/Settings';
 import { Link } from 'react-router-dom';
 
 
@@ -18,3 +18,5 @@ const { score, round } = useContext(SettingsContext);
         </div>
     );
 };
+
+export default GameOver;
