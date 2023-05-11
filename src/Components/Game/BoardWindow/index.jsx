@@ -27,6 +27,8 @@ function BoardWindow() {
     displayRoundTimer,
     incorrectLetters,
     setIncorrectLetters,
+    setStreak,
+    streak
 
   } = useContext(SettingsContext);
 
@@ -45,6 +47,7 @@ function BoardWindow() {
       setCorrectLetters([]);
       setResetTimer(true);
       setTimeout(() => {
+        setStreak(0);
         setGameTimer(gameTimer - 3)
         setRound(round + 1);
         if (allowBoardGrowth) {
@@ -64,6 +67,7 @@ function BoardWindow() {
       setGameTimer(gameTimer + Math.ceil(boardSize / 2))
       setScore(score + boardSize);
       setRound(round + 1);
+      setStreak(streak + 1);
       if (allowBoardGrowth) {
         if (round % 5 === 0) {
           setBoardSize(boardSize + 1);
