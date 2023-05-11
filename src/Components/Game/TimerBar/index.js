@@ -1,13 +1,11 @@
 import { SettingsContext } from '../../../Context/Settings';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import './styles.css';
 import { CircularProgress, Typography, Box } from '@mui/material';
 
 
 const TimerBar = () => {
   const { boardSize, resetTimer, displayRoundTimer, displayTimer, roundTimer, setRoundTimer, gameTimer,setGameTimer, } = useContext(SettingsContext);
-  // const [progress, setProgress] = useState(0);
-  // const [gameTimer, setGameTimer] = useState(60);
 
 
   useEffect(() => {
@@ -30,9 +28,7 @@ const TimerBar = () => {
 
 
   useEffect(() => {
-    // if (resetTimer) {
-      setRoundTimer(0);
-    // }
+      setRoundTimer(0); 
   }, [resetTimer]);
 
   return (
