@@ -4,7 +4,7 @@ import './styles.css';
 import { Box, Typography } from '@mui/material';
 
 const MultiplierBar = () => {
-  const { streak } = useContext(SettingsContext);
+  const { streak, multiplier } = useContext(SettingsContext);
 
   const getBoxColor = (boxIndex) => {
     if (boxIndex < 2) {
@@ -43,6 +43,7 @@ const MultiplierBar = () => {
       <Typography sx={{paddingBottom: '10px'}}>Multiplier Bar</Typography>
       <Box sx={{ width: '50px', height: '360px', display: "flex", flexDirection: "column-reverse"}}>{renderBoxes()}</Box>
       <Typography>Streak: {streak}</Typography>
+      <Typography>Multi: {multiplier}</Typography>
     </Box>
   );
 };
