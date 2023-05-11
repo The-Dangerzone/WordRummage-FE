@@ -32,6 +32,8 @@ function BoardWindow() {
     displayTimer,
     multiplier,
     setMultiplier,
+    maxStreak,
+    setMaxStreak,
 
   } = useContext(SettingsContext);
 
@@ -40,6 +42,9 @@ function BoardWindow() {
   // Check for if gameover timer runs out
   if (displayTimer) {
     if (gameTimer <= 0) {
+      if(streak > maxStreak){
+        setMaxStreak(streak);
+      }
       setGameOver(true);
     }
   }
@@ -54,6 +59,9 @@ function BoardWindow() {
       setTimeout(() => {
         setGameTimer(gameTimer - 3)
         setRound(round + 1);
+        if(streak > maxStreak){
+          setMaxStreak(streak);
+        }
         setStreak(0);
         setMultiplier(1);
         if (allowBoardGrowth) {
