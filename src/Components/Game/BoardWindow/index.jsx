@@ -6,9 +6,7 @@ import wordArray from './wordList';
 function BoardWindow() {
   // console.log('Test BoardWindow ----------')
   const [letters, setLetters] = useState([]);
-  // const [answer, setAnswer] = useState([]);
-  // let correctLetters = [];
-  // console.log('Board Window initialized')
+
   const {
     setBoardSize,
     boardSize,
@@ -27,10 +25,11 @@ function BoardWindow() {
     setGameTimer,
     setGameOver,
     displayRoundTimer,
+    incorrectLetters,
+    setIncorrectLetters,
 
   } = useContext(SettingsContext);
 
-  // console.log('first render correct letters -->>', correctLetters)
 
 
   // Check for if gameover timer runs out
@@ -53,7 +52,6 @@ function BoardWindow() {
             setBoardSize(boardSize + 1);
           }
         }
-        console.log('round timer word break ------------------>')
         wordBreak();
       }, 1000);
     }
@@ -71,7 +69,6 @@ function BoardWindow() {
           setBoardSize(boardSize + 1);
         }
       }
-      console.log('correct word word break ------------------>')  
       wordBreak();
     }, 1000);
 
@@ -79,12 +76,10 @@ function BoardWindow() {
 
   useEffect(() => {
     wordBreak();
-    console.log('Initial wordBreak ------------------>')
   }, []);
 
   useEffect(() => {
     if (answer.length > 0) {
-      console.log('board is filled ------------------>')
       fillBoard();
     }
   }, [answer]);
@@ -97,7 +92,7 @@ function BoardWindow() {
   }
 
   function fillHorizontalLeft(row, col, board) {
-    console.log('fillHorizontalLeft')
+    // console.log('fillHorizontalLeft')
     for (let i = 0; i < answer.length; i++) {
       board[row][col - i].letter = answer[i];
       board[row][col - i].isTarget = true;
@@ -105,7 +100,7 @@ function BoardWindow() {
   }
 
   function fillHorizontalRight(row, col, board) {
-    console.log('fillHorizontalRight')
+    // console.log('fillHorizontalRight')
     for (let i = 0; i < answer.length; i++) {
       board[row][col + i].letter = answer[i];
       board[row][col + i].isTarget = true;
@@ -113,7 +108,7 @@ function BoardWindow() {
   }
 
   function fillVerticalUp(row, col, board) {
-    console.log('fillVerticalUp')
+    // console.log('fillVerticalUp')
     for (let i = 0; i < answer.length; i++) {
       board[row - i][col].letter = answer[i];
       board[row - i][col].isTarget = true;
@@ -121,7 +116,7 @@ function BoardWindow() {
   }
 
   function fillVerticalDown(row, col, board) {
-    console.log('fillVerticalDown')
+    // console.log('fillVerticalDown')
     for (let i = 0; i < answer.length; i++) {
       board[row + i][col].letter = answer[i];
       board[row + i][col].isTarget = true;
@@ -129,7 +124,7 @@ function BoardWindow() {
   }
 
   function fillDiagonalUpLeft(row, col, board) {
-    console.log('fillDiagonalUpLeft')
+    // console.log('fillDiagonalUpLeft')
     for (let i = 0; i < answer.length; i++) {
       board[row - i][col - i].letter = answer[i];
       board[row - i][col - i].isTarget = true;
@@ -137,7 +132,7 @@ function BoardWindow() {
   }
 
   function fillDiagonalUpRight(row, col, board) {
-    console.log('fillDiagonalUpRight')
+    // console.log('fillDiagonalUpRight')
     for (let i = 0; i < answer.length; i++) {
       board[row - i][col + i].letter = answer[i];
       board[row - i][col + i].isTarget = true;
@@ -145,7 +140,7 @@ function BoardWindow() {
   }
 
   function fillDiagonalDownLeft(row, col, board) {
-    console.log('fillDiagonalDownLeft')
+    // console.log('fillDiagonalDownLeft')
     for (let i = 0; i < answer.length; i++) {
       board[row + i][col - i].letter = answer[i];
       board[row + i][col - i].isTarget = true;
@@ -153,7 +148,7 @@ function BoardWindow() {
   }
 
   function fillDiagonalDownRight(row, col, board) {
-    console.log('fillDiagonalDownRight')
+    // console.log('fillDiagonalDownRight')
     for (let i = 0; i < answer.length; i++) {
       board[row + i][col + i].letter = answer[i];
       board[row + i][col + i].isTarget = true;
@@ -184,8 +179,8 @@ function BoardWindow() {
 
     let randRow = Math.floor(Math.random() * boardSize);
     let randCol = Math.floor(Math.random() * boardSize);
-    console.log('randRow ->', randRow);
-    console.log('randCol ->', randCol);
+    // console.log('randRow ->', randRow);
+    // console.log('randCol ->', randCol);
 
     // if bool1 is false, cant print right
     let bool1 = randCol + answer.length <= boardSize;
@@ -195,100 +190,71 @@ function BoardWindow() {
     let bool3 = randCol - answer.length >= -1;
     // if bool4 is false, cant print up
     let bool4 = randRow - answer.length >= -1;
-    console.log('bool1 ->', bool1);
-    console.log('bool2 ->', bool2);
-    console.log('bool3 ->', bool3);
-    console.log('bool4 ->', bool4);
+
 
     if (bool1 && bool2 && bool3 && bool4) {
       let functionsArr = [fillHorizontalLeft, fillHorizontalRight, fillVerticalUp, fillVerticalDown, fillDiagonalUpLeft, fillDiagonalUpRight, fillDiagonalDownLeft, fillDiagonalDownRight];
 
-      console.log('ALL TRUE UP IN HER');
       let randomIdx = Math.floor(Math.random() * functionsArr.length);
       functionsArr[randomIdx](randRow, randCol, board);
 
     } else if (bool1 && bool2 && bool3) {
-      console.log('bool1 && bool2 && bool3, cant print up');
       let functionsArr = [fillHorizontalLeft, fillHorizontalRight, fillVerticalDown, fillDiagonalDownLeft, fillDiagonalDownRight];
       let randomIdx = Math.floor(Math.random() * functionsArr.length);
       functionsArr[randomIdx](randRow, randCol, board);
 
     } else if (bool1 && bool2 && bool4) {
-      console.log('bool1 && bool2 && bool4, cant print left');
       let functionsArr = [fillHorizontalRight, fillVerticalUp, fillVerticalDown, fillDiagonalUpRight, fillDiagonalDownRight];
       let randomIdx = Math.floor(Math.random() * functionsArr.length);
       functionsArr[randomIdx](randRow, randCol, board);
 
     } else if (bool1 && bool3 && bool4) {
-      console.log('bool1 && bool3 && bool4, cant print down');
       let functionsArr = [fillHorizontalLeft, fillHorizontalRight, fillVerticalUp, fillDiagonalUpLeft, fillDiagonalUpRight];
       let randomIdx = Math.floor(Math.random() * functionsArr.length);
       functionsArr[randomIdx](randRow, randCol, board);
 
     } else if (bool2 && bool3 && bool4) {
-      console.log('bool2 && bool3 && bool4, cant print right');
       let functionsArr = [fillHorizontalLeft, fillVerticalUp, fillVerticalDown, fillDiagonalUpLeft, fillDiagonalDownLeft];
       let randomIdx = Math.floor(Math.random() * functionsArr.length);
       functionsArr[randomIdx](randRow, randCol, board);
 
     } else if (bool1 && bool2) {
-      console.log('bool1 && bool2, cant print up or left');
       let functionsArr = [fillHorizontalRight, fillVerticalDown, fillDiagonalDownRight];
       let randomIdx = Math.floor(Math.random() * functionsArr.length);
       functionsArr[randomIdx](randRow, randCol, board);
 
     } else if (bool3 && bool4) {
-      console.log('bool3 && bool4, cant print down or right');
       let functionsArr = [fillHorizontalLeft, fillVerticalUp, fillDiagonalUpLeft];
       let randomIdx = Math.floor(Math.random() * functionsArr.length);
       functionsArr[randomIdx](randRow, randCol, board);
 
     } else if (bool1 && bool4) {
-      console.log('bool1 && bool4, cant print left or down');
       let functionsArr = [fillHorizontalRight, fillVerticalUp, fillDiagonalUpRight];
       let randomIdx = Math.floor(Math.random() * functionsArr.length);
       functionsArr[randomIdx](randRow, randCol, board);
 
     } else if (bool2 && bool3) {
-      console.log('bool2 && bool3, cant print right or up');
       let functionsArr = [fillHorizontalLeft, fillVerticalDown, fillDiagonalDownLeft];
       let randomIdx = Math.floor(Math.random() * functionsArr.length);
       functionsArr[randomIdx](randRow, randCol, board);
 
     }
 
-    // console.log(board);
     setLetters(board);
   }
 
   function handleClick(e) {
-    // console.log(e.target.className)
     if (e.target.className === 'true') {
       e.target.style.backgroundColor = 'green';
       if (!correctLetters.includes(e.target.id)) {
         setCorrectLetters([...correctLetters, e.target.id]);
-        // correctLetters.push(e.target.id);
 
       }
-      console.log('correctLetters ->', correctLetters)
-      // if (correctLetters.length === answer.length && correctLetters.length !== 0) {
-      //   setResetTimer(true);
-      //   setTimeout(() => {
-      //     // correctLetters = [];
-      //     setCorrectLetters([]);
-      //     setScore(score + boardSize);
-      //     setRound(round + 1);
-      //     if (allowBoardGrowth) {
-      //       if (round % 5 === 0) {
-      //         setBoardSize(boardSize + 1);
-      //       }
-      //     }
-      //     wordBreak();
-      //   }, 1000);
+      // console.log('correctLetters ->', correctLetters)
 
-      // }
     } else {
       e.target.style.backgroundColor = 'red';
+      setIncorrectLetters(incorrectLetters + 1)
       if (score > 0) {
         setScore(score - (Math.floor(boardSize / 2)));
       }
@@ -299,8 +265,6 @@ function BoardWindow() {
   }
 
   function renderBoard() {
-    // console.log('Test renderBoard')
-    // console.log('->>>>>>>>>>>>', answer)
 
     return letters.map((row, i) => (
       <div key={`row-${i}`} className="letter-row">
