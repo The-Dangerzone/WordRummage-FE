@@ -17,13 +17,13 @@ const GameOver = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                height: '400px', // Adjust the height as per your requirement
-                width: '300px', // Adjust the width as per your requirement
+                height: '400px', 
+                width: '300px', 
                 textAlign: 'center',
                 border: '1px solid black',
                 borderRadius: '10px',
-                margin: '200px auto', // Adjust the margin as per your requirement
-                padding: '20px', // Optional: Add padding to give some space between the content and border
+                margin: '200px auto', 
+                padding: '20px', 
             }}
         >
             <h1>Game Over</h1>
