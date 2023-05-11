@@ -22,6 +22,7 @@ const SettingsProvider = ({ children }) => {
   const [gameOver, setGameOver] = useState(false);
   const [streak, setStreak] = useState(0);
   const [multiplier, setMultiplier] = useState(1);
+  const [maxStreak, setMaxStreak] = useState(0);
 
   function resetGame() {
     setScore(0);
@@ -39,6 +40,8 @@ const SettingsProvider = ({ children }) => {
     setGameOver(false);
     setIncorrectLetters(0);
     setStreak(0);
+    setMultiplier(1);
+    setMaxStreak(0);
   }
 
   const values = {
@@ -60,6 +63,7 @@ const SettingsProvider = ({ children }) => {
     incorrectLetters, setIncorrectLetters,
     streak, setStreak,
     multiplier, setMultiplier,
+    maxStreak, setMaxStreak,
   }
 
   return (
