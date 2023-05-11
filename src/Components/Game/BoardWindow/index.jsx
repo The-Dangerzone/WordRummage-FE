@@ -61,7 +61,7 @@ function BoardWindow() {
     setCorrectLetters([]);
     setResetTimer(true);
     setTimeout(() => {
-      // correctLetters = [];
+      setGameTimer(gameTimer + Math.ceil(boardSize / 2))
       setScore(score + boardSize);
       setRound(round + 1);
       if (allowBoardGrowth) {
