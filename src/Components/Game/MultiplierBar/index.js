@@ -4,7 +4,7 @@ import './styles.css';
 import { Box, Typography } from '@mui/material';
 
 const MultiplierBar = () => {
-  const { streak, multiplier } = useContext(SettingsContext);
+  const { streak, multiplier, displayScore } = useContext(SettingsContext);
 
   const getBoxColor = (boxIndex) => {
     if (boxIndex < 2) {
@@ -39,11 +39,15 @@ const MultiplierBar = () => {
   };
 
   return (
-    <Box sx={{width: '100px', height: '450px', border: '1px solid black', justifyContent: "center", alignItems: "center", display: "flex", flexDirection: "column"}}>
-      <Typography sx={{paddingBottom: '10px'}}>Multiplier Bar</Typography>
-      <Box sx={{ width: '50px', height: '360px', display: "flex", flexDirection: "column-reverse"}}>{renderBoxes()}</Box>
-      <Typography>Streak: {streak}</Typography>
-      <Typography>Multi: {multiplier}</Typography>
+    <Box sx={{ width: '100px', height: '450px', justifyContent: "center", alignItems: "center", display: "flex", flexDirection: "column" }}>
+      {displayScore && (
+        <Box sx={{ width: '100px', height: '450px', border: '1px solid black', justifyContent: "center", alignItems: "center", display: "flex", flexDirection: "column" }}>
+          <Typography sx={{ paddingBottom: '10px' }}>Multiplier Bar</Typography>
+          <Box sx={{ width: '50px', height: '360px', display: "flex", flexDirection: "column-reverse" }}>{renderBoxes()}</Box>
+          <Typography>Streak: {streak}</Typography>
+          <Typography>Multi: {multiplier}</Typography>
+        </Box>
+      )}
     </Box>
   );
 };
