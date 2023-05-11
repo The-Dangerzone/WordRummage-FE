@@ -28,15 +28,25 @@ function BoardWindow() {
     incorrectLetters,
     setIncorrectLetters,
     setStreak,
-    streak
+    streak,
+    displayTimer,
+    multiplier,
+    setMultiplier,
+    maxStreak,
+    setMaxStreak,
 
   } = useContext(SettingsContext);
 
 
 
   // Check for if gameover timer runs out
-  if (gameTimer <= 0) {
-    setGameOver(true);
+  if (displayTimer) {
+    if (gameTimer <= 0) {
+      if(streak > maxStreak){
+        setMaxStreak(streak);
+      }
+      setGameOver(true);
+    }
   }
 
 
@@ -47,9 +57,13 @@ function BoardWindow() {
       setCorrectLetters([]);
       setResetTimer(true);
       setTimeout(() => {
-        setStreak(0);
         setGameTimer(gameTimer - 3)
         setRound(round + 1);
+        if(streak > maxStreak){
+          setMaxStreak(streak);
+        }
+        setStreak(0);
+        setMultiplier(1);
         if (allowBoardGrowth) {
           if (round % 5 === 0) {
             setBoardSize(boardSize + 1);
@@ -65,9 +79,15 @@ function BoardWindow() {
     setResetTimer(true);
     setTimeout(() => {
       setGameTimer(gameTimer + Math.ceil(boardSize / 2))
-      setScore(score + boardSize);
+      setScore(score + (boardSize * multiplier));
       setRound(round + 1);
       setStreak(streak + 1);
+      if (streak === 2) {
+        setMultiplier(2);
+      }
+      if (streak === 5) {
+        setMultiplier(3);
+      }
       if (allowBoardGrowth) {
         if (round % 5 === 0) {
           setBoardSize(boardSize + 1);
@@ -93,6 +113,7 @@ function BoardWindow() {
     console.log('randAnswer  ->', randAnswer)
     setAnswer(randAnswer.split(''));
     setResetTimer(false);
+    setCorrectLetters([]);
   }
 
   function fillHorizontalLeft(row, col, board) {
@@ -254,7 +275,7 @@ function BoardWindow() {
         setCorrectLetters([...correctLetters, e.target.id]);
 
       }
-      // console.log('correctLetters ->', correctLetters)
+      console.log('correctLetters ->', correctLetters)
 
     } else {
       e.target.style.backgroundColor = 'red';
