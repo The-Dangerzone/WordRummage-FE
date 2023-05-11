@@ -8,12 +8,12 @@ const ScoreWindow = () => {
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', width: 700, left: '50%', margin: '0 auto' }}>
-      {displayScore && (
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-          <Typography variant="h4">Round: {round}</Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+        <Typography variant="h4">Round: {round}</Typography>
+        {displayScore && (
           <Typography variant="h4">Score: {score}</Typography>
-        </Box>
-      )}
+        )}
+      </Box>
     </Box>
   );
 }
