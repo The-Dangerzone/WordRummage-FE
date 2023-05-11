@@ -28,15 +28,18 @@ function BoardWindow() {
     incorrectLetters,
     setIncorrectLetters,
     setStreak,
-    streak
+    streak,
+    displayTimer
 
   } = useContext(SettingsContext);
 
 
 
   // Check for if gameover timer runs out
-  if (gameTimer <= 0) {
-    setGameOver(true);
+  if (displayTimer) {
+    if (gameTimer <= 0) {
+      setGameOver(true);
+    }
   }
 
 
@@ -47,9 +50,9 @@ function BoardWindow() {
       setCorrectLetters([]);
       setResetTimer(true);
       setTimeout(() => {
-        setStreak(0);
         setGameTimer(gameTimer - 3)
         setRound(round + 1);
+        setStreak(0);
         if (allowBoardGrowth) {
           if (round % 5 === 0) {
             setBoardSize(boardSize + 1);
