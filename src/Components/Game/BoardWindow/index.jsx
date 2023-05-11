@@ -113,6 +113,7 @@ function BoardWindow() {
     console.log('randAnswer  ->', randAnswer)
     setAnswer(randAnswer.split(''));
     setResetTimer(false);
+    setCorrectLetters([]);
   }
 
   function fillHorizontalLeft(row, col, board) {
@@ -274,7 +275,7 @@ function BoardWindow() {
         setCorrectLetters([...correctLetters, e.target.id]);
 
       }
-      // console.log('correctLetters ->', correctLetters)
+      console.log('correctLetters ->', correctLetters)
 
     } else {
       e.target.style.backgroundColor = 'red';
