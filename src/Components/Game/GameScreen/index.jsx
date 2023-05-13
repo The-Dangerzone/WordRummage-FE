@@ -21,7 +21,6 @@ const GameScreen = () => {
         <>
           <Container sx={{ display: "flex", alignItems: "center" }}>
             <Container>
-              <h1>Log</h1>
             </Container>
             <Container>
               <BoardWindow />
