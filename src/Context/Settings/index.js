@@ -23,6 +23,7 @@ const SettingsProvider = ({ children }) => {
   const [streak, setStreak] = useState(0);
   const [multiplier, setMultiplier] = useState(1);
   const [maxStreak, setMaxStreak] = useState(0);
+  const [eventLog, setEventLog] = useState([]);
 
   function resetGame() {
     setScore(0);
@@ -42,6 +43,7 @@ const SettingsProvider = ({ children }) => {
     setStreak(0);
     setMultiplier(1);
     setMaxStreak(0);
+    setEventLog ([]);
   }
 
   const values = {
@@ -64,6 +66,7 @@ const SettingsProvider = ({ children }) => {
     streak, setStreak,
     multiplier, setMultiplier,
     maxStreak, setMaxStreak,
+    eventLog, setEventLog,
   }
 
   return (
