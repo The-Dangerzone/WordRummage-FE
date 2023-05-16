@@ -60,3 +60,15 @@
   font-weight: bolder;
   user-select: none;
 }
+.GO-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  font-size: 25px;
+  font-weight: bolder;
+  user-select: none;
+  margin-bottom: 20px;
+}
