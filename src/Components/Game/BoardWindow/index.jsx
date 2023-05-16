@@ -47,7 +47,7 @@ function BoardWindow() {
       if(streak > maxStreak){
         setMaxStreak(streak);
       }
-      setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score}]])
+      setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score, letters: letters}]])
       setGameOver(true);
     }
   }
@@ -62,7 +62,7 @@ function BoardWindow() {
       setTimeout(() => {
         setGameTimer(gameTimer - 3)
         setRound(round + 1);
-        setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score}]])
+        setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score, letters: letters}]])
         if(streak > maxStreak){
           setMaxStreak(streak);
         }
@@ -84,8 +84,8 @@ function BoardWindow() {
     setTimeout(() => {
       setGameTimer(gameTimer + Math.ceil(boardSize / 2))
       setScore(score + (boardSize * multiplier));
-      setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score}]])
-      // console.log('eventLog ->', eventLog)
+      setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score, letters: letters}]])
+      console.log('eventLog ->', eventLog)
       setRound(round + 1);
       setStreak(streak + 1);
       if (streak === 2) {
@@ -272,7 +272,7 @@ function BoardWindow() {
     }
 
     setLetters(board);
-    console.log('board ->', board); 
+    // console.log('board ->', board); 
   }
 
   function handleClick(e) {
