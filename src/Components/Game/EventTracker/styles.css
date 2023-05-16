@@ -1,0 +1,62 @@
+.GO-board-window{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.GO-letter-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  
+}
+.GO-true {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid black;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  background-color: orange;
+  user-select: none;
+}
+.GO-false {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid black;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  background-color: white;
+  user-select: none;
+
+}
+.GO-game-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  width: 500px;
+  border: 1px solid black;
+}
+.GO-target-word{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100%;
+  font-size: 25px;
+  font-weight: bolder;
+  user-select: none;
+}
