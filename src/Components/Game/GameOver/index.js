@@ -1,11 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { SettingsContext } from '../../../Context/Settings';
 import EventTracker from '../EventTracker';
 import { Link } from 'react-router-dom';
-import { Box } from '@mui/material';
 
 const GameOver = () => {
-  const { score, round, incorrectLetters, streak, maxStreak } = useContext(SettingsContext);
+  const { score, round, incorrectLetters, maxStreak } = useContext(SettingsContext);
+  const [showEventLog, setShowEventLog] = useState(false);
+
+  const handleReviewButtonClick = () => {
+    setShowEventLog(!showEventLog);
+  };
 
   return (
     <div
@@ -36,9 +40,12 @@ const GameOver = () => {
         <Link to="/">
           <button>Return to Title Screen</button>
         </Link>
+        <button style={{margin: '10px'}} onClick={handleReviewButtonClick}>
+          {showEventLog ? 'Hide Event Log' : 'Review Game'}
+        </button>
       </div>
-      <div style={{ marginLeft: '20px' }}>
-        <EventTracker />
+      <div style={{ marginLeft: '20px', width: showEventLog ? '500px' : '0', overflow: 'hidden', transition: 'width 0.5s' }}>
+        {showEventLog && <EventTracker />}
       </div>
     </div>
   );
