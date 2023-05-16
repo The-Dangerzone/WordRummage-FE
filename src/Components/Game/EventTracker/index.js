@@ -19,7 +19,7 @@ const EventTracker = () => {
 
     <div className="GO-board-window">
       <div className='GO-header'>
-        <Select value={selectedRound} sx={{ width: '130px' }} onChange={handleRoundChange} MenuProps={{PaperProps: { style: { maxHeight: 200 }}}}>
+        <Select value={selectedRound} sx={{ width: '180px' }} onChange={handleRoundChange} MenuProps={{PaperProps: { style: { maxHeight: 200 }}}}>
           {eventLog.map((roundData, index) => (
             <MenuItem key={index} value={roundData[0].round}>
               Round {roundData[0].round}
