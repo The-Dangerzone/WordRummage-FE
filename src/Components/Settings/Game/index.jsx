@@ -102,11 +102,11 @@ const GameSettings = () => {
 
       <Box sx={{ width: 400, margin: 3, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Link to="/">
-          <button className='settings-button'>Back</button>
+          <button>Back</button>
         </Link>
 
         <Link to="/game">
-          <button className='settings-button'>Start Game</button>
+          <button>Start Game</button>
           </Link>
       </Box>
     </>
