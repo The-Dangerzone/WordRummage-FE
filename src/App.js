@@ -1,4 +1,3 @@
-import './App.css';
 import Leaderboard from './Components/Leaderboard';
 import AppSettings from './Components/Settings/Application';
 import GameSettings from './Components/Settings/Game';
