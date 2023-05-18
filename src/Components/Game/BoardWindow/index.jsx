@@ -201,22 +201,33 @@ function BoardWindow() {
 
   function recursiveCheck(row, col, answerIndex) {
     // Check if word search is complete
-    if (answerIndex === answer.length) {
+    console.log('answerIndex ->', answerIndex)
+    // console.log('board matrix ->', board)
+    console.log('row/column ->', row, col)
+    if (answerIndex === answer.length && answer.length !== 0) {
+      console.log('answerIndex === answer.length')
       if (checkArray.length === answer.length) {
+        console.log('false')
+        console.log('checkArray ->', checkArray)
+        checkArray.pop();
         return false;
       } else {
+        console.log('true')
+        console.log('checkArray ->', checkArray)
         return true;
       }
     }
+    // Check if indices are within matrix bounds
+    if (row < 0 || row >= boardSize || col < 0 || col >= boardSize) {
+      console.log('OUT OF BOUNDS')  
+      return false;
+    }
 
     if (board[row][col].isTarget) {
+      console.log('Target was true')
       checkArray.push(board[row][col]);
     }
 
-    // Check if indices are within matrix bounds
-    if (row < 0 || row >= boardSize || col < 0 || col >= boardSize) {
-      return false;
-    }
 
     // Check if the current element matches the word character
     if (board[row][col].letter !== answer[answerIndex]) {
@@ -241,9 +252,10 @@ function BoardWindow() {
     for (let i = 0; i < boardSize; i++) {
       for (let j = 0; j < boardSize; j++) {
         if (board[i][j].letter === answer[0]) {
+          console.log ('found matching 1st letter ----------->', board[i][j].letter)
           if (recursiveCheck(i, j, 0)) {
             console.log('FOUND IT')
-            fillBoard();
+            // fillBoard();
           }
 
         }
@@ -336,9 +348,9 @@ function BoardWindow() {
 
     }
 
+    checkBoard();
     setLetters(board);
     // console.log('board ->', board);
-    // checkBoard();
     board = [];
   }
 
