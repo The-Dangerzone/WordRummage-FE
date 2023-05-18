@@ -44,10 +44,10 @@ function BoardWindow() {
   // Check for if gameover timer runs out
   if (displayTimer) {
     if (gameTimer <= 0) {
-      if(streak > maxStreak){
+      if (streak > maxStreak) {
         setMaxStreak(streak);
       }
-      setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score, letters: letters}]])
+      setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score, letters: letters }]])
       setGameOver(true);
     }
   }
@@ -62,8 +62,8 @@ function BoardWindow() {
       setTimeout(() => {
         setGameTimer(gameTimer - 3)
         setRound(round + 1);
-        setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score, letters: letters}]])
-        if(streak > maxStreak){
+        setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score, letters: letters }]])
+        if (streak > maxStreak) {
           setMaxStreak(streak);
         }
         setStreak(0);
@@ -84,7 +84,7 @@ function BoardWindow() {
     setTimeout(() => {
       setGameTimer(gameTimer + Math.ceil(boardSize / 2))
       setScore(score + (boardSize * multiplier));
-      setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score, letters: letters}]])
+      setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score, letters: letters }]])
       console.log('eventLog ->', eventLog)
       setRound(round + 1);
       setStreak(streak + 1);
@@ -190,6 +190,7 @@ function BoardWindow() {
 
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const board = [];
+    let checkWord = [];
     for (let i = 0; i < boardSize; i++) {
       const row = [];
       for (let j = 0; j < boardSize; j++) {
@@ -271,6 +272,125 @@ function BoardWindow() {
 
     }
 
+    // Checker for target word randomly spelled out on board
+    console.log('board ->', board);
+    for (let i = 0; i < boardSize; i++) {
+      for (let j = 0; j < boardSize; j++) {
+        // Check first letter of answer
+        console.log('first letter ->', board[i][j].letter, i, j)
+        if (board[i][j].letter === answer[0]) {
+          checkWord.push(board[i][j]); // push first letter to checkWord
+          console.log('checkWord first letter ->', checkWord);
+
+          //check right
+          if (j + answer.length <= boardSize) {
+            if (board[i][j + 1].letter === answer[1]) {
+              console.log('check right', board[i][j + 1]);
+              checkWord.push(board[i][j + 1]); // push second letter to checkWord
+              for (let k = 2; k !== answer.length; k++) {
+                if (board[i][j + k].letter === answer[k]) {
+                  checkWord.push(board[i][j + k]);
+                }
+              }
+            }
+          }
+          //check left
+          if (j - answer.length >= -1) {
+            if (board[i][j - 1].letter === answer[1]) {
+              console.log('check left', board[i][j - 1]);
+              checkWord.push(board[i][j - 1]); // push second letter to checkWord
+              for (let k = 2; k !== answer.length; k++) {
+                if (board[i][j - k].letter === answer[k]) {
+                  checkWord.push(board[i][j - k]);
+                }
+              }
+            }
+          }
+          //check down
+          if (i + answer.length <= boardSize) {
+            if (board[i + 1][j].letter === answer[1]) {
+              console.log('check down', board[i + 1][j]);
+              checkWord.push(board[i + 1][j]); // push second letter to checkWord
+              for (let k = 2; k !== answer.length; k++) {
+                if (board[i + k][j].letter === answer[k]) {
+                  checkWord.push(board[i + k][j]);
+                }
+              }
+            }
+          }
+          //check up
+          if (i - answer.length >= -1) {
+            if (board[i - 1][j].letter === answer[1]) {
+              console.log('check up', board[i - 1][j]);
+              checkWord.push(board[i - 1][j]); // push second letter to checkWord
+              for (let k = 2; k !== answer.length; k++) {
+                if (board[i - k][j].letter === answer[k]) {
+                  checkWord.push(board[i - k][j]);
+                }
+              }
+            }
+          }
+          // check diagonal down right
+          if (i + answer.length <= boardSize && j + answer.length <= boardSize) {
+            if (board[i + 1][j + 1].letter === answer[1]) {
+              console.log('check diagonal down right', board[i + 1][j + 1]);
+              checkWord.push(board[i + 1][j + 1]); // push second letter to checkWord
+              for (let k = 2; k !== answer.length; k++) {
+                if (board[i + k][j + k].letter === answer[k]) {
+                  checkWord.push(board[i + k][j + k]);
+                }
+              }
+            }
+          }
+          // check diagonal down left
+          if (i + answer.length <= boardSize && j - answer.length >= -1) {
+            if (board[i + 1][j - 1].letter === answer[1]) {
+              console.log('check diagonal down left', board[i + 1][j - 1]);
+              checkWord.push(board[i + 1][j - 1]); // push second letter to checkWord
+              for (let k = 2; k !== answer.length; k++) {
+                if (board[i + k][j - k].letter === answer[k]) {
+                  checkWord.push(board[i + k][j - k]);
+                }
+              }
+            }
+          }
+          // check diagonal up right
+          if (i - answer.length >= -1 && j + answer.length <= boardSize) {
+            if (board[i - 1][j + 1].letter === answer[1]) {
+              console.log('check diagonal up right', board[i - 1][j + 1]);
+              checkWord.push(board[i - 1][j + 1]); // push second letter to checkWord
+              for (let k = 2; k !== answer.length; k++) {
+                if (board[i - k][j + k].letter === answer[k]) {
+                  checkWord.push(board[i - k][j + k]);
+                }
+              }
+            }
+          }
+          // check diagonal up left
+          if (i - answer.length >= -1 && j - answer.length >= -1) {
+            if (board[i - 1][j - 1].letter === answer[1]) {
+              console.log('check diagonal up left', board[i - 1][j - 1]);
+              checkWord.push(board[i - 1][j - 1]); // push second letter to checkWord
+              for (let k = 2; k !== answer.length; k++) {
+                if (board[i - k][j - k].letter === answer[k]) {
+                  checkWord.push(board[i - k][j - k]);
+                }
+              }
+            }
+          }
+          console.log('final checkWord ->', checkWord);
+          // This is where we check if the word is the actual target word or not
+          if (checkWord.length === answer.length && answer.length > 1) {
+            for (let l = 0; l < checkWord.length; l++) {
+              if (checkWord[l].isTarget === false) {
+                fillBoard();
+              }
+            }
+          }
+          checkWord = [];
+        }
+      }
+    }
     setLetters(board);
     // console.log('board ->', board); 
   }
