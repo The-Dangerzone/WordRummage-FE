@@ -7,6 +7,19 @@ function BoardWindow() {
   // console.log('Test BoardWindow ----------')
   const [letters, setLetters] = useState([]);
 
+  let checkArray = [];
+  let board = [];
+  let directions = [
+    [0, 1], //down
+    [0, -1], // up
+    [1, 0], // right
+    [-1, 0], // left
+    [-1, -1], // up left
+    [-1, 1], // up right
+    [1, -1], // down left
+    [1, 1], // down right
+  ];
+
   const {
     setBoardSize,
     boardSize,
@@ -44,10 +57,10 @@ function BoardWindow() {
   // Check for if gameover timer runs out
   if (displayTimer) {
     if (gameTimer <= 0) {
-      if(streak > maxStreak){
+      if (streak > maxStreak) {
         setMaxStreak(streak);
       }
-      setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score, letters: letters}]])
+      setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score, letters: letters }]])
       setGameOver(true);
     }
   }
@@ -62,8 +75,8 @@ function BoardWindow() {
       setTimeout(() => {
         setGameTimer(gameTimer - 3)
         setRound(round + 1);
-        setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score, letters: letters}]])
-        if(streak > maxStreak){
+        setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score, letters: letters }]])
+        if (streak > maxStreak) {
           setMaxStreak(streak);
         }
         setStreak(0);
@@ -84,7 +97,7 @@ function BoardWindow() {
     setTimeout(() => {
       setGameTimer(gameTimer + Math.ceil(boardSize / 2))
       setScore(score + (boardSize * multiplier));
-      setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score, letters: letters}]])
+      setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score, letters: letters }]])
       console.log('eventLog ->', eventLog)
       setRound(round + 1);
       setStreak(streak + 1);
@@ -186,10 +199,62 @@ function BoardWindow() {
     }
   }
 
+  function recursiveCheck(row, col, answerIndex) {
+    // Check if word search is complete
+    if (answerIndex === answer.length) {
+      if (checkArray.length === answer.length) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+
+    if (board[row][col].isTarget) {
+      checkArray.push(board[row][col]);
+    }
+
+    // Check if indices are within matrix bounds
+    if (row < 0 || row >= boardSize || col < 0 || col >= boardSize) {
+      return false;
+    }
+
+    // Check if the current element matches the word character
+    if (board[row][col].letter !== answer[answerIndex]) {
+      console.log('IN RECURSION BUT NOT MATCHING')
+      return false;
+    }
+
+    // Recursively search the neighboring elements
+    for (const [dx, dy] of directions) {
+      const newRow = row + dx;
+      const newCol = col + dy;
+      if (recursiveCheck(newRow, newCol, answerIndex + 1)) {
+        return true;
+      }
+    }
+    if (checkArray.length > 0) {
+      checkArray.pop();
+    }
+  }
+
+  function checkBoard() {
+    for (let i = 0; i < boardSize; i++) {
+      for (let j = 0; j < boardSize; j++) {
+        if (board[i][j].letter === answer[0]) {
+          if (recursiveCheck(i, j, 0)) {
+            console.log('FOUND IT')
+            fillBoard();
+          }
+
+        }
+      }
+    }
+  }
+
   function fillBoard() {
 
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const board = [];
+    // const board = [];
     for (let i = 0; i < boardSize; i++) {
       const row = [];
       for (let j = 0; j < boardSize; j++) {
@@ -272,7 +337,9 @@ function BoardWindow() {
     }
 
     setLetters(board);
-    // console.log('board ->', board); 
+    // console.log('board ->', board);
+    // checkBoard();
+    board = [];
   }
 
   function handleClick(e) {
