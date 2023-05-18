@@ -26,6 +26,7 @@
 
 .title-screen-content h1 {
   font-size: 50px;
+  user-select: none;
 }
 
 
@@ -60,6 +61,7 @@
   color: white;
   font-size: 50px;
   animation: rain 5s linear infinite;
+  user-select: none;
 }
 
 @keyframes rain {
