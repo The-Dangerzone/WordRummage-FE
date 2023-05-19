@@ -359,6 +359,14 @@ function BoardWindow() {
                   checkWord.push(board[i][j + k]);
                 }
               }
+              if (checkWord.length === answer.length && answer.length > 1) {
+                for (let l = 0; l < checkWord.length; l++) {
+                  if (checkWord[l].isTarget === false) {
+                    console.log('####################################################')
+                    // fillBoard();
+                  }
+                }
+              }
             }
           }
           //check left
@@ -369,6 +377,14 @@ function BoardWindow() {
               for (let k = 2; k !== answer.length; k++) {
                 if (board[i][j - k].letter === answer[k]) {
                   checkWord.push(board[i][j - k]);
+                }
+              }
+              if (checkWord.length === answer.length && answer.length > 1) {
+                for (let l = 0; l < checkWord.length; l++) {
+                  if (checkWord[l].isTarget === false) {
+                    console.log('####################################################')
+                    // fillBoard();
+                  }
                 }
               }
             }
@@ -383,6 +399,14 @@ function BoardWindow() {
                   checkWord.push(board[i + k][j]);
                 }
               }
+              if (checkWord.length === answer.length && answer.length > 1) {
+                for (let l = 0; l < checkWord.length; l++) {
+                  if (checkWord[l].isTarget === false) {
+                    console.log('####################################################')
+                    // fillBoard();
+                  }
+                }
+              }
             }
           }
           //check up
@@ -393,6 +417,14 @@ function BoardWindow() {
               for (let k = 2; k !== answer.length; k++) {
                 if (board[i - k][j].letter === answer[k]) {
                   checkWord.push(board[i - k][j]);
+                }
+              }
+              if (checkWord.length === answer.length && answer.length > 1) {
+                for (let l = 0; l < checkWord.length; l++) {
+                  if (checkWord[l].isTarget === false) {
+                    console.log('####################################################')
+                    // fillBoard();
+                  }
                 }
               }
             }
@@ -407,6 +439,14 @@ function BoardWindow() {
                   checkWord.push(board[i + k][j + k]);
                 }
               }
+              if (checkWord.length === answer.length && answer.length > 1) {
+                for (let l = 0; l < checkWord.length; l++) {
+                  if (checkWord[l].isTarget === false) {
+                    console.log('####################################################')
+                    // fillBoard();
+                  }
+                }
+              }
             }
           }
           // check diagonal down left
@@ -417,6 +457,14 @@ function BoardWindow() {
               for (let k = 2; k !== answer.length; k++) {
                 if (board[i + k][j - k].letter === answer[k]) {
                   checkWord.push(board[i + k][j - k]);
+                }
+              }
+              if (checkWord.length === answer.length && answer.length > 1) {
+                for (let l = 0; l < checkWord.length; l++) {
+                  if (checkWord[l].isTarget === false) {
+                    console.log('####################################################')
+                    // fillBoard();
+                  }
                 }
               }
             }
@@ -431,6 +479,14 @@ function BoardWindow() {
                   checkWord.push(board[i - k][j + k]);
                 }
               }
+              if (checkWord.length === answer.length && answer.length > 1) {
+                for (let l = 0; l < checkWord.length; l++) {
+                  if (checkWord[l].isTarget === false) {
+                    console.log('####################################################')
+                    // fillBoard();
+                  }
+                }
+              }
             }
           }
           // check diagonal up left
@@ -442,18 +498,26 @@ function BoardWindow() {
                 if (board[i - k][j - k].letter === answer[k]) {
                   checkWord.push(board[i - k][j - k]);
                 }
+              } if (checkWord.length === answer.length && answer.length > 1) {
+                for (let l = 0; l < checkWord.length; l++) {
+                  if (checkWord[l].isTarget === false) {
+                    console.log('####################################################')
+                    // fillBoard();
+                  }
+                }
               }
             }
           }
           console.log('final checkWord ->', checkWord);
           // This is where we check if the word is the actual target word or not
-          if (checkWord.length === answer.length && answer.length > 1) {
-            for (let l = 0; l < checkWord.length; l++) {
-              if (checkWord[l].isTarget === false) {
-                fillBoard();
-              }
-            }
-          }
+          // if (checkWord.length === answer.length && answer.length > 1) {
+          //   for (let l = 0; l < checkWord.length; l++) {
+          //     if (checkWord[l].isTarget === false) {
+          //       console.log('####################################################')
+                // fillBoard();
+          //     }
+          //   }
+          // }
           checkWord = [];
         }
       }
