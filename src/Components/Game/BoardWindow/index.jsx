@@ -257,7 +257,6 @@ function BoardWindow() {
 
     const board = [];
     let checkWord = [];
-
     for (let i = 0; i < boardSize; i++) {
       const row = [];
       for (let j = 0; j < boardSize; j++) {
@@ -278,8 +277,8 @@ function BoardWindow() {
 
     let randRow = Math.floor(Math.random() * boardSize);
     let randCol = Math.floor(Math.random() * boardSize);
-    // console.log('randRow ->', randRow);
-    // console.log('randCol ->', randCol);
+    console.log('randRow ->', randRow);
+    console.log('randCol ->', randCol);
 
     // if bool1 is false, cant print right
     let bool1 = randCol + answer.length <= boardSize;
@@ -340,184 +339,234 @@ function BoardWindow() {
     }
 
     // Checker for target word randomly spelled out on board
-    console.log('board ->', board);
     for (let i = 0; i < boardSize; i++) {
       for (let j = 0; j < boardSize; j++) {
         // Check first letter of answer
-        console.log('first letter ->', board[i][j].letter, i, j)
-        if (board[i][j].letter === answer[0]) {
-          checkWord.push(board[i][j]); // push first letter to checkWord
-          console.log('checkWord first letter ->', checkWord);
+       if (board[i][j].letter === answer[0]) {
+          checkWord.push({ board: board[i][j], i: i, j: j }); // push first letter to checkWord
 
           //check right
           if (j + answer.length <= boardSize) {
             if (board[i][j + 1].letter === answer[1]) {
-              console.log('check right', board[i][j + 1]);
-              checkWord.push(board[i][j + 1]); // push second letter to checkWord
-              for (let k = 2; k !== answer.length; k++) {
+              checkWord.push({ board: board[i][j + 1], i: i, j: j + 1 }); // push second letter to checkWord
+              for (let k = 2; k < answer.length; k++) {
                 if (board[i][j + k].letter === answer[k]) {
-                  checkWord.push(board[i][j + k]);
+                  checkWord.push({ board: board[i][j + k], i: i, j: j + k });
                 }
               }
               if (checkWord.length === answer.length && answer.length > 1) {
                 for (let l = 0; l < checkWord.length; l++) {
-                  if (checkWord[l].isTarget === false) {
-                    console.log('####################################################')
-                    // fillBoard();
+                  if (checkWord[l].board.isTarget === false) {
+                    tempLetter = checkWord[l].board.letter;
+                    while (tempLetter === board[checkWord[l].i][checkWord[l].j].letter) {
+                      board[checkWord[l].i][checkWord[l].j].letter = alphabet[Math.floor(Math.random() * alphabet.length)]
+                      i = 0;
+                      j = 0;
+                    }
                   }
                 }
               }
+              while (checkWord.length > 1) {
+                checkWord.pop();
+              }
+
             }
           }
           //check left
           if (j - answer.length >= -1) {
             if (board[i][j - 1].letter === answer[1]) {
-              console.log('check left', board[i][j - 1]);
-              checkWord.push(board[i][j - 1]); // push second letter to checkWord
-              for (let k = 2; k !== answer.length; k++) {
+              checkWord.push({ board: board[i][j - 1], i: i, j: j - 1 }); // push second letter to checkWord
+
+              for (let k = 2; k < answer.length; k++) {
                 if (board[i][j - k].letter === answer[k]) {
-                  checkWord.push(board[i][j - k]);
+                  checkWord.push({ board: board[i][j - k], i: i, j: j - k });
                 }
               }
               if (checkWord.length === answer.length && answer.length > 1) {
                 for (let l = 0; l < checkWord.length; l++) {
-                  if (checkWord[l].isTarget === false) {
-                    console.log('####################################################')
-                    // fillBoard();
+                  if (checkWord[l].board.isTarget === false) {
+                    tempLetter = checkWord[l].board.letter;
+                    while (tempLetter === board[checkWord[l].i][checkWord[l].j].letter) {
+                      board[checkWord[l].i][checkWord[l].j].letter = alphabet[Math.floor(Math.random() * alphabet.length)]
+                      i = 0;
+                      j = 0;
+                    }
                   }
                 }
               }
+              while (checkWord.length > 1) {
+                checkWord.pop();
+              }
+
             }
           }
           //check down
           if (i + answer.length <= boardSize) {
             if (board[i + 1][j].letter === answer[1]) {
-              console.log('check down', board[i + 1][j]);
-              checkWord.push(board[i + 1][j]); // push second letter to checkWord
-              for (let k = 2; k !== answer.length; k++) {
-                if (board[i + k][j].letter === answer[k]) {
-                  checkWord.push(board[i + k][j]);
+              checkWord.push({ board: board[i + 1][j], i: i + 1, j: j }); // push second letter to checkWord
+
+              for (let k = 2; k < answer.length; k++) {
+                if (board[i + k][j].letter === answer[k]) { // I'm here
+                  checkWord.push({ board: board[i + k][j], i: i + k, j: j });
                 }
               }
               if (checkWord.length === answer.length && answer.length > 1) {
                 for (let l = 0; l < checkWord.length; l++) {
-                  if (checkWord[l].isTarget === false) {
-                    console.log('####################################################')
-                    // fillBoard();
+                  if (checkWord[l].board.isTarget === false) {
+                    tempLetter = checkWord[l].board.letter;
+                    while (tempLetter === board[checkWord[l].i][checkWord[l].j].letter) {
+                      board[checkWord[l].i][checkWord[l].j].letter = alphabet[Math.floor(Math.random() * alphabet.length)]
+                      i = 0;
+                      j = 0;
+                    }
                   }
                 }
               }
+              while (checkWord.length > 1) {
+                checkWord.pop();
+              }
+
             }
           }
           //check up
           if (i - answer.length >= -1) {
             if (board[i - 1][j].letter === answer[1]) {
-              console.log('check up', board[i - 1][j]);
-              checkWord.push(board[i - 1][j]); // push second letter to checkWord
-              for (let k = 2; k !== answer.length; k++) {
+              checkWord.push({ board: board[i - 1][j], i: i - 1, j: j }); // push second letter to checkWord
+
+              for (let k = 2; k < answer.length; k++) {
                 if (board[i - k][j].letter === answer[k]) {
-                  checkWord.push(board[i - k][j]);
+                  checkWord.push({ board: board[i - k][j], i: i - k, j: j });
                 }
               }
               if (checkWord.length === answer.length && answer.length > 1) {
                 for (let l = 0; l < checkWord.length; l++) {
-                  if (checkWord[l].isTarget === false) {
-                    console.log('####################################################')
-                    // fillBoard();
+                  if (checkWord[l].board.isTarget === false) {
+                    tempLetter = checkWord[l].board.letter;
+                    while (tempLetter === board[checkWord[l].i][checkWord[l].j].letter) {
+                      board[checkWord[l].i][checkWord[l].j].letter = alphabet[Math.floor(Math.random() * alphabet.length)]
+                      i = 0;
+                      j = 0;
+                    }
                   }
                 }
               }
+              while (checkWord.length > 1) {
+                checkWord.pop();
+              }
+
             }
           }
           // check diagonal down right
           if (i + answer.length <= boardSize && j + answer.length <= boardSize) {
             if (board[i + 1][j + 1].letter === answer[1]) {
-              console.log('check diagonal down right', board[i + 1][j + 1]);
-              checkWord.push(board[i + 1][j + 1]); // push second letter to checkWord
-              for (let k = 2; k !== answer.length; k++) {
+              checkWord.push({ board: board[i + 1][j + 1], i: i + 1, j: j + 1 }); // push second letter to checkWord
+
+              for (let k = 2; k < answer.length; k++) {
                 if (board[i + k][j + k].letter === answer[k]) {
-                  checkWord.push(board[i + k][j + k]);
+                  checkWord.push({ board: board[i + k][j + k], i: i + k, j: j + k });
                 }
               }
               if (checkWord.length === answer.length && answer.length > 1) {
                 for (let l = 0; l < checkWord.length; l++) {
-                  if (checkWord[l].isTarget === false) {
-                    console.log('####################################################')
-                    // fillBoard();
+                  if (checkWord[l].board.isTarget === false) {
+                    tempLetter = checkWord[l].board.letter;
+                    while (tempLetter === board[checkWord[l].i][checkWord[l].j].letter) {
+                      board[checkWord[l].i][checkWord[l].j].letter = alphabet[Math.floor(Math.random() * alphabet.length)]
+                      i = 0;
+                      j = 0;
+                    }
                   }
                 }
               }
+              while (checkWord.length > 1) {
+                checkWord.pop();
+              }
+
             }
           }
           // check diagonal down left
           if (i + answer.length <= boardSize && j - answer.length >= -1) {
             if (board[i + 1][j - 1].letter === answer[1]) {
-              console.log('check diagonal down left', board[i + 1][j - 1]);
-              checkWord.push(board[i + 1][j - 1]); // push second letter to checkWord
-              for (let k = 2; k !== answer.length; k++) {
+              checkWord.push({ board: board[i + 1][j - 1], i: i + 1, j: j - 1 }); // push second letter to checkWord
+
+              for (let k = 2; k < answer.length; k++) {
                 if (board[i + k][j - k].letter === answer[k]) {
-                  checkWord.push(board[i + k][j - k]);
+                  checkWord.push({ board: board[i + k][j - k], i: i + k, j: j - k });
                 }
               }
               if (checkWord.length === answer.length && answer.length > 1) {
                 for (let l = 0; l < checkWord.length; l++) {
-                  if (checkWord[l].isTarget === false) {
-                    console.log('####################################################')
-                    // fillBoard();
+                  if (checkWord[l].board.isTarget === false) {
+                    tempLetter = checkWord[l].board.letter;
+                    while (tempLetter === board[checkWord[l].i][checkWord[l].j].letter) {
+                      board[checkWord[l].i][checkWord[l].j].letter = alphabet[Math.floor(Math.random() * alphabet.length)]
+                      i = 0;
+                      j = 0;
+                    }
                   }
                 }
               }
+              while (checkWord.length > 1) {
+                checkWord.pop();
+              }
+
             }
           }
           // check diagonal up right
           if (i - answer.length >= -1 && j + answer.length <= boardSize) {
             if (board[i - 1][j + 1].letter === answer[1]) {
-              console.log('check diagonal up right', board[i - 1][j + 1]);
-              checkWord.push(board[i - 1][j + 1]); // push second letter to checkWord
-              for (let k = 2; k !== answer.length; k++) {
+              checkWord.push({ board: board[i - 1][j + 1], i: i - 1, j: j + 1 }); // push second letter to checkWord
+
+              for (let k = 2; k < answer.length; k++) {
                 if (board[i - k][j + k].letter === answer[k]) {
-                  checkWord.push(board[i - k][j + k]);
+                  checkWord.push({ board: board[i - k][j + k], i: i - k, j: j + k });
                 }
               }
               if (checkWord.length === answer.length && answer.length > 1) {
                 for (let l = 0; l < checkWord.length; l++) {
-                  if (checkWord[l].isTarget === false) {
-                    console.log('####################################################')
-                    // fillBoard();
+                  if (checkWord[l].board.isTarget === false) {
+                    tempLetter = checkWord[l].board.letter;
+                    while (tempLetter === board[checkWord[l].i][checkWord[l].j].letter) {
+                      board[checkWord[l].i][checkWord[l].j].letter = alphabet[Math.floor(Math.random() * alphabet.length)]
+                      i = 0;
+                      j = 0;
+                    }
                   }
                 }
+              }
+              while (checkWord.length > 1) {
+                checkWord.pop();
               }
             }
           }
           // check diagonal up left
           if (i - answer.length >= -1 && j - answer.length >= -1) {
             if (board[i - 1][j - 1].letter === answer[1]) {
-              console.log('check diagonal up left', board[i - 1][j - 1]);
-              checkWord.push(board[i - 1][j - 1]); // push second letter to checkWord
-              for (let k = 2; k !== answer.length; k++) {
+              checkWord.push({ board: board[i - 1][j - 1], i: i - 1, j: j - 1 }); // push second letter to checkWord
+
+              for (let k = 2; k < answer.length; k++) {
                 if (board[i - k][j - k].letter === answer[k]) {
-                  checkWord.push(board[i - k][j - k]);
+                  checkWord.push({ board: board[i - k][j - k], i: i - k, j: j - k });
                 }
               } if (checkWord.length === answer.length && answer.length > 1) {
                 for (let l = 0; l < checkWord.length; l++) {
-                  if (checkWord[l].isTarget === false) {
-                    console.log('####################################################')
-                    // fillBoard();
+                  if (checkWord[l].board.isTarget === false) {
+                    tempLetter = checkWord[l].board.letter;
+                    while (tempLetter === board[checkWord[l].i][checkWord[l].j].letter) {
+                      board[checkWord[l].i][checkWord[l].j].letter = alphabet[Math.floor(Math.random() * alphabet.length)]
+                      i = 0;
+                      j = 0;
+                    }
                   }
                 }
               }
+              while (checkWord.length > 1) {
+                checkWord.pop();
+              }
+
             }
           }
-          console.log('final checkWord ->', checkWord);
-          // This is where we check if the word is the actual target word or not
-          // if (checkWord.length === answer.length && answer.length > 1) {
-          //   for (let l = 0; l < checkWord.length; l++) {
-          //     if (checkWord[l].isTarget === false) {
-          //       console.log('####################################################')
-                // fillBoard();
-          //     }
-          //   }
-          // }
+
           checkWord = [];
         }
       }
