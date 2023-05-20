@@ -14,7 +14,7 @@ const GameScreen = () => {
   const { gameOver } = useContext(SettingsContext)
 
   return (
-    <Box>
+    <Box sx={{backgroundColor: "rgb(55, 106, 75)", height: "100vh"}}>
       {gameOver ? (
         <GameOver />
       ) : (

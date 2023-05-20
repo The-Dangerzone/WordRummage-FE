@@ -30,6 +30,10 @@ const GameOver = () => {
           border: '1px solid black',
           borderRadius: '10px',
           padding: '20px',
+          background: 'rgb(33, 70, 40)',
+          color: 'white',
+          userSelect: 'none',
+
         }}
       >
         <h1>Game Over</h1>

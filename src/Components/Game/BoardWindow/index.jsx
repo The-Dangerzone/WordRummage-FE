@@ -4,7 +4,6 @@ import './styles.css';
 import wordArray from './wordList';
 
 function BoardWindow() {
-  // console.log('Test BoardWindow ----------')
   const [letters, setLetters] = useState([]);
 
   let checkArray = [];
@@ -98,7 +97,6 @@ function BoardWindow() {
       setGameTimer(gameTimer + Math.ceil(boardSize / 2))
       setScore(score + (boardSize * multiplier));
       setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score, letters: letters }]])
-      console.log('eventLog ->', eventLog)
       setRound(round + 1);
       setStreak(streak + 1);
       if (streak === 2) {
@@ -136,7 +134,6 @@ function BoardWindow() {
   }
 
   function fillHorizontalLeft(row, col, board) {
-    // console.log('fillHorizontalLeft')
     for (let i = 0; i < answer.length; i++) {
       board[row][col - i].letter = answer[i];
       board[row][col - i].isTarget = true;
@@ -144,7 +141,6 @@ function BoardWindow() {
   }
 
   function fillHorizontalRight(row, col, board) {
-    // console.log('fillHorizontalRight')
     for (let i = 0; i < answer.length; i++) {
       board[row][col + i].letter = answer[i];
       board[row][col + i].isTarget = true;
@@ -152,7 +148,6 @@ function BoardWindow() {
   }
 
   function fillVerticalUp(row, col, board) {
-    // console.log('fillVerticalUp')
     for (let i = 0; i < answer.length; i++) {
       board[row - i][col].letter = answer[i];
       board[row - i][col].isTarget = true;
@@ -160,7 +155,6 @@ function BoardWindow() {
   }
 
   function fillVerticalDown(row, col, board) {
-    // console.log('fillVerticalDown')
     for (let i = 0; i < answer.length; i++) {
       board[row + i][col].letter = answer[i];
       board[row + i][col].isTarget = true;
@@ -168,7 +162,6 @@ function BoardWindow() {
   }
 
   function fillDiagonalUpLeft(row, col, board) {
-    // console.log('fillDiagonalUpLeft')
     for (let i = 0; i < answer.length; i++) {
       board[row - i][col - i].letter = answer[i];
       board[row - i][col - i].isTarget = true;
@@ -176,7 +169,6 @@ function BoardWindow() {
   }
 
   function fillDiagonalUpRight(row, col, board) {
-    // console.log('fillDiagonalUpRight')
     for (let i = 0; i < answer.length; i++) {
       board[row - i][col + i].letter = answer[i];
       board[row - i][col + i].isTarget = true;
@@ -184,7 +176,6 @@ function BoardWindow() {
   }
 
   function fillDiagonalDownLeft(row, col, board) {
-    // console.log('fillDiagonalDownLeft')
     for (let i = 0; i < answer.length; i++) {
       board[row + i][col - i].letter = answer[i];
       board[row + i][col - i].isTarget = true;
@@ -192,62 +183,9 @@ function BoardWindow() {
   }
 
   function fillDiagonalDownRight(row, col, board) {
-    // console.log('fillDiagonalDownRight')
     for (let i = 0; i < answer.length; i++) {
       board[row + i][col + i].letter = answer[i];
       board[row + i][col + i].isTarget = true;
-    }
-  }
-
-  function recursiveCheck(row, col, answerIndex) {
-    // Check if word search is complete
-    if (answerIndex === answer.length) {
-      if (checkArray.length === answer.length) {
-        return false;
-      } else {
-        return true;
-      }
-    }
-
-    if (board[row][col].isTarget) {
-      checkArray.push(board[row][col]);
-    }
-
-    // Check if indices are within matrix bounds
-    if (row < 0 || row >= boardSize || col < 0 || col >= boardSize) {
-      return false;
-    }
-
-    // Check if the current element matches the word character
-    if (board[row][col].letter !== answer[answerIndex]) {
-      console.log('IN RECURSION BUT NOT MATCHING')
-      return false;
-    }
-
-    // Recursively search the neighboring elements
-    for (const [dx, dy] of directions) {
-      const newRow = row + dx;
-      const newCol = col + dy;
-      if (recursiveCheck(newRow, newCol, answerIndex + 1)) {
-        return true;
-      }
-    }
-    if (checkArray.length > 0) {
-      checkArray.pop();
-    }
-  }
-
-  function checkBoard() {
-    for (let i = 0; i < boardSize; i++) {
-      for (let j = 0; j < boardSize; j++) {
-        if (board[i][j].letter === answer[0]) {
-          if (recursiveCheck(i, j, 0)) {
-            console.log('FOUND IT')
-            fillBoard();
-          }
-
-        }
-      }
     }
   }
 
@@ -277,8 +215,8 @@ function BoardWindow() {
 
     let randRow = Math.floor(Math.random() * boardSize);
     let randCol = Math.floor(Math.random() * boardSize);
-    console.log('randRow ->', randRow);
-    console.log('randCol ->', randCol);
+    console.log('Word starts at -> ', randRow, randCol);
+    
 
     // if bool1 is false, cant print right
     let bool1 = randCol + answer.length <= boardSize;
@@ -573,8 +511,7 @@ function BoardWindow() {
     }
     setLetters(board);
     // console.log('board ->', board);
-    // checkBoard();
-    board = [];
+  
   }
 
   function handleClick(e) {
@@ -584,7 +521,6 @@ function BoardWindow() {
         setCorrectLetters([...correctLetters, e.target.id]);
 
       }
-      // console.log('correctLetters ->', correctLetters)
 
     } else {
       e.target.style.backgroundColor = 'red';
