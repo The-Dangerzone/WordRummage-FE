@@ -48,7 +48,5 @@ const MultiplierBar = () => {
     </Box>
   );
 };
-};
 
 export default MultiplierBar;
-
