@@ -83,7 +83,7 @@ const GameSettings = () => {
               label="Round Timer"
             />
             <Tooltip title="If enabled, the circular progress will be present. If the circle completes the round is over.">
-              <InfoTwoToneIcon fontSize='small' />
+              <InfoOutlined fontSize='small' />
             </Tooltip>
           </div>
           <div>
@@ -109,7 +109,7 @@ const GameSettings = () => {
               label="Score"
             />
             <Tooltip title="If enabled, the game will keep a score and will have a score multiplier">
-              <InfoRoundedIcon fontSize='small' />
+              <InfoOutlined fontSize='small' />
             </Tooltip>
           </div>
           <div>
@@ -121,17 +121,17 @@ const GameSettings = () => {
                 />}
               label="Growing Board" />
             <Tooltip title="If enabled, the board will grow by 1 row and 1 column every 5 rounds.">
-              <InfoIcon fontSize='small' />
+              <InfoOutlined fontSize='small' />
             </Tooltip>
           </div>
 
           <Box sx={{ width: 300, margin: 1 }}>
-            <div style={{ display: 'flex', width: '230px', justifyContent: 'space-between', }}>
+            <div style={{ display: 'flex', width: '225px', justifyContent: 'space-between', }}>
               <Typography id="discrete-slider" gutterBottom>
                 Starting Board Size (6-20)
               </Typography>
-              <Tooltip title="The starting size of the board. This number will represent the number of letters per column and row">
-                <InfoSharpIcon fontSize='small' />
+              <Tooltip title="The starting size of the board. This number will represent the number of letters per column and row" sx={{ marginTop: '-3px', marginLeft: '-5px' }}>
+                <InfoOutlined fontSize='small' />
               </Tooltip>
             </div>
             <Slider
