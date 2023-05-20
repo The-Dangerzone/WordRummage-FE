@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { SettingsContext } from '../../../Context/Settings';
-import './styles.css';
 import { Box, Typography } from '@mui/material';
+import './styles.css';
 
 const MultiplierBar = () => {
   const { streak, multiplier, displayScore } = useContext(SettingsContext);
@@ -22,16 +22,13 @@ const MultiplierBar = () => {
     const boxes = [];
     for (let i = 0; i < 6; i++) {
       const color = i < streak ? getBoxColor(i) : 'transparent';
+      const isTopBox = i === streak - 1;
+      const boxClasses = `box ${isTopBox ? 'filled' : ''}`;
       boxes.push(
         <Box
           key={i}
-          sx={{
-            width: '50px',
-            height: '50px',
-            backgroundColor: color,
-            marginBottom: '10px',
-            border: '1px solid black',
-          }}
+          className={boxClasses}
+          style={{ backgroundColor: color }}
         />
       );
     }
@@ -39,11 +36,11 @@ const MultiplierBar = () => {
   };
 
   return (
-    <Box sx={{ width: '100px', height: '450px', justifyContent: "center", alignItems: "center", display: "flex", flexDirection: "column" }}>
+    <Box className="multiplier-bar">
       {displayScore && (
-        <Box sx={{ width: '100px', height: '450px', border: '1px solid black', justifyContent: "center", alignItems: "center", display: "flex", flexDirection: "column" }}>
-          <Typography sx={{ paddingBottom: '10px' }}>Multiplier Bar</Typography>
-          <Box sx={{ width: '50px', height: '360px', display: "flex", flexDirection: "column-reverse" }}>{renderBoxes()}</Box>
+        <Box className="score-container">
+          <Typography className="title">Multiplier Bar</Typography>
+          <Box className="box-container">{renderBoxes()}</Box>
           <Typography>Streak: {streak}</Typography>
           <Typography>Multi: {multiplier}</Typography>
         </Box>
