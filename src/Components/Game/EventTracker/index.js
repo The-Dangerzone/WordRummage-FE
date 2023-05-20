@@ -2,10 +2,6 @@ import { useContext, useState } from 'react';
 import { SettingsContext } from '../../../Context/Settings';
 import { Select, MenuItem } from '@mui/material';
 import './styles.css';
-import { useContext, useState } from 'react';
-import { SettingsContext } from '../../../Context/Settings';
-import { Select, MenuItem } from '@mui/material';
-import './styles.css';
 
 const EventTracker = () => {
   const [selectedRound, setSelectedRound] = useState(1);
