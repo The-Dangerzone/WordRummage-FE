@@ -59,6 +59,7 @@
   font-size: 25px;
   font-weight: bolder;
   user-select: none;
+  color: white;
 }
 .GO-header{
   display: flex;
