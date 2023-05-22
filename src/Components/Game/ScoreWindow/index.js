@@ -7,7 +7,7 @@ const ScoreWindow = () => {
   const { score, round, displayScore } = useContext(SettingsContext);
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', width: 700, left: '50%', margin: '0 auto' }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center', width: 700, left: '50%', margin: '0 auto', userSelect: 'none', color: 'white' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
         <Typography variant="h4">Round: {round}</Typography>
         {displayScore && (
