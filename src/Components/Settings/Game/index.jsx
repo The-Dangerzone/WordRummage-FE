@@ -10,7 +10,7 @@ import InfoOutlined from '@mui/icons-material/InfoOutlined';
 
 const GameSettings = () => {
 
-  const { setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth, resetGame } = useContext(SettingsContext);
+  const { setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth,} = useContext(SettingsContext);
 
 
   return (

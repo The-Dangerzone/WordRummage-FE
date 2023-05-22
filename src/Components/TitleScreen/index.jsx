@@ -1,11 +1,16 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, } from "react";
 import { SettingsContext } from "../../Context/Settings";
 import { Link } from "react-router-dom";
 import Rain from "../Rain";
 import "./styles.css";
 
-const TitleScreen = (props) => {
-  const { isLoggedIn, setIsLoggedIn } = useContext(SettingsContext);
+const TitleScreen = () => {
+  const { resetGame } = useContext(SettingsContext);
+
+  useEffect(() => { 
+    resetGame();
+  }, []);
+
 
   const handleSinglePlayer = () => {
     // Placeholder in case we need it
