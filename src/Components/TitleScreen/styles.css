@@ -44,31 +44,3 @@
 .button-group > *:last-child {
   margin-right: 0;
 }
-
-.falling-letters-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none; 
-}
-
-.falling-letter {
-  position: absolute;
-  top: -50px; 
-  left: 50%;
-  color: white;
-  font-size: 50px;
-  animation: rain 5s linear infinite;
-  user-select: none;
-}
-
-@keyframes rain {
-  0% {
-    transform: translateY(-50px); 
-  }
-  100% {
-    transform: translateY(100vh); 
-  }
-}
