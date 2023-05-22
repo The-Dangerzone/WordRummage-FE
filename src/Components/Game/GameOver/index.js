@@ -7,7 +7,7 @@ import './styles.css';
 
 
 const GameOver = () => {
-  const { score, round, incorrectLetters, maxStreak } = useContext(SettingsContext);
+  const { score, round, incorrectLetters, maxStreak, resetGame } = useContext(SettingsContext);
   const [showEventLog, setShowEventLog] = useState(false);
 
   const handleReviewButtonClick = () => {
