@@ -72,7 +72,7 @@ const GameSettings = () => {
             </Tooltip>
           </div>
 
-          <Box sx={{ width: 300, margin: 1 }}>
+          <Box sx={{ width: 300, margin: 1}}>
             <div style={{ display: 'flex', width: '225px', justifyContent: 'space-between', }}>
               <Typography id="discrete-slider" gutterBottom>
                 Starting Board Size (6-20)
