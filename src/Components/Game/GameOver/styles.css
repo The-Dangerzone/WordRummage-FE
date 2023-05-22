@@ -1,0 +1,39 @@
+.game-over-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+.rain-container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; 
+}
+
+.game-over-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 20px;
+  background: rgb(33, 70, 40);
+  color: white;
+  user-select: none;
+  
+}
+
+.event-log-container {
+  margin-left: 20px;
+  width: 0;
+  overflow: hidden;
+  transition: width 0.5s;
+}

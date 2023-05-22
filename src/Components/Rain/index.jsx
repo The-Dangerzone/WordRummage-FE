@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-
+import "./styles.css";
 
 function Rain () {
   const [fallingLetters, setFallingLetters] = useState([]);
 
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  
   useEffect(() => {
     const generateFallingLetters = () => {
       const letters = [];
