@@ -31,7 +31,7 @@ const GameScreen = () => {
             </Container>
             <Container>
               <Container sx={{ display: "flex" }}>
-                <Box sx={{ flexGrow: 1 }} />
+                <Box sx={{ flexGrow: 1, userSelect: 'none' }} />
                 <MultiplierBar />
               </Container>
             </Container>
