@@ -2,6 +2,9 @@ import React, { useContext, useState } from 'react';
 import { SettingsContext } from '../../../Context/Settings';
 import EventTracker from '../EventTracker';
 import { Link } from 'react-router-dom';
+import Rain from '../../Rain';
+import './styles.css';
+
 
 const GameOver = () => {
   const { score, round, incorrectLetters, maxStreak } = useContext(SettingsContext);
@@ -12,30 +15,11 @@ const GameOver = () => {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-      }}
-    >
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          textAlign: 'center',
-          border: '1px solid black',
-          borderRadius: '10px',
-          padding: '20px',
-          background: 'rgb(33, 70, 40)',
-          color: 'white',
-          userSelect: 'none',
-
-        }}
-      >
+    <div className="game-over-container">
+      <div className='rain-container'>
+      <Rain />  
+      </div>
+      <div className="game-over-content">
         <h1>Game Over</h1>
         <h2>Score: {score}</h2>
         <h2>Round: {round}</h2>
@@ -44,11 +28,11 @@ const GameOver = () => {
         <Link to="/">
           <button>Return to Title Screen</button>
         </Link>
-        <button style={{margin: '10px'}} onClick={handleReviewButtonClick}>
+        <button style={{ margin: '10px' }} onClick={handleReviewButtonClick}>
           {showEventLog ? 'Hide Event Log' : 'Review Game'}
         </button>
       </div>
-      <div style={{ marginLeft: '20px', width: showEventLog ? '500px' : '0', overflow: 'hidden', transition: 'width 0.5s' }}>
+      <div className="event-log-container" style={{ width: showEventLog ? '500px' : '0' }}>
         {showEventLog && <EventTracker />}
       </div>
     </div>
