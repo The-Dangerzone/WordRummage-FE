@@ -37,6 +37,7 @@ let tempLetter = [];
     setMaxStreak,
     setEventLog,
     eventLog,
+    insaneAlphabet,
 
   } = useContext(SettingsContext);
 
@@ -179,8 +180,12 @@ let tempLetter = [];
   }
 
   function fillBoard() {
+    
+    let alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    if (insaneAlphabet) {
+      alphabet = answer.join('');
+    }
 
     const board = [];
     let checkWord = [];
