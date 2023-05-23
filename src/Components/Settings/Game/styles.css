@@ -8,6 +8,10 @@
   
 }
 
+.disabled-typography {
+  color: rgba(0, 0, 0, 0.38);
+}
+
 .mode-container {
   background: rgb(33, 70, 40);
   display: flex;
