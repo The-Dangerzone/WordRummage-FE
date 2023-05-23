@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FormGroup, FormControlLabel, Switch, Slider, Box, Typography, Tooltip } from '@mui/material';
+import { FormGroup, FormControlLabel, Switch, Box, Typography, Tooltip } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { SettingsContext } from '../../../Context/Settings';
 import './styles.css'
@@ -14,7 +14,7 @@ const GameSettings = () => {
   const { setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth, resetGame } = useContext(SettingsContext);
 
   const [selectedContainer, setSelectedContainer] = useState(null);
-  const [selectedMode, setSelectedMode] = useState(0);
+  const [selectedMode, setSelectedMode] = useState(null);
 
   useEffect(() => {
     resetGame();
@@ -129,7 +129,7 @@ const GameSettings = () => {
                   <InfoOutlined fontSize='small' />
                 </Tooltip>
               </div>
-              <BoardSizeSlider/>
+              <BoardSizeSlider />
             </Box>
           </FormGroup>
 
@@ -151,7 +151,13 @@ const GameSettings = () => {
         </Link>
 
         <Link to="/game">
-          <button>Start Game</button>
+          <button
+            disabled={selectedContainer === null}
+            className={`${selectedContainer === null ? 'disabled-button' : ''}`}
+            title={selectedContainer === null ? 'Select a mode to start a game' : ''}>
+            Start Game
+          </button>
+
         </Link>
       </div>
     </div>
