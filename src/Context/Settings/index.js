@@ -24,6 +24,7 @@ const SettingsProvider = ({ children }) => {
   const [multiplier, setMultiplier] = useState(1);
   const [maxStreak, setMaxStreak] = useState(0);
   const [eventLog, setEventLog] = useState([]);
+  const [insaneAlphabet, setInsaneAlphabet] = useState(true);
 
   function resetGame() {
     setScore(0);
@@ -44,6 +45,7 @@ const SettingsProvider = ({ children }) => {
     setMultiplier(1);
     setMaxStreak(0);
     setEventLog ([]);
+    setInsaneAlphabet(true);
   }
 
   const values = {
@@ -67,6 +69,7 @@ const SettingsProvider = ({ children }) => {
     multiplier, setMultiplier,
     maxStreak, setMaxStreak,
     eventLog, setEventLog,
+    insaneAlphabet, setInsaneAlphabet
   }
 
   return (
