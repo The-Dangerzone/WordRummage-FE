@@ -18,6 +18,13 @@ button:hover {
   animation: pulsate 1s infinite;
 }
 
+button.disabled-button {
+  background: gray;
+  cursor: not-allowed;
+  animation: none;
+}
+
+
 @keyframes pulsate {
   0% {
     transform: skew(-20deg) scale(1);
