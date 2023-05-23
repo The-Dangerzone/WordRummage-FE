@@ -8,6 +8,27 @@
   
 }
 
+.disabled-typography {
+  color: rgba(0, 0, 0, 0.38);
+}
+.game-settings-title{
+  background: rgb(33, 70, 40);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: white;
+  border: 3px solid black;
+  border-radius: 10px;
+  width: 33vw;
+  box-shadow: 0 0 10px black;
+  overflow: hidden;
+  z-index: 1;
+  margin: 10px;
+  user-select: none;
+  font-size: 25px;
+}
+
 .mode-container {
   background: rgb(33, 70, 40);
   display: flex;
