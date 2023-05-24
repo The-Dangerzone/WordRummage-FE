@@ -38,10 +38,14 @@ let tempLetter = [];
     setEventLog,
     eventLog,
     insaneAlphabet,
+    setCurrentBoardSize,
 
   } = useContext(SettingsContext);
 
-
+  // Saves BoardSize For Replay Button
+  if (round === 1) {
+    setCurrentBoardSize(boardSize);
+  }
 
   // Check for if gameover timer runs out
   if (displayTimer) {
