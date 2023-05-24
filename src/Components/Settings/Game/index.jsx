@@ -11,10 +11,10 @@ import BoardSizeSlider from './slider';
 
 const GameSettings = () => {
 
-  const { setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth, resetGame, insaneAlphabet, setInsaneAlphabet } = useContext(SettingsContext);
+  const { setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth, resetGame, insaneAlphabet, setInsaneAlphabet, setSelectedMode, selectedMode } = useContext(SettingsContext);
 
   const [selectedContainer, setSelectedContainer] = useState(null);
-  const [selectedMode, setSelectedMode] = useState(null);
+ 
 
   useEffect(() => {
     resetGame();
