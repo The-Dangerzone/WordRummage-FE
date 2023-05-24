@@ -25,7 +25,8 @@ const SettingsProvider = ({ children }) => {
   const [maxStreak, setMaxStreak] = useState(0);
   const [eventLog, setEventLog] = useState([]);
   const [insaneAlphabet, setInsaneAlphabet] = useState(true);
-
+  const [selectedMode, setSelectedMode] = useState(null);
+  const [currentBoardSize, setCurrentBoardSize] = useState(6);
   function resetGame() {
     setScore(0);
     setRound(1);
@@ -46,6 +47,7 @@ const SettingsProvider = ({ children }) => {
     setMaxStreak(0);
     setEventLog ([]);
     setInsaneAlphabet(true);
+    setCurrentBoardSize(6);
   }
 
   const values = {
@@ -69,7 +71,9 @@ const SettingsProvider = ({ children }) => {
     multiplier, setMultiplier,
     maxStreak, setMaxStreak,
     eventLog, setEventLog,
-    insaneAlphabet, setInsaneAlphabet
+    insaneAlphabet, setInsaneAlphabet,
+    selectedMode, setSelectedMode,
+    currentBoardSize, setCurrentBoardSize
   }
 
   return (

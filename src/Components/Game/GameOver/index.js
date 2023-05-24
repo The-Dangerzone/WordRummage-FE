@@ -7,11 +7,33 @@ import './styles.css';
 
 
 const GameOver = () => {
-  const { score, round, incorrectLetters, maxStreak, resetGame } = useContext(SettingsContext);
+  const { score, round, incorrectLetters, maxStreak, setScore, setRound, setGameTimer,setBoardSize, currentBoardSize, setRoundTimer, setResetTimer, setDisplayTimer, displayTimer, setDisplayRoundTimer, displayRoundTimer, setDisplayScore, displayScore, setAllowBoardGrowth, allowBoardGrowth, setAnswer, setCorrectLetters, setGameOver, setIncorrectLetters, setStreak, setMultiplier, setMaxStreak, setEventLog, setInsaneAlphabet, insaneAlphabet } = useContext(SettingsContext);
   const [showEventLog, setShowEventLog] = useState(false);
 
   const handleReviewButtonClick = () => {
     setShowEventLog(!showEventLog);
+  };
+  
+  const handleReplayClick = () => {
+    setScore(0);
+    setRound(1);
+    setGameTimer(60);
+    setBoardSize(currentBoardSize);
+    setRoundTimer(0);
+    setResetTimer(true);
+    setDisplayTimer(displayTimer);
+    setDisplayRoundTimer(displayRoundTimer);
+    setDisplayScore(displayScore);
+    setAllowBoardGrowth(allowBoardGrowth);
+    setAnswer([]);
+    setCorrectLetters([]);
+    setGameOver(false);
+    setIncorrectLetters(0);
+    setStreak(0);
+    setMultiplier(1);
+    setMaxStreak(0);
+    setEventLog ([]);
+    setInsaneAlphabet(insaneAlphabet);
   };
 
   return (
@@ -25,10 +47,13 @@ const GameOver = () => {
         <h2>Round: {round}</h2>
         <h2>Incorrect Letters: {incorrectLetters}</h2>
         <h2>Biggest Streak: {maxStreak}</h2>
-        <Link to="/">
-          <button>Return to Title Screen</button>
+        <Link to="/game">
+          <button style={{ margin: '5px' }} onClick={handleReplayClick}>Try Again</button>
         </Link>
-        <button style={{ margin: '10px' }} onClick={handleReviewButtonClick}>
+        <Link to="/">
+          <button style={{ margin: '5px' }}>Return to Title Screen</button>
+        </Link>
+        <button style={{ margin: '5px' }} onClick={handleReviewButtonClick}>
           {showEventLog ? 'Hide Event Log' : 'Review Game'}
         </button>
       </div>
