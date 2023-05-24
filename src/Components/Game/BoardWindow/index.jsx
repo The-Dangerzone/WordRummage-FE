@@ -278,7 +278,7 @@ let tempLetter = [];
           checkWord.push({ board: board[i][j], i: i, j: j }); // push first letter to checkWord
 
           //check right
-          if (j + answer.length <= boardSize) {
+          if (j + answer.length <= boardSize && j >= 0) {
             if (board[i][j + 1].letter === answer[1]) {
               checkWord.push({ board: board[i][j + 1], i: i, j: j + 1 }); // push second letter to checkWord
               for (let k = 2; k < answer.length; k++) {
@@ -293,7 +293,7 @@ let tempLetter = [];
                     while (tempLetter === board[checkWord[l].i][checkWord[l].j].letter) {
                       board[checkWord[l].i][checkWord[l].j].letter = alphabet[Math.floor(Math.random() * alphabet.length)]
                       i = 0;
-                      j = 0;
+                      j = -1;
                     }
                   }
                 }
@@ -305,7 +305,7 @@ let tempLetter = [];
             }
           }
           //check left
-          if (j - answer.length >= -1) {
+          if (j - answer.length >= -1 && j >= 0) {
             if (board[i][j - 1].letter === answer[1]) {
               checkWord.push({ board: board[i][j - 1], i: i, j: j - 1 }); // push second letter to checkWord
 
@@ -321,7 +321,7 @@ let tempLetter = [];
                     while (tempLetter === board[checkWord[l].i][checkWord[l].j].letter) {
                       board[checkWord[l].i][checkWord[l].j].letter = alphabet[Math.floor(Math.random() * alphabet.length)]
                       i = 0;
-                      j = 0;
+                      j = -1;
                     }
                   }
                 }
@@ -333,7 +333,7 @@ let tempLetter = [];
             }
           }
           //check down
-          if (i + answer.length <= boardSize) {
+          if (i + answer.length <= boardSize && j >= 0) {
             if (board[i + 1][j].letter === answer[1]) {
               checkWord.push({ board: board[i + 1][j], i: i + 1, j: j }); // push second letter to checkWord
 
@@ -349,7 +349,7 @@ let tempLetter = [];
                     while (tempLetter === board[checkWord[l].i][checkWord[l].j].letter) {
                       board[checkWord[l].i][checkWord[l].j].letter = alphabet[Math.floor(Math.random() * alphabet.length)]
                       i = 0;
-                      j = 0;
+                      j = -1;
                     }
                   }
                 }
@@ -361,7 +361,7 @@ let tempLetter = [];
             }
           }
           //check up
-          if (i - answer.length >= -1) {
+          if (i - answer.length >= -1 && j >= 0) {
             if (board[i - 1][j].letter === answer[1]) {
               checkWord.push({ board: board[i - 1][j], i: i - 1, j: j }); // push second letter to checkWord
 
@@ -377,7 +377,7 @@ let tempLetter = [];
                     while (tempLetter === board[checkWord[l].i][checkWord[l].j].letter) {
                       board[checkWord[l].i][checkWord[l].j].letter = alphabet[Math.floor(Math.random() * alphabet.length)]
                       i = 0;
-                      j = 0;
+                      j = -1;
                     }
                   }
                 }
@@ -389,7 +389,7 @@ let tempLetter = [];
             }
           }
           // check diagonal down right
-          if (i + answer.length <= boardSize && j + answer.length <= boardSize) {
+          if (i + answer.length <= boardSize && j + answer.length <= boardSize && j >= 0) {
             if (board[i + 1][j + 1].letter === answer[1]) {
               checkWord.push({ board: board[i + 1][j + 1], i: i + 1, j: j + 1 }); // push second letter to checkWord
 
@@ -405,7 +405,7 @@ let tempLetter = [];
                     while (tempLetter === board[checkWord[l].i][checkWord[l].j].letter) {
                       board[checkWord[l].i][checkWord[l].j].letter = alphabet[Math.floor(Math.random() * alphabet.length)]
                       i = 0;
-                      j = 0;
+                      j = -1;
                     }
                   }
                 }
@@ -417,7 +417,7 @@ let tempLetter = [];
             }
           }
           // check diagonal down left
-          if (i + answer.length <= boardSize && j - answer.length >= -1) {
+          if (i + answer.length <= boardSize && j - answer.length >= -1 && j >= 0) {
             if (board[i + 1][j - 1].letter === answer[1]) {
               checkWord.push({ board: board[i + 1][j - 1], i: i + 1, j: j - 1 }); // push second letter to checkWord
 
@@ -433,7 +433,7 @@ let tempLetter = [];
                     while (tempLetter === board[checkWord[l].i][checkWord[l].j].letter) {
                       board[checkWord[l].i][checkWord[l].j].letter = alphabet[Math.floor(Math.random() * alphabet.length)]
                       i = 0;
-                      j = 0;
+                      j = -1;
                     }
                   }
                 }
@@ -445,7 +445,7 @@ let tempLetter = [];
             }
           }
           // check diagonal up right
-          if (i - answer.length >= -1 && j + answer.length <= boardSize) {
+          if (i - answer.length >= -1 && j + answer.length <= boardSize && j >= 0) {
             if (board[i - 1][j + 1].letter === answer[1]) {
               checkWord.push({ board: board[i - 1][j + 1], i: i - 1, j: j + 1 }); // push second letter to checkWord
 
@@ -461,7 +461,7 @@ let tempLetter = [];
                     while (tempLetter === board[checkWord[l].i][checkWord[l].j].letter) {
                       board[checkWord[l].i][checkWord[l].j].letter = alphabet[Math.floor(Math.random() * alphabet.length)]
                       i = 0;
-                      j = 0;
+                      j = -1;
                     }
                   }
                 }
@@ -472,7 +472,7 @@ let tempLetter = [];
             }
           }
           // check diagonal up left
-          if (i - answer.length >= -1 && j - answer.length >= -1) {
+          if (i - answer.length >= -1 && j - answer.length >= -1 && j >= 0) {
             if (board[i - 1][j - 1].letter === answer[1]) {
               checkWord.push({ board: board[i - 1][j - 1], i: i - 1, j: j - 1 }); // push second letter to checkWord
 
@@ -487,7 +487,7 @@ let tempLetter = [];
                     while (tempLetter === board[checkWord[l].i][checkWord[l].j].letter) {
                       board[checkWord[l].i][checkWord[l].j].letter = alphabet[Math.floor(Math.random() * alphabet.length)]
                       i = 0;
-                      j = 0;
+                      j = -1;
                     }
                   }
                 }
@@ -498,8 +498,9 @@ let tempLetter = [];
 
             }
           }
-
           checkWord = [];
+          // i = 0;
+          // j = -1;
         }
       }
     }
