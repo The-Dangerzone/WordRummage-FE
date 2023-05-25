@@ -16,7 +16,7 @@ const CountDown = () => {
           setCountDownNumber(countDownNumber - 1);
           setShowNumber(true);
         }, 500);
-      }, 1500);
+      }, 1000);
       return () => clearTimeout(timeout);
     } else {
       setCountDownFlag(false);
