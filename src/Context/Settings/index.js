@@ -27,6 +27,8 @@ const SettingsProvider = ({ children }) => {
   const [insaneAlphabet, setInsaneAlphabet] = useState(true);
   const [selectedMode, setSelectedMode] = useState(null);
   const [currentBoardSize, setCurrentBoardSize] = useState(6);
+  const [countDownFlag, setCountDownFlag] = useState(false);
+
   function resetGame() {
     setScore(0);
     setRound(1);
@@ -73,7 +75,8 @@ const SettingsProvider = ({ children }) => {
     eventLog, setEventLog,
     insaneAlphabet, setInsaneAlphabet,
     selectedMode, setSelectedMode,
-    currentBoardSize, setCurrentBoardSize
+    currentBoardSize, setCurrentBoardSize,
+    countDownFlag, setCountDownFlag,
   }
 
   return (

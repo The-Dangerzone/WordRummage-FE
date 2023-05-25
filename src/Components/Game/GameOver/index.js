@@ -7,7 +7,7 @@ import './styles.css';
 
 
 const GameOver = () => {
-  const { score, round, incorrectLetters, maxStreak, setScore, setRound, setGameTimer,setBoardSize, currentBoardSize, setRoundTimer, setResetTimer, setDisplayTimer, displayTimer, setDisplayRoundTimer, displayRoundTimer, setDisplayScore, displayScore, setAllowBoardGrowth, allowBoardGrowth, setAnswer, setCorrectLetters, setGameOver, setIncorrectLetters, setStreak, setMultiplier, setMaxStreak, setEventLog, setInsaneAlphabet, insaneAlphabet } = useContext(SettingsContext);
+  const { score, round, incorrectLetters, maxStreak, setScore, setRound, setGameTimer,setBoardSize, currentBoardSize, setRoundTimer, setResetTimer, setDisplayTimer, displayTimer, setDisplayRoundTimer, displayRoundTimer, setDisplayScore, displayScore, setAllowBoardGrowth, allowBoardGrowth, setAnswer, setCorrectLetters, setGameOver, setIncorrectLetters, setStreak, setMultiplier, setMaxStreak, setEventLog, setInsaneAlphabet, insaneAlphabet, setCountDownFlag } = useContext(SettingsContext);
   const [showEventLog, setShowEventLog] = useState(false);
 
   const handleReviewButtonClick = () => {
@@ -34,6 +34,8 @@ const GameOver = () => {
     setMaxStreak(0);
     setEventLog ([]);
     setInsaneAlphabet(insaneAlphabet);
+    setCountDownFlag(true);
+    
   };
 
   return (
