@@ -1,6 +1,6 @@
 import './styles.css';
+import Rain from '../../Rain';
 import { useContext, useEffect, useState } from 'react';
-
 import { SettingsContext } from '../../../Context/Settings';
 
 const CountDown = () => {
@@ -25,6 +25,9 @@ const CountDown = () => {
 
   return (
     <div className='count-down-container'>
+        <div className='rain-container'>
+      <Rain />  
+      </div>
       <div className={`count-down-number ${showNumber ? 'show' : 'hide'}`}>
         {countDownNumber}
       </div>
