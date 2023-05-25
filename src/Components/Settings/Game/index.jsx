@@ -11,7 +11,7 @@ import BoardSizeSlider from './slider';
 
 const GameSettings = () => {
 
-  const { setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth, resetGame, insaneAlphabet, setInsaneAlphabet, setSelectedMode, selectedMode } = useContext(SettingsContext);
+  const { setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth, resetGame, insaneAlphabet, setInsaneAlphabet, setSelectedMode, selectedMode, setCountDownFlag } = useContext(SettingsContext);
 
   const [selectedContainer, setSelectedContainer] = useState(null);
  
@@ -48,6 +48,11 @@ const GameSettings = () => {
       setInsaneAlphabet(true); 
     }
   };
+
+  const handleStartClick = () => {
+    setCountDownFlag(true);
+  }
+
 
   return (
     <div className='game-settings-container'>
@@ -193,7 +198,8 @@ const GameSettings = () => {
           <button
             disabled={selectedContainer === null}
             className={`${selectedContainer === null ? 'disabled-button' : ''}`}
-            title={selectedContainer === null ? 'Select a mode to start a game' : ''}>
+            title={selectedContainer === null ? 'Select a mode to start a game' : ''}
+            onClick={handleStartClick}>
             Start Game
           </button>
 
