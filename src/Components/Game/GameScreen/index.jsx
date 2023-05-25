@@ -2,21 +2,24 @@ import BoardWindow from "../BoardWindow";
 import ScoreWindow from "../ScoreWindow";
 import TimerBar from "../TimerBar";
 import GameOver from "../GameOver";
+import CountDown from "../CountDown";
 import MultiplierBar from "../MultiplierBar";
 import { SettingsContext } from "../../../Context/Settings";
 import './styles.css';
-import { Box, Container, Grid } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import { useContext } from "react";
 
 
 const GameScreen = () => {
 
-  const { gameOver } = useContext(SettingsContext)
+  const { gameOver, countDownFlag } = useContext(SettingsContext)
 
   return (
-    <Box sx={{backgroundColor: "rgb(55, 106, 75)", height: "100vh"}}>
+    <Box sx={{ backgroundColor: "rgb(55, 106, 75)", height: "100vh" }}>
       {gameOver ? (
         <GameOver />
+      ) : countDownFlag ? (
+        <CountDown />
       ) : (
         <>
           <Container sx={{ display: "flex", alignItems: "center" }}>
@@ -31,7 +34,7 @@ const GameScreen = () => {
             </Container>
             <Container>
               <Container sx={{ display: "flex" }}>
-                <Box sx={{ flexGrow: 1, userSelect: 'none' }} />
+                <Box sx={{ flexGrow: 1, userSelect: "none" }} />
                 <MultiplierBar />
               </Container>
             </Container>
@@ -40,6 +43,6 @@ const GameScreen = () => {
       )}
     </Box>
   );
-}
+};
 
 export default GameScreen;
