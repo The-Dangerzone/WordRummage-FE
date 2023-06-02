@@ -1,10 +1,11 @@
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import { SettingsContext } from '../../../Context/Settings';
 import { Box, Typography } from '@mui/material';
 import './styles.css';
 
 const MultiplierBar = () => {
-  const { streak, multiplier, displayScore } = useContext(SettingsContext);
+  const { streak, multiplier, displayScore, setGameOver } = useContext(SettingsContext);
+  const [showQuitMessage, setShowQuitMessage] = useState(false);
 
   const getBoxColor = (boxIndex) => {
     if (boxIndex < 2) {
@@ -35,16 +36,42 @@ const MultiplierBar = () => {
     return boxes;
   };
 
+  const handleQuitClick = () => {
+    setShowQuitMessage(true);
+  };
+
+  const handleYesClick = () => {
+    setGameOver(true);
+    setShowQuitMessage(false);
+  };
+
+  const handleNoClick = () => {
+    setShowQuitMessage(false);
+  };
+
   return (
     <Box className="multiplier-bar">
+      <Box className="quit-box">
+        {!showQuitMessage && (
+          <button onClick={handleQuitClick}>
+            Quit
+          </button>
+        )}
+        {showQuitMessage && (
+          <Box className="quit-message">
+            <Typography style={{marginBottom: '10px'}}>Are you sure you want to quit?</Typography>
+            <Box className="quit-button-container">
+              <button onClick={handleYesClick} style={{marginRight: '5px'}}>Yes</button>
+              <button onClick={handleNoClick} style={{marginLeft: '5px'}}>No</button>
+            </Box>
+          </Box>
+        )}
+      </Box>
       {displayScore && (
         <Box className="score-container">
           <Box className="box-container">{renderBoxes()}</Box>
-          {/* <Typography>Streak: {streak}</Typography> */}
           <Typography>Multiplier:</Typography>
-          <Typography style={{fontSize: '30px'}}>{multiplier}x</Typography>
-                   
-
+          <Typography style={{ fontSize: '30px' }}>{multiplier}x</Typography>
         </Box>
       )}
     </Box>
