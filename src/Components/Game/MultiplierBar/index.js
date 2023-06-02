@@ -39,10 +39,12 @@ const MultiplierBar = () => {
     <Box className="multiplier-bar">
       {displayScore && (
         <Box className="score-container">
-          <Typography className="title">Multiplier Bar</Typography>
           <Box className="box-container">{renderBoxes()}</Box>
-          <Typography>Streak: {streak}</Typography>
-          <Typography>Multi: {multiplier}</Typography>
+          {/* <Typography>Streak: {streak}</Typography> */}
+          <Typography>Multiplier:</Typography>
+          <Typography style={{fontSize: '30px'}}>{multiplier}x</Typography>
+                   
+
         </Box>
       )}
     </Box>
