@@ -5,8 +5,8 @@ import wordArray from './wordList';
 
 function BoardWindow() {
   const [letters, setLetters] = useState([]);
-let tempLetter = [];
- 
+  let tempLetter = [];
+
 
   const {
     setBoardSize,
@@ -184,7 +184,7 @@ let tempLetter = [];
   }
 
   function fillBoard() {
-    
+
     let alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
     if (insaneAlphabet) {
@@ -214,7 +214,7 @@ let tempLetter = [];
     let randRow = Math.floor(Math.random() * boardSize);
     let randCol = Math.floor(Math.random() * boardSize);
     console.log('Word starts at -> ', randRow, randCol);
-    
+
 
     // if bool1 is false, cant print right
     let bool1 = randCol + answer.length <= boardSize;
@@ -278,7 +278,7 @@ let tempLetter = [];
     for (let i = 0; i < boardSize; i++) {
       for (let j = 0; j < boardSize; j++) {
         // Check first letter of answer
-       if (board[i][j].letter === answer[0]) {
+        if (board[i][j].letter === answer[0]) {
           checkWord.push({ board: board[i][j], i: i, j: j }); // push first letter to checkWord
 
           //check right
@@ -510,7 +510,7 @@ let tempLetter = [];
     }
     setLetters(board);
     // console.log('board ->', board);
-  
+
   }
 
   function handleClick(e) {
@@ -533,13 +533,25 @@ let tempLetter = [];
     }
   }
 
+
   function renderBoard() {
 
     return letters.map((row, i) => (
       <div key={`row-${i}`} className="letter-row">
         {row.map((obj, j) => (
-          <div key={`block-${i}-${j}`} id={`block-${i}-${j}`} className={`${obj.isTarget}`} onClick={(e) => handleClick(e)} >
-            {obj.letter}
+          <div key={`block-${i}-${j}`} 
+          id={`block-${i}-${j}`} 
+          className={`${obj.isTarget}`} 
+          onClick={(e) => handleClick(e)} 
+          ref={(element) => {
+            if (element) {
+              const targetFontSize = 0.6 * element.clientHeight; // Change the percentage here to adjust font size
+              element.style.fontSize = `${targetFontSize}px`;
+            }
+          }}
+          
+          >
+              {obj.letter}
           </div>
         ))}
       </div>
