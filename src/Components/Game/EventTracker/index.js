@@ -13,6 +13,12 @@ const EventTracker = () => {
 
   const selectedRoundData = eventLog.find((roundData) => roundData[0].round === selectedRound);
   const lettersMatrix = selectedRoundData ? selectedRoundData[0].letters : [];
+  
+
+  // This if  statement is used if you click quit game round 1 then try to review the eventlog.
+  if (eventLog.length === 0) {
+    return <div className="GO-board-window">No Data</div>;
+  }
 
   return (
 
