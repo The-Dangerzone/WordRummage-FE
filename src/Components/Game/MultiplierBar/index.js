@@ -21,9 +21,11 @@ const MultiplierBar = () => {
 
   const renderBoxes = () => {
     const boxes = [];
-    for (let i = 0; i < 6; i++) {
+    const maxStreak = Math.min(streak, 6); // Ensure there are at most 6 boxes
+    
+    for (let i = 0; i < maxStreak; i++) {
       const color = i < streak ? getBoxColor(i) : 'transparent';
-      const isTopBox = i === streak - 1;
+      const isTopBox = i === maxStreak - 1;
       const boxClasses = `box ${isTopBox ? 'filled' : ''}`;
       boxes.push(
         <Box
@@ -33,8 +35,10 @@ const MultiplierBar = () => {
         />
       );
     }
+    
     return boxes;
   };
+  
 
   const handleQuitClick = () => {
     setShowQuitMessage(true);
