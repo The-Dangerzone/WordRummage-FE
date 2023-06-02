@@ -561,7 +561,7 @@ function BoardWindow() {
   return (
     <>
       <div className="board-window">
-        <div className="target-word">Target Word: {answer.join('')}</div>
+        <div className="target-word">{answer.join('')}</div>
         <div className="game-container">{renderBoard()}</div>
       </div>
     </>
