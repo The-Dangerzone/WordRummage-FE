@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { SettingsContext } from '../../../Context/Settings';
 import './styles.css';
-import wordArray from './wordList';
+import wordsArray from './wordList';
+
+const [fourLetterWordArray, fiveLetterWordArray] = wordsArray;
 
 function BoardWindow() {
   const [letters, setLetters] = useState([]);
@@ -120,7 +122,24 @@ function BoardWindow() {
   }, [answer]);
 
   function wordBreak() {
-    let randAnswer = wordArray[Math.floor(Math.random() * wordArray.length)].toUpperCase();
+    let selectedArray;
+    if (boardSize < 8) {
+      selectedArray = fourLetterWordArray;
+    } else if (boardSize < 10) {
+      const randomIndex = Math.floor(Math.random() * 2); 
+      selectedArray = randomIndex === 0 ? fourLetterWordArray : fiveLetterWordArray;
+    } else {
+      const randomIndex = Math.floor(Math.random() * 2); //change this 2 to a 3 once 6 letter array is created
+      if (randomIndex === 0) {
+        selectedArray = fourLetterWordArray;
+      } else if (randomIndex === 1) {
+        selectedArray = fiveLetterWordArray;
+      } else {
+        // selectedArray = sixLetterArray;
+      }
+    }
+  
+    let randAnswer = selectedArray[Math.floor(Math.random() * selectedArray.length)].toUpperCase();
     console.log('randAnswer  ->', randAnswer)
     setAnswer(randAnswer.split(''));
     setResetTimer(false);
