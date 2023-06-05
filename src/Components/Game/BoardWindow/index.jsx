@@ -2,11 +2,13 @@ import React, { useState, useEffect, useContext } from 'react';
 import { SettingsContext } from '../../../Context/Settings';
 import correct from "../../../assets/audio/right_answer.mp3";
 import incorrect from "../../../assets/audio/wrong_answer.mp3";
-import './styles.css';
+import roundOver from "../../../assets/audio/round_over.mp3";
 import wordsArray from './wordList';
+import './styles.css';
 
 const correctAudio = new Audio(correct);
 const incorrectAudio = new Audio(incorrect);
+const roundOverAudio = new Audio(roundOver);
 
 const [fourLetterWordArray, fiveLetterWordArray, sixLetterWordArray] = wordsArray;
 
@@ -70,6 +72,7 @@ function BoardWindow() {
   // Check for if time runs out for the round
   if (displayRoundTimer) {
     if (roundTimer >= 100) {
+      roundOverAudio.play();
       setCorrectLetters([]);
       setResetTimer(true);
       setTimeout(() => {
