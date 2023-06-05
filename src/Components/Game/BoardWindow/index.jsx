@@ -1,7 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { SettingsContext } from '../../../Context/Settings';
+import correct from "../../../assets/audio/right_answer.mp3";
+import incorrect from "../../../assets/audio/wrong_answer.mp3";
 import './styles.css';
 import wordsArray from './wordList';
+
+const correctAudio = new Audio(correct);
+const incorrectAudio = new Audio(incorrect);
 
 const [fourLetterWordArray, fiveLetterWordArray, sixLetterWordArray] = wordsArray;
 
@@ -126,10 +131,10 @@ function BoardWindow() {
     if (boardSize < 8) {
       selectedArray = fourLetterWordArray;
     } else if (boardSize < 10) {
-      const randomIndex = Math.floor(Math.random() * 2); 
+      const randomIndex = Math.floor(Math.random() * 2);
       selectedArray = randomIndex === 0 ? fourLetterWordArray : fiveLetterWordArray;
     } else {
-      const randomIndex = Math.floor(Math.random() * 3); 
+      const randomIndex = Math.floor(Math.random() * 3);
       if (randomIndex === 0) {
         selectedArray = fourLetterWordArray;
       } else if (randomIndex === 1) {
@@ -138,7 +143,7 @@ function BoardWindow() {
         selectedArray = sixLetterWordArray;
       }
     }
-  
+
     let randAnswer = selectedArray[Math.floor(Math.random() * selectedArray.length)].toUpperCase();
     console.log('randAnswer  ->', randAnswer)
     setAnswer(randAnswer.split(''));
@@ -537,13 +542,15 @@ function BoardWindow() {
         setCorrectLetters([...correctLetters, e.target.id]);
 
       }
-
+      correctAudio.currentTime = 0;
+      correctAudio.play();
     } else {
       e.target.style.backgroundColor = 'red';
       setIncorrectLetters(incorrectLetters + 1)
       if (score > 0) {
         setScore(score - (Math.floor(boardSize / 2)));
       }
+      incorrectAudio.play();
       setTimeout(() => {
         e.target.style.backgroundColor = 'white';
       }, 1500);
@@ -556,19 +563,19 @@ function BoardWindow() {
     return letters.map((row, i) => (
       <div key={`row-${i}`} className="letter-row">
         {row.map((obj, j) => (
-          <div key={`block-${i}-${j}`} 
-          id={`block-${i}-${j}`} 
-          className={`${obj.isTarget}`} 
-          onClick={(e) => handleClick(e)} 
-          ref={(element) => {
-            if (element) {
-              const targetFontSize = 0.6 * element.clientHeight; // Change the percentage here to adjust font size
-              element.style.fontSize = `${targetFontSize}px`;
-            }
-          }}
-          
+          <div key={`block-${i}-${j}`}
+            id={`block-${i}-${j}`}
+            className={`${obj.isTarget}`}
+            onClick={(e) => handleClick(e)}
+            ref={(element) => {
+              if (element) {
+                const targetFontSize = 0.6 * element.clientHeight; // Change the percentage here to adjust font size
+                element.style.fontSize = `${targetFontSize}px`;
+              }
+            }}
+
           >
-              {obj.letter}
+            {obj.letter}
           </div>
         ))}
       </div>
