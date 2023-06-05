@@ -7,3 +7,4 @@ Initial project was built with HTML, JavaScript, and CSS. This refactor is built
 Refactor members: Jordan Covington and Joe Davitt
 
 Music from [ZapSplat](https://www.zapsplat.com)
+Sound Effects from [ZapSplat](https://www.zapsplat.com)
