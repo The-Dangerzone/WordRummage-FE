@@ -9,8 +9,14 @@ const TimerBar = () => {
 
 
   useEffect(() => {
+    let tempVar;
+    if(boardSize < 13) {
+      tempVar = boardSize;
+    } else {
+      tempVar = 12;
+    }
     const roundTimerInterval = setInterval(() => {
-      setRoundTimer((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + boardSize));
+      setRoundTimer((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + tempVar));
     }, 1000);
     return () => {
       clearInterval(roundTimerInterval);
