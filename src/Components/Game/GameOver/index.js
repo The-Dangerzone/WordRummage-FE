@@ -4,6 +4,9 @@ import EventTracker from '../EventTracker';
 import { Link } from 'react-router-dom';
 import Rain from '../../Rain';
 import './styles.css';
+import click from "../../../assets/audio/button_click.mp3";
+
+const clickAudio = new Audio(click);
 
 
 const GameOver = () => {
@@ -11,10 +14,19 @@ const GameOver = () => {
   const [showEventLog, setShowEventLog] = useState(false);
 
   const handleReviewButtonClick = () => {
+    clickAudio.currentTime = 0;
+    clickAudio.play()
     setShowEventLog(!showEventLog);
+  };
+
+  const handleHomeClick = () => {
+    clickAudio.currentTime = 0;
+    clickAudio.play()
   };
   
   const handleReplayClick = () => {
+    clickAudio.currentTime = 0;
+    clickAudio.play()
     setScore(0);
     setRound(1);
     setGameTimer(60);
@@ -53,7 +65,7 @@ const GameOver = () => {
           <button style={{ margin: '5px' }} onClick={handleReplayClick}>Try Again</button>
         </Link>
         <Link to="/">
-          <button style={{ margin: '5px' }}>Return to Title Screen</button>
+          <button style={{ margin: '5px' }} onClick={handleHomeClick}>Return to Title Screen</button>
         </Link>
         <button style={{ margin: '5px' }} onClick={handleReviewButtonClick}>
           {showEventLog ? 'Hide Event Log' : 'Review Game'}

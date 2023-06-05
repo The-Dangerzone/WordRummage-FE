@@ -5,3 +5,5 @@ Initial project was built with HTML, JavaScript, and CSS. This refactor is built
 [Word Rummage 1.0](https://github.com/Word-Rummage/Word-Rummage)
 
 Refactor members: Jordan Covington and Joe Davitt
+
+Music from [ZapSplat](https://www.zapsplat.com)

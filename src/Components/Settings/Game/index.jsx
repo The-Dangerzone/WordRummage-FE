@@ -6,12 +6,13 @@ import './styles.css'
 import Rain from '../../Rain';
 import InfoOutlined from '@mui/icons-material/InfoOutlined';
 import BoardSizeSlider from './slider';
+import click from "../../../assets/audio/button_click.mp3";
 
-
+const clickAudio = new Audio(click);
 
 const GameSettings = () => {
 
-  const { setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth, resetGame, insaneAlphabet, setInsaneAlphabet, setSelectedMode, selectedMode, setCountDownFlag } = useContext(SettingsContext);
+  const { setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth, resetGame, insaneAlphabet, setInsaneAlphabet, setSelectedMode, selectedMode, setCountDownFlag, setPlayMusic } = useContext(SettingsContext);
 
   const [selectedContainer, setSelectedContainer] = useState(null);
  
@@ -50,8 +51,16 @@ const GameSettings = () => {
   };
 
   const handleStartClick = () => {
+    clickAudio.currentTime = 0;
+    clickAudio.play()
     setCountDownFlag(true);
+    setPlayMusic(true);
   }
+
+  const handleBackClick = () => {
+    clickAudio.currentTime = 0;
+    clickAudio.play()
+  };
 
 
   return (
@@ -191,7 +200,7 @@ const GameSettings = () => {
 
       <div className='button-container'>
         <Link to="/">
-          <button>Back</button>
+          <button onClick={handleBackClick}>Back</button>
         </Link>
 
         <Link to="/game">
