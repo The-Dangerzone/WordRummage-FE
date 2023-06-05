@@ -11,7 +11,7 @@ import BoardSizeSlider from './slider';
 
 const GameSettings = () => {
 
-  const { setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth, resetGame, insaneAlphabet, setInsaneAlphabet, setSelectedMode, selectedMode, setCountDownFlag } = useContext(SettingsContext);
+  const { setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth, resetGame, insaneAlphabet, setInsaneAlphabet, setSelectedMode, selectedMode, setCountDownFlag, setPlayMusic } = useContext(SettingsContext);
 
   const [selectedContainer, setSelectedContainer] = useState(null);
  
@@ -51,6 +51,7 @@ const GameSettings = () => {
 
   const handleStartClick = () => {
     setCountDownFlag(true);
+    setPlayMusic(true);
   }
 
 
