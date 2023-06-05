@@ -2,6 +2,9 @@ import { useState, useContext } from 'react';
 import { SettingsContext } from '../../../Context/Settings';
 import { Box, Typography } from '@mui/material';
 import './styles.css';
+import click from "../../../assets/audio/button_click.mp3";
+
+const clickAudio = new Audio(click);
 
 const MultiplierBar = () => {
   const { streak, multiplier, displayScore, setGameOver } = useContext(SettingsContext);
@@ -41,15 +44,21 @@ const MultiplierBar = () => {
   
 
   const handleQuitClick = () => {
+    clickAudio.currentTime = 0;
+    clickAudio.play()
     setShowQuitMessage(true);
   };
 
   const handleYesClick = () => {
+    clickAudio.currentTime = 0;
+    clickAudio.play()
     setGameOver(true);
     setShowQuitMessage(false);
   };
 
   const handleNoClick = () => {
+    clickAudio.currentTime = 0;
+    clickAudio.play()
     setShowQuitMessage(false);
   };
 

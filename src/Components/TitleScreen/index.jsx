@@ -3,6 +3,9 @@ import { SettingsContext } from "../../Context/Settings";
 import { Link } from "react-router-dom";
 import Rain from "../Rain";
 import "./styles.css";
+import click from "../../assets/audio/button_click.mp3";
+
+const clickAudio = new Audio(click);
 
 const TitleScreen = () => {
   const { resetGame } = useContext(SettingsContext);
@@ -13,23 +16,28 @@ const TitleScreen = () => {
 
 
   const handleSinglePlayer = () => {
-    // Placeholder in case we need it
+    clickAudio.currentTime = 0;
+    clickAudio.play()
   };
 
   const handleSettings = () => {
-    // Placeholder in case we need it
+    clickAudio.currentTime = 0;
+    clickAudio.play()
   };
 
   const handleHowToPlay = () => {
-    // Placeholder in case we need it
+    clickAudio.currentTime = 0;
+    clickAudio.play()
   };
 
   const handleLeaderBoard = () => {
-    // Placeholder in case we need it
+    clickAudio.currentTime = 0;
+    clickAudio.play()
   };
 
   const handleMultiplayer = () => {
-    // Placeholder in case we need it
+    clickAudio.currentTime = 0;
+    clickAudio.play()
   };
 
   return (
