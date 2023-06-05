@@ -6,8 +6,6 @@ import MultiplayerOptions from './Components/Settings/MultiplayerOptions';
 import Instructions from './Components/Instructions';
 import GameScreen from './Components/Game/GameScreen';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import music from './assets/audio/space_trivia.mp3';
-
 
 function App() {
 

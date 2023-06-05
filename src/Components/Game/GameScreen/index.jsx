@@ -8,7 +8,7 @@ import { SettingsContext } from "../../../Context/Settings";
 import './styles.css';
 import { Box, Container } from '@mui/material';
 import { useContext, useEffect } from "react";
-import music from "../../../assets/audio/space_trivia.mp3";
+import music from "../../../assets/audio/music.mp3";
 
 const GameScreen = () => {
 
