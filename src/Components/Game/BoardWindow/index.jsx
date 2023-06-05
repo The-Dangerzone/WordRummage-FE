@@ -3,7 +3,7 @@ import { SettingsContext } from '../../../Context/Settings';
 import './styles.css';
 import wordsArray from './wordList';
 
-const [fourLetterWordArray, fiveLetterWordArray] = wordsArray;
+const [fourLetterWordArray, fiveLetterWordArray, sixLetterWordArray] = wordsArray;
 
 function BoardWindow() {
   const [letters, setLetters] = useState([]);
@@ -129,13 +129,13 @@ function BoardWindow() {
       const randomIndex = Math.floor(Math.random() * 2); 
       selectedArray = randomIndex === 0 ? fourLetterWordArray : fiveLetterWordArray;
     } else {
-      const randomIndex = Math.floor(Math.random() * 2); //change this 2 to a 3 once 6 letter array is created
+      const randomIndex = Math.floor(Math.random() * 3); 
       if (randomIndex === 0) {
         selectedArray = fourLetterWordArray;
       } else if (randomIndex === 1) {
         selectedArray = fiveLetterWordArray;
       } else {
-        // selectedArray = sixLetterArray;
+        selectedArray = sixLetterWordArray;
       }
     }
   
@@ -522,8 +522,6 @@ function BoardWindow() {
             }
           }
           checkWord = [];
-          // i = 0;
-          // j = -1;
         }
       }
     }
