@@ -536,29 +536,32 @@ function BoardWindow() {
   }
 
   function handleClick(e) {
-    if (e.target.className === 'true') {
-      e.target.style.backgroundColor = 'green';
-      if (!correctLetters.includes(e.target.id)) {
-        setCorrectLetters([...correctLetters, e.target.id]);
+    if (roundTimer > 0) {
 
-      }
-      correctAudio.currentTime = 0;
-      correctAudio.play();
-    } else {
-      e.target.style.backgroundColor = 'red';
-      setIncorrectLetters(incorrectLetters + 1)
-      if (score > 0) {
-        let tempScore = score - (Math.floor(boardSize / 2))
-        if (tempScore > 0){
-          setScore(tempScore);
-        } else {
-          setScore(0);
+      if (e.target.className === 'true') {
+        e.target.style.backgroundColor = 'green';
+        if (!correctLetters.includes(e.target.id)) {
+          setCorrectLetters([...correctLetters, e.target.id]);
+          
         }
+        correctAudio.currentTime = 0;
+        correctAudio.play();
+      } else {
+        e.target.style.backgroundColor = 'red';
+        setIncorrectLetters(incorrectLetters + 1)
+        if (score > 0) {
+          let tempScore = score - (Math.floor(boardSize / 2))
+          if (tempScore > 0){
+            setScore(tempScore);
+          } else {
+            setScore(0);
+          }
+        }
+        incorrectAudio.play();
+        setTimeout(() => {
+          e.target.style.backgroundColor = 'white';
+        }, 1500);
       }
-      incorrectAudio.play();
-      setTimeout(() => {
-        e.target.style.backgroundColor = 'white';
-      }, 1500);
     }
   }
 
