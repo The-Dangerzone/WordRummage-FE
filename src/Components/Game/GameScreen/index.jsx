@@ -7,12 +7,26 @@ import MultiplierBar from "../MultiplierBar";
 import { SettingsContext } from "../../../Context/Settings";
 import './styles.css';
 import { Box, Container } from '@mui/material';
-import { useContext } from "react";
-
+import { useContext, useEffect } from "react";
+import music from "../../../assets/audio/space_trivia.mp3";
 
 const GameScreen = () => {
 
-  const { gameOver, countDownFlag } = useContext(SettingsContext)
+  const { gameOver, countDownFlag, playMusic } = useContext(SettingsContext)
+
+useEffect(() => {
+  if (playMusic) {
+    const audio = new Audio(music);
+    audio.play();
+    audio.loop = true;
+    return () => {
+      audio.pause();
+      audio.currentTime = 0;
+    };
+  }
+
+}, [playMusic]);
+
 
   return (
     <Box sx={{ backgroundColor: "rgb(55, 106, 75)", height: "100vh" }}>
