@@ -548,7 +548,12 @@ function BoardWindow() {
       e.target.style.backgroundColor = 'red';
       setIncorrectLetters(incorrectLetters + 1)
       if (score > 0) {
-        setScore(score - (Math.floor(boardSize / 2)));
+        let tempScore = score - (Math.floor(boardSize / 2))
+        if (tempScore > 0){
+          setScore(tempScore);
+        } else {
+          setScore(0);
+        }
       }
       incorrectAudio.play();
       setTimeout(() => {
