@@ -3,12 +3,14 @@ import { SettingsContext } from '../../../Context/Settings';
 import correct from "../../../assets/audio/right_answer.mp3";
 import incorrect from "../../../assets/audio/wrong_answer.mp3";
 import roundOver from "../../../assets/audio/round_over.mp3";
+import completed from "../../../assets/audio/completed_word.mp3";
 import wordsArray from './wordList';
 import './styles.css';
 
 const correctAudio = new Audio(correct);
 const incorrectAudio = new Audio(incorrect);
 const roundOverAudio = new Audio(roundOver);
+const completedAudio = new Audio(completed);
 
 const [fourLetterWordArray, fiveLetterWordArray, sixLetterWordArray] = wordsArray;
 
@@ -99,6 +101,8 @@ function BoardWindow() {
   if (correctLetters.length === answer.length && correctLetters.length !== 0) {
     setCorrectLetters([]);
     setResetTimer(true);
+    completedAudio.volume = effectVolume / 100;
+    completedAudio.play();
     setTimeout(() => {
       setGameTimer(gameTimer + Math.ceil(boardSize / 2))
       setScore(score + (boardSize * multiplier));
