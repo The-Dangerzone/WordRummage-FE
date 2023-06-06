@@ -16,3 +16,40 @@
   height: 100%;
   z-index: 0; 
 }
+
+.volume-container{
+    background: rgb(33, 70, 40);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: white;
+    border: 3px solid black;
+    border-radius: 10px;
+    height: 400px;
+    width: 320px;
+    padding: 10px;
+    box-shadow: 0 0 10px black;
+    overflow: hidden;
+    z-index: 1;
+    margin: 20px;
+    user-select: none;
+}
+
+.app-settings-title{
+  background: rgb(33, 70, 40);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: white;
+  border: 3px solid black;
+  border-radius: 10px;
+  width: 33vw;
+  box-shadow: 0 0 10px black;
+  overflow: hidden;
+  z-index: 1;
+  margin: 10px;
+  user-select: none;
+  font-size: 25px;
+}
