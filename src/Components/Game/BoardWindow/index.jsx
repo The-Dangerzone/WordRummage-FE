@@ -48,6 +48,7 @@ function BoardWindow() {
     eventLog,
     insaneAlphabet,
     setCurrentBoardSize,
+    effectVolume,
 
   } = useContext(SettingsContext);
 
@@ -72,6 +73,7 @@ function BoardWindow() {
   // Check for if time runs out for the round
   if (displayRoundTimer) {
     if (roundTimer >= 100) {
+      roundOverAudio.volume = effectVolume / 100;
       roundOverAudio.play();
       setCorrectLetters([]);
       setResetTimer(true);
@@ -548,6 +550,7 @@ function BoardWindow() {
           
         }
         correctAudio.currentTime = 0;
+        correctAudio.volume = effectVolume / 100;
         correctAudio.play();
       } else {
         e.target.style.backgroundColor = 'red';
@@ -560,6 +563,7 @@ function BoardWindow() {
             setScore(0);
           }
         }
+        incorrectAudio.volume = effectVolume / 100;
         incorrectAudio.play();
         setTimeout(() => {
           e.target.style.backgroundColor = 'white';
