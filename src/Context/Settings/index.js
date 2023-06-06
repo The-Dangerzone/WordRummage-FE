@@ -29,6 +29,8 @@ const SettingsProvider = ({ children }) => {
   const [currentBoardSize, setCurrentBoardSize] = useState(6);
   const [countDownFlag, setCountDownFlag] = useState(false);
   const [playMusic, setPlayMusic] = useState(false);
+  const [effectVolume, setEffectVolume] = useState(50);
+  const [musicVolume, setMusicVolume] = useState(50);
 
 
 
@@ -82,6 +84,8 @@ const SettingsProvider = ({ children }) => {
     currentBoardSize, setCurrentBoardSize,
     countDownFlag, setCountDownFlag,
     playMusic, setPlayMusic,
+    effectVolume, setEffectVolume,
+    musicVolume, setMusicVolume,
   }
 
   return (
