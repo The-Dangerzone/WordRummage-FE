@@ -10,22 +10,25 @@ const clickAudio = new Audio(click);
 
 
 const GameOver = () => {
-  const { score, round, incorrectLetters, maxStreak, setScore, setRound, setGameTimer,setBoardSize, currentBoardSize, setRoundTimer, setResetTimer, setDisplayTimer, displayTimer, setDisplayRoundTimer, displayRoundTimer, setDisplayScore, displayScore, setAllowBoardGrowth, allowBoardGrowth, setAnswer, setCorrectLetters, setGameOver, setIncorrectLetters, setStreak, setMultiplier, setMaxStreak, setEventLog, setInsaneAlphabet, insaneAlphabet, setCountDownFlag } = useContext(SettingsContext);
+  const { score, round, incorrectLetters, maxStreak, setScore, setRound, setGameTimer,setBoardSize, currentBoardSize, setRoundTimer, setResetTimer, setDisplayTimer, displayTimer, setDisplayRoundTimer, displayRoundTimer, setDisplayScore, displayScore, setAllowBoardGrowth, allowBoardGrowth, setAnswer, setCorrectLetters, setGameOver, setIncorrectLetters, setStreak, setMultiplier, setMaxStreak, setEventLog, setInsaneAlphabet, insaneAlphabet, setCountDownFlag, effectVolume } = useContext(SettingsContext);
   const [showEventLog, setShowEventLog] = useState(false);
 
   const handleReviewButtonClick = () => {
     clickAudio.currentTime = 0;
+    clickAudio.volume = effectVolume / 100;
     clickAudio.play()
     setShowEventLog(!showEventLog);
   };
 
   const handleHomeClick = () => {
     clickAudio.currentTime = 0;
+    clickAudio.volume = effectVolume / 100;
     clickAudio.play()
   };
   
   const handleReplayClick = () => {
     clickAudio.currentTime = 0;
+    clickAudio.volume = effectVolume / 100;
     clickAudio.play()
     setScore(0);
     setRound(1);

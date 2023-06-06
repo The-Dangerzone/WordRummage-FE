@@ -12,16 +12,17 @@ import music from "../../../assets/audio/music.mp3";
 
 const GameScreen = () => {
 
-  const { gameOver, countDownFlag, playMusic } = useContext(SettingsContext)
+  const { gameOver, countDownFlag, playMusic, musicVolume } = useContext(SettingsContext)
 
 useEffect(() => {
   if (playMusic) {
-    const audio = new Audio(music);
-    audio.play();
-    audio.loop = true;
+    const gameMusic = new Audio(music);
+    gameMusic.volume = musicVolume / 100;
+    gameMusic.play();
+    gameMusic.loop = true;
     return () => {
-      audio.pause();
-      audio.currentTime = 0;
+      gameMusic.pause();
+      gameMusic.currentTime = 0;
     };
   }
 

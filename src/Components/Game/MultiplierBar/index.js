@@ -7,7 +7,7 @@ import click from "../../../assets/audio/button_click.mp3";
 const clickAudio = new Audio(click);
 
 const MultiplierBar = () => {
-  const { streak, multiplier, displayScore, setGameOver } = useContext(SettingsContext);
+  const { streak, multiplier, displayScore, setGameOver, effectVolume } = useContext(SettingsContext);
   const [showQuitMessage, setShowQuitMessage] = useState(false);
 
   const getBoxColor = (boxIndex) => {
@@ -45,12 +45,14 @@ const MultiplierBar = () => {
 
   const handleQuitClick = () => {
     clickAudio.currentTime = 0;
+    clickAudio.volume = effectVolume / 100;
     clickAudio.play()
     setShowQuitMessage(true);
   };
 
   const handleYesClick = () => {
     clickAudio.currentTime = 0;
+    clickAudio.volume = effectVolume / 100;
     clickAudio.play()
     setGameOver(true);
     setShowQuitMessage(false);
@@ -58,6 +60,7 @@ const MultiplierBar = () => {
 
   const handleNoClick = () => {
     clickAudio.currentTime = 0;
+    clickAudio.volume = effectVolume / 100;
     clickAudio.play()
     setShowQuitMessage(false);
   };

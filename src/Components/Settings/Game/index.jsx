@@ -12,7 +12,7 @@ const clickAudio = new Audio(click);
 
 const GameSettings = () => {
 
-  const { setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth, resetGame, insaneAlphabet, setInsaneAlphabet, setSelectedMode, selectedMode, setCountDownFlag, setPlayMusic } = useContext(SettingsContext);
+  const { setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth, resetGame, insaneAlphabet, setInsaneAlphabet, setSelectedMode, selectedMode, setCountDownFlag, setPlayMusic, effectVolume } = useContext(SettingsContext);
 
   const [selectedContainer, setSelectedContainer] = useState(null);
 
@@ -52,6 +52,7 @@ const GameSettings = () => {
 
   const handleStartClick = () => {
     clickAudio.currentTime = 0;
+    clickAudio.volume = effectVolume / 100;
     clickAudio.play()
     setCountDownFlag(true);
     setPlayMusic(true);
@@ -59,6 +60,7 @@ const GameSettings = () => {
 
   const handleBackClick = () => {
     clickAudio.currentTime = 0;
+    clickAudio.volume = effectVolume / 100;
     clickAudio.play()
   };
 
