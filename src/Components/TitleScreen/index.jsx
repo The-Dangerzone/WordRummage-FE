@@ -8,7 +8,7 @@ import click from "../../assets/audio/button_click.mp3";
 const clickAudio = new Audio(click);
 
 const TitleScreen = () => {
-  const { resetGame } = useContext(SettingsContext);
+  const { resetGame, effectVolume } = useContext(SettingsContext);
 
   useEffect(() => { 
     resetGame();
@@ -17,26 +17,31 @@ const TitleScreen = () => {
 
   const handleSinglePlayer = () => {
     clickAudio.currentTime = 0;
+    clickAudio.volume = effectVolume / 100;
     clickAudio.play()
   };
 
   const handleSettings = () => {
     clickAudio.currentTime = 0;
+    clickAudio.volume = effectVolume / 100;
     clickAudio.play()
   };
 
   const handleHowToPlay = () => {
     clickAudio.currentTime = 0;
+    clickAudio.volume = effectVolume / 100;
     clickAudio.play()
   };
 
   const handleLeaderBoard = () => {
     clickAudio.currentTime = 0;
+    clickAudio.volume = effectVolume / 100;
     clickAudio.play()
   };
 
   const handleMultiplayer = () => {
     clickAudio.currentTime = 0;
+    clickAudio.volume = effectVolume / 100;
     clickAudio.play()
   };
 
