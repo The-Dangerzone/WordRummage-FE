@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import click from "../../../assets/audio/button_click.mp3";
 import { Slider, Typography } from '@mui/material';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
@@ -13,6 +13,9 @@ const clickAudio = new Audio(click);
 
 const AppSettings = () => {
   const { effectVolume, setEffectVolume, musicVolume, setMusicVolume } = useContext(SettingsContext);
+  const [muteAll, setMuteAll] = useState(false);
+  console.log('Mute all initial', muteAll);
+
 
   const handleClick = () => {
     clickAudio.currentTime = 0;
@@ -26,6 +29,14 @@ const AppSettings = () => {
 
   const handleMusicVolumeChange = (event, newValue) => {
     setMusicVolume(newValue);
+  };
+
+  const handleMuteAllChange = () => {
+    console.log('Mute all', muteAll);
+    setMuteAll(!muteAll);
+    const newVolume = muteAll ? 50 : 0;
+    setEffectVolume(newVolume);
+    setMusicVolume(newVolume);
   };
 
   const getVolumeIcon = (volume) => {
@@ -80,6 +91,17 @@ const AppSettings = () => {
               />
               {getVolumeIcon(musicVolume)}
             </div>
+            <div className="mute-all-checkbox">
+            <div>
+              Mute All
+              <input
+                type="checkbox"
+                id="mute-all-checkbox"
+                checked={muteAll}
+                onChange={handleMuteAllChange}
+              />
+            </div>
+          </div>
           </div>
         </div>
       </div>

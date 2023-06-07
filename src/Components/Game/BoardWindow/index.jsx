@@ -553,9 +553,11 @@ function BoardWindow() {
           setCorrectLetters([...correctLetters, e.target.id]);
           
         }
+        if (correctLetters.length < answer.length - 1){
         correctAudio.currentTime = 0;
         correctAudio.volume = effectVolume / 100;
         correctAudio.play();
+      }
       } else {
         e.target.style.backgroundColor = 'red';
         setIncorrectLetters(incorrectLetters + 1)
