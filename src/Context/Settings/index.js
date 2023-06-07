@@ -31,6 +31,8 @@ const SettingsProvider = ({ children }) => {
   const [playMusic, setPlayMusic] = useState(false);
   const [effectVolume, setEffectVolume] = useState(50);
   const [musicVolume, setMusicVolume] = useState(50);
+  const [customWordFlag, setCustomWordFlag] =useState(false);
+  const [customWordArray, setCustomWordArray] = useState([]);
 
 
 
@@ -86,6 +88,8 @@ const SettingsProvider = ({ children }) => {
     playMusic, setPlayMusic,
     effectVolume, setEffectVolume,
     musicVolume, setMusicVolume,
+    customWordArray, setCustomWordArray,
+    customWordFlag, setCustomWordFlag,
   }
 
   return (
