@@ -25,7 +25,7 @@ const SettingsProvider = ({ children }) => {
   const [maxStreak, setMaxStreak] = useState(0);
   const [eventLog, setEventLog] = useState([]);
   const [insaneAlphabet, setInsaneAlphabet] = useState(true);
-  const [selectedMode, setSelectedMode] = useState(null);
+  const [selectedMode, setSelectedMode] = useState(1);
   const [currentBoardSize, setCurrentBoardSize] = useState(6);
   const [countDownFlag, setCountDownFlag] = useState(false);
   const [playMusic, setPlayMusic] = useState(false);
