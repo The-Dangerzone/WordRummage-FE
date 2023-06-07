@@ -11,7 +11,9 @@ import click from "../../../assets/audio/button_click.mp3";
 const clickAudio = new Audio(click);
 
 const GameSettings = () => {
-  const { setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth, resetGame, insaneAlphabet, setInsaneAlphabet, setSelectedMode, selectedMode, setCountDownFlag, setPlayMusic, effectVolume } = useContext(SettingsContext);
+  const { setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth, resetGame, insaneAlphabet, setInsaneAlphabet, setSelectedMode, selectedMode, setCountDownFlag, setPlayMusic, effectVolume, customWordFlag, setCustomWordFlag, customWordArray, setCustomWordArray } = useContext(SettingsContext);
+
+  const [customWordInput, setCustomWordInput] = useState('');
 
   useEffect(() => {
     resetGame();
@@ -22,6 +24,7 @@ const GameSettings = () => {
     clickAudio.volume = effectVolume / 100;
     clickAudio.play()
     setSelectedMode(index);
+
     if (index === 1) {
       setDisplayTimer(true);
       setDisplayRoundTimer(true);
@@ -29,6 +32,7 @@ const GameSettings = () => {
       setAllowBoardGrowth(true);
       setBoardSize(6);
       setInsaneAlphabet(false);
+      setCustomWordFlag(false);
     }
     if (index === 2) {
       setDisplayTimer(true);
@@ -37,6 +41,7 @@ const GameSettings = () => {
       setAllowBoardGrowth(true);
       setBoardSize(8);
       setInsaneAlphabet(true);
+      setCustomWordFlag(false);
     }
   };
 
@@ -46,6 +51,14 @@ const GameSettings = () => {
     clickAudio.play()
     setCountDownFlag(true);
     setPlayMusic(true);
+    if (customWordFlag) {
+      const words = customWordInput.split(' ').filter(word => {
+        // Filter out words that are not 4 to 6 letters long
+        const trimmedWord = word.trim();
+        return trimmedWord.length >= 4 && trimmedWord.length <= 6;
+      });
+      setCustomWordArray(words);
+    }
   };
 
   const handleBackClick = () => {
@@ -82,6 +95,7 @@ const GameSettings = () => {
           Insane
         </h1>
       </div>
+      <div className='settings-form-container'>
       <div className='settings-content'>
         <div className={`mode-info ${selectedMode === 0 ? 'active' : ''}`}>
         <div>Custom Game Settings</div>
@@ -184,6 +198,26 @@ const GameSettings = () => {
               />
             </div>
 
+            <div>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={customWordFlag}
+                    onChange={(e) => setCustomWordFlag(e.target.checked)}
+                  />}
+                disabled={selectedMode !== 0}
+
+                label={
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '175px' }}>
+                    {customWordFlag ? 'Custom Words: ON' : 'Custom Words: OFF'}
+                    <Tooltip title="If enabled you can chose what words will be part of the target word list">
+                      <InfoOutlined fontSize='small' style={{ marginLeft: '5px' }} />
+                    </Tooltip>
+                  </div>
+                }
+              />
+            </div>
+
             <Box sx={{ width: 300, margin: 1 }}>
               <div style={{ display: 'flex', width: '225px', justifyContent: 'space-between', }}>
                 <Typography id="discrete-slider" gutterBottom className={selectedMode !== 0 ? "disabled-typography" : ""}
@@ -217,6 +251,19 @@ const GameSettings = () => {
           <div>Starting Board Size: 8</div>
 
         </div>
+      </div>
+      {customWordFlag && (
+        <div className='custom-word-form'>
+          <Typography gutterBottom className={selectedMode !== 0 ? 'disabled-typography' : ''}>
+            Words must be separated by a space and between 4 and 6 letters long. At minimum one 4 letter word is required.
+          </Typography>
+          <textarea
+            value={customWordInput}
+            onChange={(e) => setCustomWordInput(e.target.value)}
+            className='custom-word-textarea'
+          />
+        </div>
+      )}
       </div>
       <div className='button-container'>
         <Link to='/'>
