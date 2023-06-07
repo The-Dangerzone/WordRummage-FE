@@ -51,9 +51,11 @@ function BoardWindow() {
     insaneAlphabet,
     setCurrentBoardSize,
     effectVolume,
+    customWordArray,
 
   } = useContext(SettingsContext);
 
+  
   // Saves BoardSize For Replay Button
   if (round === 1) {
     setCurrentBoardSize(boardSize);
@@ -155,6 +157,7 @@ function BoardWindow() {
 
     let randAnswer = selectedArray[Math.floor(Math.random() * selectedArray.length)].toUpperCase();
     console.log('randAnswer  ->', randAnswer)
+    console.log('Custom Words', customWordArray)
     setAnswer(randAnswer.split(''));
     setResetTimer(false);
     setCorrectLetters([]);
