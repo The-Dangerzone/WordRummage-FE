@@ -52,10 +52,12 @@ function BoardWindow() {
     setCurrentBoardSize,
     effectVolume,
     customWordArray,
+    customWordFlag,
 
   } = useContext(SettingsContext);
 
-  
+  const [customFourLetterArray, customFiveLetterArray, customSixLetterArray] = customWordArray;
+
   // Saves BoardSize For Replay Button
   if (round === 1) {
     setCurrentBoardSize(boardSize);
@@ -140,24 +142,55 @@ function BoardWindow() {
   function wordBreak() {
     let selectedArray;
     if (boardSize < 8) {
-      selectedArray = fourLetterWordArray;
-    } else if (boardSize < 10) {
-      const randomIndex = Math.floor(Math.random() * 2);
-      selectedArray = randomIndex === 0 ? fourLetterWordArray : fiveLetterWordArray;
-    } else {
-      const randomIndex = Math.floor(Math.random() * 3);
-      if (randomIndex === 0) {
-        selectedArray = fourLetterWordArray;
-      } else if (randomIndex === 1) {
-        selectedArray = fiveLetterWordArray;
+      if (customWordFlag) {
+        selectedArray = customFourLetterArray;
       } else {
-        selectedArray = sixLetterWordArray;
+        selectedArray = fourLetterWordArray;
+      }
+    } else if (boardSize < 10) {
+      if (customWordFlag) {
+        if (customFiveLetterArray.length > 0) {
+          const randomIndex = Math.floor(Math.random() * 2);
+          selectedArray = randomIndex === 0 ? customFourLetterArray : customFiveLetterArray;
+        } else {
+          selectedArray = customFourLetterArray;
+        }
+      } else {
+        const randomIndex = Math.floor(Math.random() * 2);
+        selectedArray = randomIndex === 0 ? fourLetterWordArray : fiveLetterWordArray;
+      }
+    } else {
+      if (customWordFlag) {
+        if (customSixLetterArray.length > 0 && customFiveLetterArray.length > 0) {
+          const randomIndex = Math.floor(Math.random() * 3);
+          if (randomIndex === 0) {
+            selectedArray = customFourLetterArray;
+          } else if (randomIndex === 1) {
+            selectedArray = customFiveLetterArray;
+          } else {
+            selectedArray = customSixLetterArray;
+          }
+        } else if (customSixLetterArray.length > 0 && customFiveLetterArray.length < 0) {
+          const randomIndex = Math.floor(Math.random() * 2);
+          selectedArray = randomIndex === 0 ? customFourLetterArray : customSixLetterArray;
+        } else if (customSixLetterArray.length < 0 && customFiveLetterArray.length > 0) {
+          const randomIndex = Math.floor(Math.random() * 2);
+          selectedArray = randomIndex === 0 ? customFourLetterArray : customFiveLetterArray;
+        } else {
+          selectedArray = customFourLetterArray;
+        }
+      } else {
+        const randomIndex = Math.floor(Math.random() * 3);
+        if (randomIndex === 0) {
+          selectedArray = fourLetterWordArray;
+        } else if (randomIndex === 1) {
+          selectedArray = fiveLetterWordArray;
+        } else {
+          selectedArray = sixLetterWordArray;
+        }
       }
     }
-
     let randAnswer = selectedArray[Math.floor(Math.random() * selectedArray.length)].toUpperCase();
-    console.log('randAnswer  ->', randAnswer)
-    console.log('Custom Words', customWordArray)
     setAnswer(randAnswer.split(''));
     setResetTimer(false);
     setCorrectLetters([]);
@@ -554,19 +587,19 @@ function BoardWindow() {
         e.target.style.backgroundColor = 'green';
         if (!correctLetters.includes(e.target.id)) {
           setCorrectLetters([...correctLetters, e.target.id]);
-          
+
         }
-        if (correctLetters.length < answer.length - 1){
-        correctAudio.currentTime = 0;
-        correctAudio.volume = effectVolume / 100;
-        correctAudio.play();
-      }
+        if (correctLetters.length < answer.length - 1) {
+          correctAudio.currentTime = 0;
+          correctAudio.volume = effectVolume / 100;
+          correctAudio.play();
+        }
       } else {
         e.target.style.backgroundColor = 'red';
         setIncorrectLetters(incorrectLetters + 1)
         if (score > 0) {
           let tempScore = score - (Math.floor(boardSize / 2))
-          if (tempScore > 0){
+          if (tempScore > 0) {
             setScore(tempScore);
           } else {
             setScore(0);
