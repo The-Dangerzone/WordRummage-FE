@@ -58,6 +58,8 @@ function BoardWindow() {
 
   const [customFourLetterArray, customFiveLetterArray, customSixLetterArray] = customWordArray;
 
+
+
   // Saves BoardSize For Replay Button
   if (round === 1) {
     setCurrentBoardSize(boardSize);
@@ -162,6 +164,7 @@ function BoardWindow() {
     } else {
       if (customWordFlag) {
         if (customSixLetterArray.length > 0 && customFiveLetterArray.length > 0) {
+        
           const randomIndex = Math.floor(Math.random() * 3);
           if (randomIndex === 0) {
             selectedArray = customFourLetterArray;
@@ -170,10 +173,10 @@ function BoardWindow() {
           } else {
             selectedArray = customSixLetterArray;
           }
-        } else if (customSixLetterArray.length > 0 && customFiveLetterArray.length < 0) {
+        } else if (customSixLetterArray.length > 0 && customFiveLetterArray.length === 0) {
           const randomIndex = Math.floor(Math.random() * 2);
           selectedArray = randomIndex === 0 ? customFourLetterArray : customSixLetterArray;
-        } else if (customSixLetterArray.length < 0 && customFiveLetterArray.length > 0) {
+        } else if (customSixLetterArray.length === 0 && customFiveLetterArray.length > 0) {
           const randomIndex = Math.floor(Math.random() * 2);
           selectedArray = randomIndex === 0 ? customFourLetterArray : customFiveLetterArray;
         } else {

@@ -60,8 +60,6 @@ const GameSettings = () => {
       });
     }
 
-    console.log('hasFourLetterWord: ', hasFourLetterWord, 'hasUniqueLetters: ', hasUniqueLetters);
-
   const handleStartClick = () => {
     clickAudio.currentTime = 0;
     clickAudio.volume = effectVolume / 100;
