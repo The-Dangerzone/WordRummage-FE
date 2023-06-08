@@ -135,3 +135,8 @@
   padding: 10px 20px;
   font-size: 16px;
 }
+
+.disabled-button {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
