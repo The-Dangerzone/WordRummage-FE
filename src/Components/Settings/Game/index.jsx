@@ -11,10 +11,9 @@ import click from "../../../assets/audio/button_click.mp3";
 const clickAudio = new Audio(click);
 
 const GameSettings = () => {
-  const { setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth, resetGame, insaneAlphabet, setInsaneAlphabet, setSelectedMode, selectedMode, setCountDownFlag, setPlayMusic, effectVolume, customWordFlag, setCustomWordFlag, customWordArray, setCustomWordArray } = useContext(SettingsContext);
+  const { setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth, resetGame, insaneAlphabet, setInsaneAlphabet, setSelectedMode, selectedMode, setCountDownFlag, setPlayMusic, effectVolume, customWordFlag, setCustomWordFlag, setCustomWordArray } = useContext(SettingsContext);
 
   const [customWordInput, setCustomWordInput] = useState('');
-
   useEffect(() => {
     resetGame();
   }, []);
@@ -45,6 +44,17 @@ const GameSettings = () => {
     }
   };
 
+  let hasFourLetterWord = false;
+  if (customWordFlag) {
+    const words = customWordInput.split(' ').filter(word => {
+      const trimmedWord = word.trim();
+      return /^[A-Za-z]{4,6}$/.test(trimmedWord);
+    });
+
+    hasFourLetterWord = words.some(word => word.trim().length === 4);
+
+  }
+
   const handleStartClick = () => {
     clickAudio.currentTime = 0;
     clickAudio.volume = effectVolume / 100;
@@ -53,11 +63,28 @@ const GameSettings = () => {
     setPlayMusic(true);
     if (customWordFlag) {
       const words = customWordInput.split(' ').filter(word => {
-        // Filter out words that are not 4 to 6 letters long
         const trimmedWord = word.trim();
-        return trimmedWord.length >= 4 && trimmedWord.length <= 6;
+        return /^[A-Za-z]{4,6}$/.test(trimmedWord);
       });
-      setCustomWordArray(words);
+
+      const customFourLetterArray = [];
+      const customFiveLetterArray = [];
+      const customSixLetterArray = [];
+
+      words.forEach(word => {
+        const trimmedWord = word.trim();
+        if (trimmedWord.length === 4) {
+          customFourLetterArray.push(trimmedWord.toLowerCase());
+        } else if (trimmedWord.length === 5) {
+          customFiveLetterArray.push(trimmedWord.toLowerCase());
+        } else if (trimmedWord.length === 6) {
+          customSixLetterArray.push(trimmedWord.toLowerCase());
+        }
+      });
+
+      const tempArr = [customFourLetterArray, customFiveLetterArray, customSixLetterArray];
+      setCustomWordArray(tempArr);
+
     }
   };
 
@@ -96,181 +123,186 @@ const GameSettings = () => {
         </h1>
       </div>
       <div className='settings-form-container'>
-      <div className='settings-content'>
-        <div className={`mode-info ${selectedMode === 0 ? 'active' : ''}`}>
-        <div>Custom Game Settings</div>
-          <FormGroup style={{ userSelect: 'none' }}>
-            <div>
-              <FormControlLabel
-                control={
-                  <Switch
+        <div className='settings-content'>
+          <div className={`mode-info ${selectedMode === 0 ? 'active' : ''}`}>
+            <div>Custom Game Settings</div>
+            <FormGroup style={{ userSelect: 'none' }}>
+              <div>
+                <FormControlLabel
+                  control={
+                    <Switch
 
-                    checked={displayRoundTimer}
-                    onChange={(e) => setDisplayRoundTimer(e.target.checked)}
-                  />}
-                disabled={selectedMode !== 0}
-                label={
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '160px' }}>
-                    {displayRoundTimer ? 'Round Timer: ON' : 'Round Timer: OFF'}
-                    <Tooltip title="If enabled, the circular progress will be present. If the circle completes the round is over.">
-                      <InfoOutlined fontSize='small' style={{ marginLeft: '5px' }} />
-                    </Tooltip>
-                  </div>
-                }
-              />
-            </div>
-            <div>
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={displayTimer}
-                    onChange={(e) => setDisplayTimer(e.target.checked)}
-                  />}
-                disabled={selectedMode !== 0}
-
-                label={
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '200px' }}>
-                    {displayTimer ? 'Game Over Timer: ON' : 'Game Over Timer: OFF'}
-                    <Tooltip title="If enabled, a timer will be present and the game will end when the timer reaches 0.">
-                      <InfoOutlined fontSize='small' style={{ marginLeft: '5px' }} />
-                    </Tooltip>
-                  </div>
-                }
-
-              />
-
-            </div>
-            <div>
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={displayScore}
-                    onChange={(e) => setDisplayScore(e.target.checked)}
-                  />}
-                disabled={selectedMode !== 0}
-                label={
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '125px' }}>
-                    {displayScore ? 'Scoring: ON' : 'Scoring: OFF'}
-                    <Tooltip title="If enabled, the game will keep a score and will have a score multiplier">
-                      <InfoOutlined fontSize='small' style={{ marginLeft: '5px' }} />
-                    </Tooltip>
-                  </div>
-                }
-              />
-            </div>
-            <div>
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={allowBoardGrowth}
-                    onChange={(e) => setAllowBoardGrowth(e.target.checked)}
-                  />}
-                disabled={selectedMode !== 0}
-
-                label={
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '180px' }}>
-                    {allowBoardGrowth ? 'Growing Board: ON' : 'Growing Board: OFF'}
-                    <Tooltip title="If enabled, the board will grow by 1 row and 1 column every 5 rounds.">
-                      <InfoOutlined fontSize='small' style={{ marginLeft: '5px' }} />
-                    </Tooltip>
-                  </div>
-                }
-              />
-            </div>
-
-            <div>
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={insaneAlphabet}
-                    onChange={(e) => setInsaneAlphabet(e.target.checked)}
-                  />}
-                disabled={selectedMode !== 0}
-
-                label={
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '160px' }}>
-                    {insaneAlphabet ? 'Alphabet: Insane' : 'Alphabet: Regular'}
-                    <Tooltip title="If enabled, the board will only use letters from the current target word">
-                      <InfoOutlined fontSize='small' style={{ marginLeft: '5px' }} />
-                    </Tooltip>
-                  </div>
-                }
-              />
-            </div>
-
-            <div>
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={customWordFlag}
-                    onChange={(e) => setCustomWordFlag(e.target.checked)}
-                  />}
-                disabled={selectedMode !== 0}
-
-                label={
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '175px' }}>
-                    {customWordFlag ? 'Custom Words: ON' : 'Custom Words: OFF'}
-                    <Tooltip title="If enabled you can chose what words will be part of the target word list">
-                      <InfoOutlined fontSize='small' style={{ marginLeft: '5px' }} />
-                    </Tooltip>
-                  </div>
-                }
-              />
-            </div>
-
-            <Box sx={{ width: 300, margin: 1 }}>
-              <div style={{ display: 'flex', width: '225px', justifyContent: 'space-between', }}>
-                <Typography id="discrete-slider" gutterBottom className={selectedMode !== 0 ? "disabled-typography" : ""}
-                >
-                  Starting Board Size (6-20)
-                </Typography>
-                <Tooltip title="The starting size of the board. This number will represent the number of letters per column and row">
-                  <InfoOutlined fontSize='small' />
-                </Tooltip>
+                      checked={displayRoundTimer}
+                      onChange={(e) => setDisplayRoundTimer(e.target.checked)}
+                    />}
+                  disabled={selectedMode !== 0}
+                  label={
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '160px' }}>
+                      {displayRoundTimer ? 'Round Timer: ON' : 'Round Timer: OFF'}
+                      <Tooltip title="If enabled, the circular progress will be present. If the circle completes the round is over.">
+                        <InfoOutlined fontSize='small' style={{ marginLeft: '5px' }} />
+                      </Tooltip>
+                    </div>
+                  }
+                />
               </div>
-              <BoardSizeSlider />
-            </Box>
-          </FormGroup>
-        </div>
-        <div className={`mode-info ${selectedMode === 1 ? 'active' : ''}`}>
-          <div>Standard Game Settings</div>
-          <div>Round Timer: ON</div>
-          <div>Game Over Timer: ON</div>
-          <div>Scoring: ON</div>
-          <div>Growing Board: ON</div>
-          <div>Alphabet: Regular</div>
-          <div>Starting Board Size: 6</div>
-        </div>
-        <div className={`mode-info ${selectedMode === 2 ? 'active' : ''}`}>
-          <div>Insane Game Settings</div>
-          <div>Round Timer: OFF</div>
-          <div>Game Over Timer: ON</div>
-          <div>Scoring: ON</div>
-          <div>Growing Board: ON</div>
-          <div>Alphabet: Insane</div>
-          <div>Starting Board Size: 8</div>
+              <div>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={displayTimer}
+                      onChange={(e) => setDisplayTimer(e.target.checked)}
+                    />}
+                  disabled={selectedMode !== 0}
 
+                  label={
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '200px' }}>
+                      {displayTimer ? 'Game Over Timer: ON' : 'Game Over Timer: OFF'}
+                      <Tooltip title="If enabled, a timer will be present and the game will end when the timer reaches 0.">
+                        <InfoOutlined fontSize='small' style={{ marginLeft: '5px' }} />
+                      </Tooltip>
+                    </div>
+                  }
+
+                />
+
+              </div>
+              <div>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={displayScore}
+                      onChange={(e) => setDisplayScore(e.target.checked)}
+                    />}
+                  disabled={selectedMode !== 0}
+                  label={
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '125px' }}>
+                      {displayScore ? 'Scoring: ON' : 'Scoring: OFF'}
+                      <Tooltip title="If enabled, the game will keep a score and will have a score multiplier">
+                        <InfoOutlined fontSize='small' style={{ marginLeft: '5px' }} />
+                      </Tooltip>
+                    </div>
+                  }
+                />
+              </div>
+              <div>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={allowBoardGrowth}
+                      onChange={(e) => setAllowBoardGrowth(e.target.checked)}
+                    />}
+                  disabled={selectedMode !== 0}
+
+                  label={
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '180px' }}>
+                      {allowBoardGrowth ? 'Growing Board: ON' : 'Growing Board: OFF'}
+                      <Tooltip title="If enabled, the board will grow by 1 row and 1 column every 5 rounds.">
+                        <InfoOutlined fontSize='small' style={{ marginLeft: '5px' }} />
+                      </Tooltip>
+                    </div>
+                  }
+                />
+              </div>
+
+              <div>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={insaneAlphabet}
+                      onChange={(e) => setInsaneAlphabet(e.target.checked)}
+                    />}
+                  disabled={selectedMode !== 0}
+
+                  label={
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '160px' }}>
+                      {insaneAlphabet ? 'Alphabet: Insane' : 'Alphabet: Regular'}
+                      <Tooltip title="If enabled, the board will only use letters from the current target word">
+                        <InfoOutlined fontSize='small' style={{ marginLeft: '5px' }} />
+                      </Tooltip>
+                    </div>
+                  }
+                />
+              </div>
+
+              <div>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={customWordFlag}
+                      onChange={(e) => setCustomWordFlag(e.target.checked)}
+                    />}
+                  disabled={selectedMode !== 0}
+
+                  label={
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '175px' }}>
+                      {customWordFlag ? 'Custom Words: ON' : 'Custom Words: OFF'}
+                      <Tooltip title="If enabled you can chose what words will be part of the target word list">
+                        <InfoOutlined fontSize='small' style={{ marginLeft: '5px' }} />
+                      </Tooltip>
+                    </div>
+                  }
+                />
+              </div>
+
+              <Box sx={{ width: 300, margin: 1 }}>
+                <div style={{ display: 'flex', width: '225px', justifyContent: 'space-between', }}>
+                  <Typography id="discrete-slider" gutterBottom className={selectedMode !== 0 ? "disabled-typography" : ""}
+                  >
+                    Starting Board Size (6-20)
+                  </Typography>
+                  <Tooltip title="The starting size of the board. This number will represent the number of letters per column and row">
+                    <InfoOutlined fontSize='small' />
+                  </Tooltip>
+                </div>
+                <BoardSizeSlider />
+              </Box>
+            </FormGroup>
+          </div>
+          <div className={`mode-info ${selectedMode === 1 ? 'active' : ''}`}>
+            <div>Standard Game Settings</div>
+            <div>Round Timer: ON</div>
+            <div>Game Over Timer: ON</div>
+            <div>Scoring: ON</div>
+            <div>Growing Board: ON</div>
+            <div>Alphabet: Regular</div>
+            <div>Starting Board Size: 6</div>
+          </div>
+          <div className={`mode-info ${selectedMode === 2 ? 'active' : ''}`}>
+            <div>Insane Game Settings</div>
+            <div>Round Timer: OFF</div>
+            <div>Game Over Timer: ON</div>
+            <div>Scoring: ON</div>
+            <div>Growing Board: ON</div>
+            <div>Alphabet: Insane</div>
+            <div>Starting Board Size: 8</div>
+
+          </div>
         </div>
-      </div>
-      {customWordFlag && (
-        <div className='custom-word-form'>
-          <Typography gutterBottom className={selectedMode !== 0 ? 'disabled-typography' : ''}>
-            Words must be separated by a space and between 4 and 6 letters long. At minimum one 4 letter word is required.
-          </Typography>
-          <textarea
-            value={customWordInput}
-            onChange={(e) => setCustomWordInput(e.target.value)}
-            className='custom-word-textarea'
-          />
-        </div>
-      )}
+        {customWordFlag && (
+          <div className='custom-word-form'>
+            <Typography gutterBottom className={selectedMode !== 0 ? 'disabled-typography' : ''}>
+              Words must be separated by a space and between 4 and 6 letters long. At minimum one 4 letter word is required.
+            </Typography>
+            <textarea
+              value={customWordInput}
+              onChange={(e) => setCustomWordInput(e.target.value)}
+              className='custom-word-textarea'
+            />
+          </div>
+        )}
       </div>
       <div className='button-container'>
         <Link to='/'>
           <button onClick={handleBackClick}>Back</button>
         </Link>
         <Link to='/game'>
-          <button onClick={handleStartClick} disabled={selectedMode === null}>
+          <button
+            onClick={handleStartClick} 
+            disabled={selectedMode === null || (customWordFlag && !hasFourLetterWord)}
+            className={(selectedMode === null || (customWordFlag && !hasFourLetterWord)) ? 'disabled-button' : ''}
+            title={customWordFlag && !hasFourLetterWord ? 'Please input at least one 4 word' : ''}
+          >
             Start
           </button>
         </Link>
