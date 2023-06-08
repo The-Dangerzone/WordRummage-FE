@@ -266,21 +266,21 @@ const GameSettings = () => {
           </div>
           <div className={`mode-info ${selectedMode === 1 ? 'active' : ''}`}>
             <div>Standard Game Settings</div>
-            <div>Round Timer: ON</div>
-            <div>Game Over Timer: ON</div>
-            <div>Scoring: ON</div>
-            <div>Growing Board: ON</div>
-            <div>Alphabet: Regular</div>
-            <div>Starting Board Size: 6</div>
+            <div style={{margin: '10px'}}>Round Timer: ON</div>
+            <div style={{margin: '10px'}}>Game Over Timer: ON</div>
+            <div style={{margin: '10px'}}>Scoring: ON</div>
+            <div style={{margin: '10px'}}>Growing Board: ON</div>
+            <div style={{margin: '10px'}}>Alphabet: Regular</div>
+            <div style={{margin: '10px'}}>Starting Board Size: 6</div>
           </div>
           <div className={`mode-info ${selectedMode === 2 ? 'active' : ''}`}>
             <div>Insane Game Settings</div>
-            <div>Round Timer: OFF</div>
-            <div>Game Over Timer: ON</div>
-            <div>Scoring: ON</div>
-            <div>Growing Board: ON</div>
-            <div>Alphabet: Insane</div>
-            <div>Starting Board Size: 8</div>
+            <div style={{margin: '10px'}}>Round Timer: OFF</div>
+            <div style={{margin: '10px'}}>Game Over Timer: ON</div>
+            <div style={{margin: '10px'}}>Scoring: ON</div>
+            <div style={{margin: '10px'}}>Growing Board: ON</div>
+            <div style={{margin: '10px'}}>Alphabet: Insane</div>
+            <div style={{margin: '10px'}}>Starting Board Size: 8</div>
 
           </div>
         </div>

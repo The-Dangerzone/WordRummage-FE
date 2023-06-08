@@ -90,7 +90,6 @@
 .mode-info.active {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   font-size: 25px;
   margin: 10px 0 10px 0;
   width: 80%;
