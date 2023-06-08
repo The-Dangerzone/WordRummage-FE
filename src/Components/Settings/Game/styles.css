@@ -75,7 +75,7 @@
   border-radius: 10px;
   padding: 10px;
   width: 30vw;
-  height: 40vh;
+  height: 50vh;
   user-select: none;
   z-index: 1;
   overflow: hidden;
@@ -107,7 +107,7 @@
 }
 .custom-word-textarea{
   width: 99%;
-  height: 33vh;
+  height: 40vh;
   resize: none;
 }
 .custom-word-form{
@@ -118,7 +118,9 @@
   border-radius: 10px;
   padding: 10px;
   width: 30vw;
-  height: 40vh;
+  height: 50vh;
+  overflow: hidden;
+  user-select: none;
 }
 
 .settings-form-container{
