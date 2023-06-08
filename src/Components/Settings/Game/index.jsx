@@ -43,17 +43,24 @@ const GameSettings = () => {
       setCustomWordFlag(false);
     }
   };
-
+  // This checks if the Start Button to be disabled in custom mode
   let hasFourLetterWord = false;
+  let hasUniqueLetters = false;
   if (customWordFlag) {
     const words = customWordInput.split(' ').filter(word => {
       const trimmedWord = word.trim();
       return /^[A-Za-z]{4,6}$/.test(trimmedWord);
     });
-
+    
     hasFourLetterWord = words.some(word => word.trim().length === 4);
+    
+    hasUniqueLetters = words.every(word => {
+        const uniqueLetters = new Set(word.toLowerCase());
+        return uniqueLetters.size >= 2;
+      });
+    }
 
-  }
+    console.log('hasFourLetterWord: ', hasFourLetterWord, 'hasUniqueLetters: ', hasUniqueLetters);
 
   const handleStartClick = () => {
     clickAudio.currentTime = 0;
@@ -282,7 +289,7 @@ const GameSettings = () => {
         {customWordFlag && (
           <div className='custom-word-form'>
             <Typography gutterBottom className={selectedMode !== 0 ? 'disabled-typography' : ''}>
-              Words must be separated by a space and between 4 and 6 letters long. At minimum one 4 letter word is required.
+              Words must be separated by a space and between 4 and 6 letters long or they will not be added to the custom word list. At minimum one 4 letter word is required and all words must have at least 2 unique characters. 
             </Typography>
             <textarea
               value={customWordInput}
@@ -298,10 +305,17 @@ const GameSettings = () => {
         </Link>
         <Link to='/game'>
           <button
-            onClick={handleStartClick} 
-            disabled={selectedMode === null || (customWordFlag && !hasFourLetterWord)}
-            className={(selectedMode === null || (customWordFlag && !hasFourLetterWord)) ? 'disabled-button' : ''}
-            title={customWordFlag && !hasFourLetterWord ? 'Please input at least one 4 word' : ''}
+            onClick={handleStartClick}
+            disabled={
+              selectedMode === null || 
+              (customWordFlag && !hasFourLetterWord)
+              
+            }
+            className={
+              (selectedMode === null || (customWordFlag && (!hasFourLetterWord || !hasUniqueLetters)))
+              ? 'disabled-button' 
+              : ''}
+            title={customWordFlag && (!hasFourLetterWord || !hasUniqueLetters) ? 'Please input at least one 4 word' : ''}
           >
             Start
           </button>
