@@ -6,12 +6,14 @@ import MultiplayerOptions from './Components/Settings/MultiplayerOptions';
 import Instructions from './Components/Instructions';
 import GameScreen from './Components/Game/GameScreen';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Sidebar from './Components/Sidebar';
 
 function App() {
 
   return (
-    <>
+    <div>
       <BrowserRouter>
+      <Sidebar />
         <Routes>
           <Route path="/" element={<TitleScreen />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
@@ -22,7 +24,7 @@ function App() {
           <Route path="/game" element={<GameScreen />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Rain from "../Rain";
 import "./styles.css";
 import click from "../../assets/audio/button_click.mp3";
-
 const clickAudio = new Audio(click);
 
 const TitleScreen = () => {
