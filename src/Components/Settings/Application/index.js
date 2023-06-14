@@ -105,7 +105,7 @@ const AppSettings = () => {
           </div>
         </div>
       </div>
-      <Link to="/"><button onClick={handleClick}>Back</button></Link>
+      <Link to="/"><button className="pulse-button"  onClick={handleClick}>Back</button></Link>
     </div>
   );
 };
