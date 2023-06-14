@@ -299,7 +299,7 @@ const GameSettings = () => {
       </div>
       <div className='button-container'>
         <Link to='/'>
-          <button onClick={handleBackClick}>Back</button>
+          <button  className="pulse-button" onClick={handleBackClick}>Back</button>
         </Link>
         <Link to='/game'>
           <button
@@ -312,7 +312,7 @@ const GameSettings = () => {
             className={
               (selectedMode === null || (customWordFlag && (!hasFourLetterWord || !hasUniqueLetters)))
               ? 'disabled-button' 
-              : ''}
+              : 'pulse-button'}
             title={customWordFlag && (!hasFourLetterWord || !hasUniqueLetters) ? 'Please input at least one 4 word' : ''}
           >
             Start
