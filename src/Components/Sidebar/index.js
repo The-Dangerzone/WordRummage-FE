@@ -26,6 +26,8 @@ const Sidebar = () => {
         aria-label="open drawer"
         onClick={handleDrawerOpen}
         className="menuButton"
+        sx={{backgroundColor: 'rgb(33, 70, 40)', border: '2px solid black'}} 
+
       >
         <MenuIcon />
       </IconButton>
