@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 
 export const SettingsContext = React.createContext();
 
 const SettingsProvider = ({ children }) => {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [score, setScore] = useState(0);
   const [round, setRound] = useState(1);
   const [boardSize, setBoardSize] = useState(6);
@@ -62,7 +61,6 @@ const SettingsProvider = ({ children }) => {
 
   const values = {
     resetGame,
-    isLoggedIn, setIsLoggedIn,
     score, setScore,
     round, setRound,
     boardSize, setBoardSize,
