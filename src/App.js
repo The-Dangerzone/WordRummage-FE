@@ -9,16 +9,18 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Sidebar from './Components/Sidebar';
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
+import { UserContext } from './Context/User';
 
 function App() {
   const { user, isAuthenticated, getIdTokenClaims } = useAuth0();
+  const { validUser, setValidUser } = useContext(UserContext);
 
   useEffect(() => {
     if (isAuthenticated) {
           console.log(user);
           postUser();
-          
+
       }
   }, [isAuthenticated])
   
@@ -38,9 +40,8 @@ function App() {
       try {
 
         let userFromDB = await axios(config);
-        this.setState({
-          user: userFromDB.data
-        })
+        setValidUser(userFromDB.data);
+        console.log(userFromDB.data);
 
       } catch (error) {
         console.log(error.message);
