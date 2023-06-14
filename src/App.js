@@ -20,7 +20,6 @@ function App() {
     if (isAuthenticated) {
           console.log(user);
           postUser();
-
       }
   }, [isAuthenticated])
   
