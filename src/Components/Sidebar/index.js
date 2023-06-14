@@ -4,8 +4,11 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import LoginButton from '../Auth/LoginButton';
+import AuthProfile from '../Auth/AuthProfile';
 
 import './styles.css';
+import LogoutButton from '../Auth/LogoutButton';
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
@@ -20,18 +23,18 @@ const Sidebar = () => {
 
   return (
     <div className="root">
-     {!open && (
-      <IconButton
-        color="inherit"
-        aria-label="open drawer"
-        onClick={handleDrawerOpen}
-        className="menuButton"
-        sx={{backgroundColor: 'rgb(33, 70, 40)', border: '2px solid black'}} 
+      {!open && (
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          onClick={handleDrawerOpen}
+          className="menuButton"
+          sx={{ backgroundColor: 'rgb(33, 70, 40)', border: '2px solid black' }}
 
-      >
-        <MenuIcon />
-      </IconButton>
-    )}
+        >
+          <MenuIcon />
+        </IconButton>
+      )}
       <Drawer
         className={`drawer ${open ? 'transparentDrawer' : ''}`}
         variant="persistent"
@@ -42,13 +45,16 @@ const Sidebar = () => {
         }}
       >
         <div className="drawerHeader">
+          <AuthProfile />
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />
           </IconButton>
         </div>
-        <Button variant="contained" color="primary" fullWidth className="sidebarButton">
+        <LoginButton />
+        <LogoutButton />
+        {/* <Button variant="contained" color="primary" fullWidth className="sidebarButton">
           Sign In
-        </Button>
+        </Button> */}
       </Drawer>
     </div>
   );
