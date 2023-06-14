@@ -13,7 +13,7 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-      <Sidebar />
+        <Sidebar />
         <Routes>
           <Route path="/" element={<TitleScreen />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
