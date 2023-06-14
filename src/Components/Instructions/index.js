@@ -30,7 +30,7 @@ const Instructions = () => {
         <h1>Currently Under Development</h1>
       </div>
 
-      <Link to="/"><button onClick={handleClick}>Back</button></Link>
+      <Link to="/"><button className="pulse-button"  onClick={handleClick}>Back</button></Link>
     </div>
   );
 }
