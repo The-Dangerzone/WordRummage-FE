@@ -24,8 +24,8 @@ const MultiplierBar = () => {
 
   const renderBoxes = () => {
     const boxes = [];
-    const maxStreak = Math.min(streak, 6); // Ensure there are at most 6 boxes
-    
+    const maxStreak = Math.min(streak, 6);
+
     for (let i = 0; i < maxStreak; i++) {
       const color = i < streak ? getBoxColor(i) : 'transparent';
       const isTopBox = i === maxStreak - 1;
@@ -38,10 +38,10 @@ const MultiplierBar = () => {
         />
       );
     }
-    
+
     return boxes;
   };
-  
+
 
   const handleQuitClick = () => {
     clickAudio.currentTime = 0;
@@ -69,16 +69,16 @@ const MultiplierBar = () => {
     <Box className="multiplier-bar">
       <Box className="quit-box">
         {!showQuitMessage && (
-          <button onClick={handleQuitClick}>
+          <button className="pulse-button"  onClick={handleQuitClick}>
             Quit
           </button>
         )}
         {showQuitMessage && (
           <Box className="quit-message">
-            <Typography style={{marginBottom: '10px'}}>Are you sure you want to quit?</Typography>
+            <Typography style={{ marginBottom: '10px' }}>Are you sure you want to quit?</Typography>
             <Box className="quit-button-container">
-              <button onClick={handleYesClick} style={{marginRight: '5px'}}>Yes</button>
-              <button onClick={handleNoClick} style={{marginLeft: '5px'}}>No</button>
+              <button className="pulse-button" onClick={handleYesClick} style={{ marginRight: '5px' }}>Yes</button>
+              <button className="pulse-button" onClick={handleNoClick} style={{ marginLeft: '5px' }}>No</button>
             </Box>
           </Box>
         )}

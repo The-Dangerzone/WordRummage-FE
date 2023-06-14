@@ -65,12 +65,12 @@ const GameOver = () => {
         <h2>Incorrect Letters: {incorrectLetters}</h2>
         <h2>Biggest Streak: {maxStreak}</h2>
         <Link to="/game">
-          <button style={{ margin: '5px' }} onClick={handleReplayClick}>Try Again</button>
+          <button className="pulse-button"  style={{ margin: '5px' }} onClick={handleReplayClick}>Try Again</button>
         </Link>
         <Link to="/">
-          <button style={{ margin: '5px' }} onClick={handleHomeClick}>Return to Title Screen</button>
+          <button className="pulse-button"  style={{ margin: '5px' }} onClick={handleHomeClick}>Return to Title Screen</button>
         </Link>
-        <button style={{ margin: '5px' }} onClick={handleReviewButtonClick}>
+        <button className="pulse-button"  style={{ margin: '5px' }} onClick={handleReviewButtonClick}>
           {showEventLog ? 'Hide Event Log' : 'Review Game'}
         </button>
       </div>

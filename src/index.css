@@ -1,4 +1,4 @@
-button {
+.pulse-button {
   transform: skew(-20deg);
   width: 150px;
   height: 40px;
@@ -13,16 +13,16 @@ button {
   transition: border-color 0.3s ease;
 }
 
-button:hover {
+.pulse-button:hover {
   cursor: pointer;
   animation: pulsate 1s infinite;
 }
 
-button.disabled-button {
+/* .pulse-button.disabled-button {
   background: gray;
   cursor: not-allowed;
   animation: none;
-}
+} */
 
 
 @keyframes pulsate {

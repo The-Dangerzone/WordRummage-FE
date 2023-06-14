@@ -51,21 +51,21 @@ const TitleScreen = () => {
         <h1>Word Rummage</h1>
         <div className="button-group">
           <Link to="/gamesettings">
-            <button onClick={handleSinglePlayer}>Single Player</button>
+            <button className="pulse-button" onClick={handleSinglePlayer}>Single Player</button>
           </Link>
           <Link to="/multiplayeroptions">
-            <button onClick={handleMultiplayer}>Multiplayer</button>
+            <button className="pulse-button"  onClick={handleMultiplayer}>Multiplayer</button>
           </Link>
         </div>
         <div className="button-group">
           <Link to="/settings">
-            <button onClick={handleSettings}>Settings</button>
+            <button  className="pulse-button" onClick={handleSettings}>Settings</button>
           </Link>
           <Link to="/instructions">
-            <button onClick={handleHowToPlay}>How to Play</button>
+            <button  className="pulse-button" onClick={handleHowToPlay}>How to Play</button>
           </Link>
           <Link to="/leaderboard">
-            <button onClick={handleLeaderBoard}>Leaderboard</button>
+            <button  className="pulse-button" onClick={handleLeaderBoard}>Leaderboard</button>
           </Link>
         </div>
       </div>
