@@ -6,6 +6,21 @@ Initial project was built with HTML, JavaScript, and CSS. This refactor is built
 
 Refactor members: Jordan Covington and Joe Davitt
 
+## Startup
+
+Clone the repo.
+
+Use `npm install` to install the required node_modules.
+
+Use `npm start` to run the application.
+
+## Tools Used
+<!-- add links -->
+- React
+- Axios
+- Auth0
+- Material UI
+
 ## Audio
 
 Music from [ZapSplat](https://www.zapsplat.com)
