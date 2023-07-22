@@ -30,3 +30,7 @@ Use `npm start` to run the application.
 Music from [ZapSplat](https://www.zapsplat.com)
 
 Sound Effects from [ZapSplat](https://www.zapsplat.com)
+
+## Wireframe
+
+![Wireframe](./WR2-wireframe.png)
