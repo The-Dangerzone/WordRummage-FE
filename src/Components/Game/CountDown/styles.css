@@ -1,0 +1,45 @@
+.count-down-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  /* border: 1px solid black; */
+  position: relative;
+  z-index: 1;
+}
+.rain-container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; 
+}
+
+.count-down-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  font-size: 20vw;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 0 10px black;
+  user-select: none;
+  border: 3px solid black;
+  border-radius: 10px;
+  box-shadow: 0 0 10px black;
+  background: rgb(33, 70, 40);
+  width: 20%;
+  height: 40%;
+  transition: opacity 0.5s ease-in-out;
+  opacity: 0;
+}
+
+.count-down-number.show {
+  opacity: 1;
+}
+
+.count-down-number.hide {
+  opacity: 0;
+}

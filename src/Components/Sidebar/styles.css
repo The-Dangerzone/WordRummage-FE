@@ -1,0 +1,35 @@
+.root {
+  position: absolute;
+  z-index: 3;
+}
+
+.drawer {
+  width: 240px;
+  flex-shrink: 0;
+}
+
+.transparentDrawer .drawerPaper {
+  background: rgba(175, 175, 175, 0.8);
+}
+
+.drawerPaper {
+  width: 240px;
+}
+
+.drawerHeader {
+  display: flex;
+  align-items: center;
+  padding: 0px 8px;
+  min-height: 64px;
+  justify-content: flex-end;
+}
+
+.menuButton {
+  top: 8px;
+  left: 8px;
+  z-index: 1;
+}
+
+.hideButton {
+  display: none;
+}
