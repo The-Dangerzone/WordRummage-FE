@@ -11,10 +11,12 @@ import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import { useContext, useEffect } from 'react';
 import { UserContext } from './Context/User';
+import DisplayName from './Components/Auth/DisplayName';
 
 function App() {
   const { user, isAuthenticated, getIdTokenClaims } = useAuth0();
   const { validUser, setValidUser } = useContext(UserContext);
+  const { displayNamePopup, setDisplayNamePopup } = useContext(UserContext);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -22,6 +24,16 @@ function App() {
           postUser();
       }
   }, [isAuthenticated])
+
+  // useEffect(() => {
+  //   if(!validUser.displayName){
+  //     setDisplayNamePopup(true);
+  //   }
+  // }, [validUser])
+
+  const displayNameCheck = () => {
+    setDisplayNamePopup(true);
+  }
   
 
   const postUser = async () => {
@@ -34,13 +46,16 @@ function App() {
         method: "post",
         baseURL: process.env.REACT_APP_SERVER,
         url: '/user',
-        
+  
       }
       try {
 
         let userFromDB = await axios(config);
         setValidUser(userFromDB.data);
         console.log(userFromDB.data);
+        if(!userFromDB.data.displayName){
+          displayNameCheck();
+        }
 
       } catch (error) {
         console.log(error.message);
@@ -54,6 +69,9 @@ function App() {
     <div>
       <BrowserRouter>
         <Sidebar />
+        {displayNamePopup && (
+          <DisplayName />
+        )}
         <Routes>
           <Route path="/" element={<TitleScreen />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
