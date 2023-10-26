@@ -6,10 +6,12 @@ export const UserContext = React.createContext();
 const UserProvider = ({ children }) => {
 
   const [validUser, setValidUser] = useState({});
+  const [displayNamePopup, setDisplayNamePopup] = useState(false);
 
 
   const values = {
     validUser, setValidUser,
+    displayNamePopup, setDisplayNamePopup,
   };
 
   return (
