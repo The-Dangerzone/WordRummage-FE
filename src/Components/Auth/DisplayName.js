@@ -21,7 +21,7 @@ const DisplayName = () => {
   };
 
   const updateUser = async () => {
-    let data = { ...validUser, displayName: displayName };
+    let data = { ...validUser, displayName: displayName, nameCheck: displayName.toLowerCase() };
     try {
       let url = `${process.env.REACT_APP_SERVER}/user/${validUser._id}`;
       // check response of server for success
