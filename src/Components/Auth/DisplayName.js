@@ -14,23 +14,28 @@ const DisplayName = () => {
   const { displayNamePopup, setDisplayNamePopup } = useContext(UserContext);
   const { validUser, setValidUser } = useContext(UserContext);
   const [displayName, setDisplayName] = useState('');
+  const [errorMessage, setErrorMessage] = useState(false);
 
   const handleClose = () => {
     setDisplayNamePopup(false);
   };
 
   const updateUser = async () => {
-    let data = {...validUser, displayName: displayName};
+    let data = { ...validUser, displayName: displayName };
     try {
       let url = `${process.env.REACT_APP_SERVER}/user/${validUser._id}`;
       // check response of server for success
       // send other code if displayName already exists
       // prompt user to choose another name
       let updatedUser = await axios.put(url, data);
-      console.log(updatedUser.data);
+      console.log(updatedUser);
       setValidUser(updatedUser.data);
+      setErrorMessage(false);
       setDisplayNamePopup(false);
+
     } catch (error) {
+      console.log('ERROR DUPLICATE DISPLAYNAME')
+      setErrorMessage(true);
       console.log(error.message);
     }
 
@@ -43,7 +48,9 @@ const DisplayName = () => {
         <DialogTitle>Display Name</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Please input a display name.
+            {
+              errorMessage ? 'Display name exists. Please try again.' : 'Please input a display name.'
+            }
           </DialogContentText>
           <TextField
             autoFocus
