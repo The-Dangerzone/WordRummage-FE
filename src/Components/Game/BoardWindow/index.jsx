@@ -6,6 +6,8 @@ import roundOver from "../../../assets/audio/round_over.mp3";
 import completed from "../../../assets/audio/completed_word.mp3";
 import wordsArray from './wordList';
 import './styles.css';
+import { UserContext } from '../../../Context/User';
+// import axios from 'axios';
 
 const correctAudio = new Audio(correct);
 const incorrectAudio = new Audio(incorrect);
@@ -16,6 +18,10 @@ const [fourLetterWordArray, fiveLetterWordArray, sixLetterWordArray] = wordsArra
 
 function BoardWindow() {
   const [letters, setLetters] = useState([]);
+  const { 
+    validUser, 
+    updateUser,
+   } = useContext(UserContext);
   let tempLetter = [];
 
 
@@ -58,6 +64,21 @@ function BoardWindow() {
 
   const [customFourLetterArray, customFiveLetterArray, customSixLetterArray] = customWordArray;
 
+  // const updateUser = async (data) => {
+  //   try {
+  //     let url = `${process.env.REACT_APP_SERVER}/user/${validUser._id}`;
+  //     // check response of server for success
+  //     // send other code if displayName already exists
+  //     // prompt user to choose another name
+  //     let updatedUser = await axios.put(url, data);
+  //     console.log(updatedUser);
+  //     setValidUser(updatedUser.data);
+
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+
+  // }
 
 
   // Saves BoardSize For Replay Button
@@ -73,6 +94,8 @@ function BoardWindow() {
       }
       setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score, letters: letters }]])
       setGameOver(true);
+      // update user
+      updateUser({ ...validUser, gamesPlayed: validUser.gamesPlayed + 1  });
     }
   }
 
