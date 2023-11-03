@@ -1,5 +1,6 @@
 import { useContext, useEffect, } from "react";
 import { SettingsContext } from "../../Context/Settings";
+import { UserContext } from "../../Context/User";
 import { Link } from "react-router-dom";
 import Rain from "../Rain";
 import "./styles.css";
@@ -9,11 +10,14 @@ const clickAudio = new Audio(click);
 const TitleScreen = () => {
   const { resetGame, effectVolume } = useContext(SettingsContext);
 
+  const { validUser } = useContext(UserContext);
+
   useEffect(() => { 
     resetGame();
   }, []);
 
-
+ 
+  // placeholder handlers
   const handleSinglePlayer = () => {
     clickAudio.currentTime = 0;
     clickAudio.volume = effectVolume / 100;
@@ -44,6 +48,12 @@ const TitleScreen = () => {
     clickAudio.play()
   };
 
+  const handleUserProfile = () => {
+    clickAudio.currentTime = 0;
+    clickAudio.volume = effectVolume / 100;
+    clickAudio.play()
+  };
+
   return (
     <div className="title-screen-container">
       <Rain />
@@ -56,6 +66,12 @@ const TitleScreen = () => {
           <Link to="/multiplayeroptions">
             <button className="pulse-button"  onClick={handleMultiplayer}>Multiplayer</button>
           </Link>
+          { validUser.displayName && 
+          <Link to="/userprofile">
+            <button  className="pulse-button" onClick={handleUserProfile}>Profile</button>
+          </Link>
+          }
+          
         </div>
         <div className="button-group">
           <Link to="/settings">
