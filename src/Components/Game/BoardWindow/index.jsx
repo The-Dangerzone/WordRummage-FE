@@ -96,6 +96,7 @@ function BoardWindow() {
       setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score, letters: letters }]])
       setGameOver(true);
       // update user
+      console.log('VALID USER BEFORE UPDATE ---->', validUser);
       updateUser({ ...validUser, gamesPlayed: validUser.gamesPlayed + 1  });
     }
   }
@@ -615,7 +616,6 @@ function BoardWindow() {
         if (!correctLetters.includes(e.target.id)) {
           setCorrectLetters([...correctLetters, e.target.id]);
           setValidUser({ ...validUser, accuracy: { ...validUser.accuracy, correct: validUser.accuracy.correct + 1 } });
-          console.log('CORRECT LETTER');
         }
         if (correctLetters.length < answer.length - 1) {
           correctAudio.currentTime = 0;
@@ -624,7 +624,8 @@ function BoardWindow() {
         }
       } else {
         e.target.style.backgroundColor = 'red';
-        setIncorrectLetters(incorrectLetters + 1)
+        setIncorrectLetters(incorrectLetters + 1);
+        setValidUser({ ...validUser, accuracy: { ...validUser.accuracy, incorrect: validUser.accuracy.incorrect + 1 } });
         if (score > 0) {
           let tempScore = score - (Math.floor(boardSize / 2))
           if (tempScore > 0) {
