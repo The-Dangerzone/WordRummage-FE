@@ -3,11 +3,16 @@ import { SettingsContext } from '../../../Context/Settings';
 import { Box, Typography } from '@mui/material';
 import './styles.css';
 import click from "../../../assets/audio/button_click.mp3";
+import { UserContext } from '../../../Context/User';
 
 const clickAudio = new Audio(click);
 
 const MultiplierBar = () => {
   const { streak, multiplier, displayScore, setGameOver, effectVolume } = useContext(SettingsContext);
+  const { 
+    validUser,
+    updateUser,
+   } = useContext(UserContext);
   const [showQuitMessage, setShowQuitMessage] = useState(false);
 
   const getBoxColor = (boxIndex) => {
@@ -55,6 +60,7 @@ const MultiplierBar = () => {
     clickAudio.volume = effectVolume / 100;
     clickAudio.play()
     setGameOver(true);
+    updateUser({ ...validUser, gamesPlayed: validUser.gamesPlayed + 1  });
     setShowQuitMessage(false);
   };
 
