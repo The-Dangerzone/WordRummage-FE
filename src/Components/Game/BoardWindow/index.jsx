@@ -19,7 +19,8 @@ const [fourLetterWordArray, fiveLetterWordArray, sixLetterWordArray] = wordsArra
 function BoardWindow() {
   const [letters, setLetters] = useState([]);
   const { 
-    validUser, 
+    validUser,
+    setValidUser, 
     updateUser,
    } = useContext(UserContext);
   let tempLetter = [];
@@ -613,7 +614,8 @@ function BoardWindow() {
         e.target.style.backgroundColor = 'green';
         if (!correctLetters.includes(e.target.id)) {
           setCorrectLetters([...correctLetters, e.target.id]);
-
+          setValidUser({ ...validUser, accuracy: { ...validUser.accuracy, correct: validUser.accuracy.correct + 1 } });
+          console.log('CORRECT LETTER');
         }
         if (correctLetters.length < answer.length - 1) {
           correctAudio.currentTime = 0;
