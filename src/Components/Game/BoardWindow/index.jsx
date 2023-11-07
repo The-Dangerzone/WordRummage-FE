@@ -19,7 +19,8 @@ const [fourLetterWordArray, fiveLetterWordArray, sixLetterWordArray] = wordsArra
 function BoardWindow() {
   const [letters, setLetters] = useState([]);
   const { 
-    validUser, 
+    validUser,
+    setValidUser, 
     updateUser,
    } = useContext(UserContext);
   let tempLetter = [];
@@ -95,7 +96,8 @@ function BoardWindow() {
       setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score, letters: letters }]])
       setGameOver(true);
       // update user
-      updateUser({ ...validUser, gamesPlayed: validUser.gamesPlayed + 1  });
+      console.log('VALID USER BEFORE UPDATE ---->', validUser);
+      updateUser({ ...validUser, gamesPlayed: validUser.gamesPlayed + 1, highScore: Math.max(validUser.highScore, score), maxStreak: Math.max(validUser.maxStreak, maxStreak)  });
     }
   }
 
@@ -613,7 +615,7 @@ function BoardWindow() {
         e.target.style.backgroundColor = 'green';
         if (!correctLetters.includes(e.target.id)) {
           setCorrectLetters([...correctLetters, e.target.id]);
-
+          setValidUser({ ...validUser, accuracy: { ...validUser.accuracy, correct: validUser.accuracy.correct + 1 } });
         }
         if (correctLetters.length < answer.length - 1) {
           correctAudio.currentTime = 0;
@@ -622,7 +624,8 @@ function BoardWindow() {
         }
       } else {
         e.target.style.backgroundColor = 'red';
-        setIncorrectLetters(incorrectLetters + 1)
+        setIncorrectLetters(incorrectLetters + 1);
+        setValidUser({ ...validUser, accuracy: { ...validUser.accuracy, incorrect: validUser.accuracy.incorrect + 1 } });
         if (score > 0) {
           let tempScore = score - (Math.floor(boardSize / 2))
           if (tempScore > 0) {

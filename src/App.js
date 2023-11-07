@@ -12,6 +12,7 @@ import axios from 'axios';
 import { useContext, useEffect } from 'react';
 import { UserContext } from './Context/User';
 import DisplayName from './Components/Auth/DisplayName';
+import UserProfile from './Components/UserProfile';
 
 function App() {
   const { user, isAuthenticated, getIdTokenClaims } = useAuth0();
@@ -80,6 +81,7 @@ function App() {
           <Route path="/multiplayeroptions" element={<MultiplayerOptions />} />
           <Route path="/instructions" element={<Instructions />} />
           <Route path="/game" element={<GameScreen />} />
+          <Route path="/userprofile" element={<UserProfile />} />
         </Routes>
       </BrowserRouter>
     </div>
