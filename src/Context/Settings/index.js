@@ -23,7 +23,7 @@ const SettingsProvider = ({ children }) => {
   const [multiplier, setMultiplier] = useState(1);
   const [maxStreak, setMaxStreak] = useState(0);
   const [eventLog, setEventLog] = useState([]);
-  const [insaneAlphabet, setInsaneAlphabet] = useState(true);
+  const [insaneAlphabet, setInsaneAlphabet] = useState(false);
   const [selectedMode, setSelectedMode] = useState(1);
   const [currentBoardSize, setCurrentBoardSize] = useState(6);
   const [countDownFlag, setCountDownFlag] = useState(false);
