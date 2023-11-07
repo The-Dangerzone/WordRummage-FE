@@ -54,7 +54,7 @@ const SettingsProvider = ({ children }) => {
     setMultiplier(1);
     setMaxStreak(0);
     setEventLog ([]);
-    setInsaneAlphabet(true);
+    setInsaneAlphabet(false);
     setCurrentBoardSize(6);
     setPlayMusic(false);
   }
