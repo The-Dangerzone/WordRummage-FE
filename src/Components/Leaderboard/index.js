@@ -46,10 +46,7 @@ const Leaderboard = () => {
         <h1>Leaderboard</h1>
       </div>
       <div className='under-development'>
-        <h1>Currently Under Development</h1>
-      </div>
-      <div>
-        <table>
+      <table>
           <thead>
             <th>USERNAME</th>
             <th>highScore</th>
