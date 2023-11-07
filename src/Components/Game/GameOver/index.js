@@ -33,13 +33,13 @@ const GameOver = () => {
     setScore(0);
     setRound(1);
     setGameTimer(60);
-    setBoardSize(currentBoardSize);
+    // setBoardSize(currentBoardSize);
     setRoundTimer(0);
     setResetTimer(true);
-    setDisplayTimer(displayTimer);
-    setDisplayRoundTimer(displayRoundTimer);
-    setDisplayScore(displayScore);
-    setAllowBoardGrowth(allowBoardGrowth);
+    // setDisplayTimer(displayTimer);
+    // setDisplayRoundTimer(displayRoundTimer);
+    // setDisplayScore(displayScore);
+    // setAllowBoardGrowth(allowBoardGrowth);
     setAnswer([]);
     setCorrectLetters([]);
     setGameOver(false);
@@ -48,7 +48,7 @@ const GameOver = () => {
     setMultiplier(1);
     setMaxStreak(0);
     setEventLog ([]);
-    setInsaneAlphabet(insaneAlphabet);
+    // setInsaneAlphabet(insaneAlphabet);
     setCountDownFlag(true);
     
   };
