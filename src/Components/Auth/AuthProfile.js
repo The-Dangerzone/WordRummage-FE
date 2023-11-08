@@ -7,9 +7,7 @@ import { UserContext } from '../../Context/User';
 const Profile = () => {
     const { user, isAuthenticated, isLoading } = useAuth0();
     const { validUser } = useContext(UserContext);
-    // if (isAuthenticated) {
-    //     console.log(user);
-    // }
+
 
     if (isLoading) {
         return <div>Loading ...</div>;

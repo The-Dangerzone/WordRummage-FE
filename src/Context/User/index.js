@@ -9,6 +9,7 @@ const UserProvider = ({ children }) => {
   const [validUser, setValidUser] = useState({});
   const [displayNamePopup, setDisplayNamePopup] = useState(false);
   const [leaderboard, setLeaderboard] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 
   const updateUser = async (data) => {
@@ -18,7 +19,6 @@ const UserProvider = ({ children }) => {
       // send other code if displayName already exists
       // prompt user to choose another name
       let updatedUser = await axios.put(url, data);
-      console.log(updatedUser);
       setValidUser(updatedUser.data);
 
     } catch (error) {
@@ -32,6 +32,7 @@ const UserProvider = ({ children }) => {
     displayNamePopup, setDisplayNamePopup,
     updateUser,
     leaderboard, setLeaderboard,
+    isLoggedIn, setIsLoggedIn,
   };
 
   return (

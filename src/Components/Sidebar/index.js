@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -9,9 +9,13 @@ import AuthProfile from '../Auth/AuthProfile';
 
 import './styles.css';
 import LogoutButton from '../Auth/LogoutButton';
+import { UserContext } from '../../Context/User';
+import { SettingsContext } from '../../Context/Settings';
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
+  const { isLoggedIn } = useContext(UserContext);
+  const { inGame } = useContext(SettingsContext);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -50,8 +54,14 @@ const Sidebar = () => {
             <ChevronLeftIcon />
           </IconButton>
         </div>
-        <LoginButton />
-        <LogoutButton />
+        {
+          inGame ?
+            null :
+            isLoggedIn ?
+              <LogoutButton /> :
+              <LoginButton />
+        }
+
         {/* <Button variant="contained" color="primary" fullWidth className="sidebarButton">
           Sign In
         </Button> */}

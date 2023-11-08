@@ -17,11 +17,10 @@ import UserProfile from './Components/UserProfile';
 function App() {
   const { user, isAuthenticated, getIdTokenClaims } = useAuth0();
   const { validUser, setValidUser } = useContext(UserContext);
-  const { displayNamePopup, setDisplayNamePopup } = useContext(UserContext);
+  const { displayNamePopup, setDisplayNamePopup, isLoggedIn, setIsLoggedIn } = useContext(UserContext);
 
   useEffect(() => {
     if (isAuthenticated) {
-          console.log(user);
           postUser();
       }
   }, [isAuthenticated])
@@ -53,10 +52,10 @@ function App() {
 
         let userFromDB = await axios(config);
         setValidUser(userFromDB.data);
-        console.log(userFromDB.data);
         if(!userFromDB.data.displayName){
           displayNameCheck();
         }
+        setIsLoggedIn(true);
 
       } catch (error) {
         console.log(error.message);

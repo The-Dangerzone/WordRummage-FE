@@ -14,7 +14,7 @@ const clickAudio = new Audio(click);
 const AppSettings = () => {
   const { effectVolume, setEffectVolume, musicVolume, setMusicVolume } = useContext(SettingsContext);
   const [muteAll, setMuteAll] = useState(false);
-  console.log('Mute all initial', muteAll);
+  // console.log('Mute all initial', muteAll);
 
 
   const handleClick = () => {
@@ -32,7 +32,7 @@ const AppSettings = () => {
   };
 
   const handleMuteAllChange = () => {
-    console.log('Mute all', muteAll);
+    // console.log('Mute all', muteAll);
     setMuteAll(!muteAll);
     const newVolume = muteAll ? 50 : 0;
     setEffectVolume(newVolume);

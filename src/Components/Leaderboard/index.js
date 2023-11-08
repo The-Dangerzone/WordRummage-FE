@@ -24,7 +24,6 @@ const Leaderboard = () => {
 
   const getLeaderboard = async () => {
     let data = await axios.get(`${process.env.REACT_APP_SERVER}/leaderboard`);
-    console.log(data.data);
     setLeaderboard(data.data);
   }
 

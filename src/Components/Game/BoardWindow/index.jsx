@@ -22,6 +22,7 @@ function BoardWindow() {
     validUser,
     setValidUser, 
     updateUser,
+    isLoggedIn,
    } = useContext(UserContext);
   let tempLetter = [];
 
@@ -60,26 +61,13 @@ function BoardWindow() {
     effectVolume,
     customWordArray,
     customWordFlag,
+    inGame,
+    setInGame,
 
   } = useContext(SettingsContext);
 
   const [customFourLetterArray, customFiveLetterArray, customSixLetterArray] = customWordArray;
 
-  // const updateUser = async (data) => {
-  //   try {
-  //     let url = `${process.env.REACT_APP_SERVER}/user/${validUser._id}`;
-  //     // check response of server for success
-  //     // send other code if displayName already exists
-  //     // prompt user to choose another name
-  //     let updatedUser = await axios.put(url, data);
-  //     console.log(updatedUser);
-  //     setValidUser(updatedUser.data);
-
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-
-  // }
 
 
   // Saves BoardSize For Replay Button
@@ -95,8 +83,8 @@ function BoardWindow() {
       }
       setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score, letters: letters }]])
       setGameOver(true);
+      setInGame(false);
       // update user
-      console.log('VALID USER BEFORE UPDATE ---->', validUser);
       updateUser({ ...validUser, gamesPlayed: validUser.gamesPlayed + 1, highScore: Math.max(validUser.highScore, score), maxStreak: Math.max(validUser.maxStreak, maxStreak)  });
     }
   }
@@ -310,7 +298,7 @@ function BoardWindow() {
 
     let randRow = Math.floor(Math.random() * boardSize);
     let randCol = Math.floor(Math.random() * boardSize);
-    console.log('Word starts at -> ', randRow, randCol);
+    // console.log('Word starts at -> ', randRow, randCol);
 
 
     // if bool1 is false, cant print right
@@ -604,7 +592,6 @@ function BoardWindow() {
       }
     }
     setLetters(board);
-    // console.log('board ->', board);
 
   }
 
@@ -615,7 +602,9 @@ function BoardWindow() {
         e.target.style.backgroundColor = 'green';
         if (!correctLetters.includes(e.target.id)) {
           setCorrectLetters([...correctLetters, e.target.id]);
-          setValidUser({ ...validUser, accuracy: { ...validUser.accuracy, correct: validUser.accuracy.correct + 1 } });
+          if(isLoggedIn){
+            setValidUser({ ...validUser, accuracy: { ...validUser.accuracy, correct: validUser.accuracy.correct + 1 } });
+          }
         }
         if (correctLetters.length < answer.length - 1) {
           correctAudio.currentTime = 0;
@@ -625,7 +614,9 @@ function BoardWindow() {
       } else {
         e.target.style.backgroundColor = 'red';
         setIncorrectLetters(incorrectLetters + 1);
-        setValidUser({ ...validUser, accuracy: { ...validUser.accuracy, incorrect: validUser.accuracy.incorrect + 1 } });
+        if(isLoggedIn){
+          setValidUser({ ...validUser, accuracy: { ...validUser.accuracy, incorrect: validUser.accuracy.incorrect + 1 } });
+        }
         if (score > 0) {
           let tempScore = score - (Math.floor(boardSize / 2))
           if (tempScore > 0) {

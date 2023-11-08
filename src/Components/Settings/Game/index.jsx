@@ -11,7 +11,7 @@ import click from "../../../assets/audio/button_click.mp3";
 const clickAudio = new Audio(click);
 
 const GameSettings = () => {
-  const { setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth, resetGame, insaneAlphabet, setInsaneAlphabet, setSelectedMode, selectedMode, setCountDownFlag, setPlayMusic, effectVolume, customWordFlag, setCustomWordFlag, setCustomWordArray } = useContext(SettingsContext);
+  const { setBoardSize, displayTimer, displayRoundTimer, setDisplayTimer, setDisplayRoundTimer, setDisplayScore, displayScore, allowBoardGrowth, setAllowBoardGrowth, resetGame, insaneAlphabet, setInsaneAlphabet, setSelectedMode, selectedMode, setCountDownFlag, setPlayMusic, effectVolume, customWordFlag, setCustomWordFlag, setCustomWordArray, setInGame, } = useContext(SettingsContext);
 
   const [customWordInput, setCustomWordInput] = useState('');
   useEffect(() => {
@@ -66,6 +66,7 @@ const GameSettings = () => {
     clickAudio.play()
     setCountDownFlag(true);
     setPlayMusic(true);
+    setInGame(true);
     if (customWordFlag) {
       const words = customWordInput.split(' ').filter(word => {
         const trimmedWord = word.trim();
