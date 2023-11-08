@@ -9,6 +9,7 @@ const UserProvider = ({ children }) => {
   const [validUser, setValidUser] = useState({});
   const [displayNamePopup, setDisplayNamePopup] = useState(false);
   const [leaderboard, setLeaderboard] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 
   const updateUser = async (data) => {
@@ -32,6 +33,7 @@ const UserProvider = ({ children }) => {
     displayNamePopup, setDisplayNamePopup,
     updateUser,
     leaderboard, setLeaderboard,
+    isLoggedIn, setIsLoggedIn,
   };
 
   return (

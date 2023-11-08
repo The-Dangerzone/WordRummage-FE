@@ -17,7 +17,7 @@ import UserProfile from './Components/UserProfile';
 function App() {
   const { user, isAuthenticated, getIdTokenClaims } = useAuth0();
   const { validUser, setValidUser } = useContext(UserContext);
-  const { displayNamePopup, setDisplayNamePopup } = useContext(UserContext);
+  const { displayNamePopup, setDisplayNamePopup, isLoggedIn, setIsLoggedIn } = useContext(UserContext);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -57,6 +57,7 @@ function App() {
         if(!userFromDB.data.displayName){
           displayNameCheck();
         }
+        setIsLoggedIn(true);
 
       } catch (error) {
         console.log(error.message);
