@@ -21,7 +21,6 @@ function App() {
 
   useEffect(() => {
     if (isAuthenticated) {
-          console.log(user);
           postUser();
       }
   }, [isAuthenticated])
@@ -53,7 +52,6 @@ function App() {
 
         let userFromDB = await axios(config);
         setValidUser(userFromDB.data);
-        console.log(userFromDB.data);
         if(!userFromDB.data.displayName){
           displayNameCheck();
         }

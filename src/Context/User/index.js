@@ -19,7 +19,6 @@ const UserProvider = ({ children }) => {
       // send other code if displayName already exists
       // prompt user to choose another name
       let updatedUser = await axios.put(url, data);
-      console.log(updatedUser);
       setValidUser(updatedUser.data);
 
     } catch (error) {
