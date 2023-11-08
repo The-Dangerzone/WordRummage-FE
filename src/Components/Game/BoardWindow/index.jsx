@@ -60,6 +60,8 @@ function BoardWindow() {
     effectVolume,
     customWordArray,
     customWordFlag,
+    inGame,
+    setInGame,
 
   } = useContext(SettingsContext);
 
@@ -95,6 +97,7 @@ function BoardWindow() {
       }
       setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score, letters: letters }]])
       setGameOver(true);
+      setInGame(false);
       // update user
       console.log('VALID USER BEFORE UPDATE ---->', validUser);
       updateUser({ ...validUser, gamesPlayed: validUser.gamesPlayed + 1, highScore: Math.max(validUser.highScore, score), maxStreak: Math.max(validUser.maxStreak, maxStreak)  });
