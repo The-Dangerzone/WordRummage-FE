@@ -54,7 +54,8 @@ const Leaderboard = () => {
             return (
               <tr>
                 <td>{user.displayName}</td>
-                <td>{user.highScore}</td>
+                <td>{user.normalMode.highScore}</td>
+                <button>Profile</button>
               </tr>
             )
           })}

@@ -63,6 +63,7 @@ function BoardWindow() {
     customWordFlag,
     inGame,
     setInGame,
+    selectedMode,
 
   } = useContext(SettingsContext);
 
@@ -85,7 +86,11 @@ function BoardWindow() {
       setGameOver(true);
       setInGame(false);
       // update user
-      updateUser({ ...validUser, gamesPlayed: validUser.gamesPlayed + 1, highScore: Math.max(validUser.highScore, score), maxStreak: Math.max(validUser.maxStreak, maxStreak)  });
+      if(selectedMode === 1){
+        updateUser({ ...validUser, normalMode: { ...validUser.normalMode, gamesPlayed: validUser.normalMode.gamesPlayed + 1, highScore: Math.max(validUser.normalMode.highScore, score), maxStreak: Math.max(validUser.normalMode.maxStreak, maxStreak) }});
+      } else if(selectedMode === 2){
+        updateUser({ ...validUser, insaneMode: { ...validUser.insaneMode, gamesPlayed: validUser.insaneMode.gamesPlayed + 1, highScore: Math.max(validUser.insaneMode.highScore, score), maxStreak: Math.max(validUser.insaneMode.maxStreak, maxStreak) }});
+      }
     }
   }
 
@@ -603,7 +608,9 @@ function BoardWindow() {
         if (!correctLetters.includes(e.target.id)) {
           setCorrectLetters([...correctLetters, e.target.id]);
           if(isLoggedIn){
-            setValidUser({ ...validUser, accuracy: { ...validUser.accuracy, correct: validUser.accuracy.correct + 1 } });
+            if(selectedMode === 1){
+              setValidUser({ ...validUser, normalMode: { ...validUser.normalMode, accuracy: { ...validUser.normalMode.accuracy, correct: validUser.normalMode.accuracy.correct + 1 } }});
+            }
           }
         }
         if (correctLetters.length < answer.length - 1) {
@@ -615,7 +622,9 @@ function BoardWindow() {
         e.target.style.backgroundColor = 'red';
         setIncorrectLetters(incorrectLetters + 1);
         if(isLoggedIn){
-          setValidUser({ ...validUser, accuracy: { ...validUser.accuracy, incorrect: validUser.accuracy.incorrect + 1 } });
+          if(selectedMode === 1){
+            setValidUser({ ...validUser, normalMode: { ...validUser.normalMode, accuracy: { ...validUser.normalMode.accuracy, incorrect: validUser.normalMode.accuracy.incorrect + 1 } }});
+          }
         }
         if (score > 0) {
           let tempScore = score - (Math.floor(boardSize / 2))
