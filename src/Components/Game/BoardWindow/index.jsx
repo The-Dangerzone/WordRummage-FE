@@ -87,9 +87,9 @@ function BoardWindow() {
       setInGame(false);
       // update user
       if(selectedMode === 1){
-        updateUser({ ...validUser, normalMode: { ...validUser.normalMode, gamesPlayed: validUser.normalMode.gamesPlayed + 1, highScore: Math.max(validUser.normalMode.highScore, score), maxStreak: Math.max(validUser.normalMode.maxStreak, maxStreak) }});
+        updateUser({ ...validUser, normalMode: { ...validUser.normalMode, gamesPlayed: validUser.normalMode.gamesPlayed + 1, highScore: Math.max(validUser.normalMode.highScore, score), maxStreak: Math.max(validUser.normalMode.maxStreak, maxStreak), highestRound: Math.max(validUser.normalMode.highestRound, round) }});
       } else if(selectedMode === 2){
-        updateUser({ ...validUser, insaneMode: { ...validUser.insaneMode, gamesPlayed: validUser.insaneMode.gamesPlayed + 1, highScore: Math.max(validUser.insaneMode.highScore, score), maxStreak: Math.max(validUser.insaneMode.maxStreak, maxStreak) }});
+        updateUser({ ...validUser, insaneMode: { ...validUser.insaneMode, gamesPlayed: validUser.insaneMode.gamesPlayed + 1, highScore: Math.max(validUser.insaneMode.highScore, score), maxStreak: Math.max(validUser.insaneMode.maxStreak, maxStreak), highestRound: Math.max(validUser.insaneMode.highestRound, round) }});
       }
     }
   }
@@ -133,6 +133,9 @@ function BoardWindow() {
       setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score, letters: letters }]])
       setRound(round + 1);
       setStreak(streak + 1);
+      if(streak > maxStreak){
+        setMaxStreak(streak);
+      }
       if (streak === 2) {
         setMultiplier(2);
       }
