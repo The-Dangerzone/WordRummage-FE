@@ -68,7 +68,7 @@ const TitleScreen = () => {
             <button className="pulse-button"  onClick={handleMultiplayer}>Multiplayer</button>
           </Link>
           { validUser.displayName && 
-          <Link to="/userprofile">
+          <Link to="/userprofile" state={{ user: validUser}}>
             <button  className="pulse-button" onClick={handleUserProfile}>Profile</button>
           </Link>
           }
