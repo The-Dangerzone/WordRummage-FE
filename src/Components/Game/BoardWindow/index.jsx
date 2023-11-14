@@ -610,6 +610,8 @@ function BoardWindow() {
           if(isLoggedIn){
             if(selectedMode === 1){
               setValidUser({ ...validUser, normalMode: { ...validUser.normalMode, accuracy: { ...validUser.normalMode.accuracy, correct: validUser.normalMode.accuracy.correct + 1 } }});
+            } else if(selectedMode === 2){
+              setValidUser({ ...validUser, insaneMode: { ...validUser.insaneMode, accuracy: { ...validUser.insaneMode.accuracy, correct: validUser.insaneMode.accuracy.correct + 1 } }});
             }
           }
         }
@@ -624,6 +626,8 @@ function BoardWindow() {
         if(isLoggedIn){
           if(selectedMode === 1){
             setValidUser({ ...validUser, normalMode: { ...validUser.normalMode, accuracy: { ...validUser.normalMode.accuracy, incorrect: validUser.normalMode.accuracy.incorrect + 1 } }});
+          } else if(selectedMode === 2){
+            setValidUser({ ...validUser, insaneMode: { ...validUser.insaneMode, accuracy: { ...validUser.insaneMode.accuracy, incorrect: validUser.insaneMode.accuracy.incorrect + 1 } }});
           }
         }
         if (score > 0) {

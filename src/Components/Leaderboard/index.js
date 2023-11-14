@@ -14,7 +14,7 @@ const Leaderboard = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { effectVolume } = useContext(SettingsContext);
-  const { leaderboard, setLeaderboard } = useContext(UserContext);
+  const { leaderboard, setLeaderboard, insaneLeaderboard, setInsaneLeaderboard } = useContext(UserContext);
 
   const handleClick = () => {
     clickAudio.currentTime = 0;
@@ -24,7 +24,8 @@ const Leaderboard = () => {
 
   const getLeaderboard = async () => {
     let data = await axios.get(`${process.env.REACT_APP_SERVER}/leaderboard`);
-    setLeaderboard(data.data);
+    setLeaderboard(data.data.normalLeaderboard);
+    setInsaneLeaderboard(data.data.insaneLeaderboard);
   }
 
   useEffect(() => {
@@ -44,17 +45,39 @@ const Leaderboard = () => {
       <div className='leaderboard-title'>
         <h1>Leaderboard</h1>
       </div>
+       {/* change className */}
       <div className='under-development'>
+        <h2>NORMAL MODE</h2>
       <table>
           <thead>
-            <th>USERNAME</th>
-            <th>highScore</th>
+            <th>Username</th>
+            <th>Highscore</th>
           </thead>
           {leaderboard.map(user => {
             return (
               <tr>
                 <td>{user.displayName}</td>
                 <td>{user.normalMode.highScore}</td>
+                <button>Profile</button>
+              </tr>
+            )
+          })}
+        </table>
+      </div>
+
+       {/* change className */}
+       <div className='under-development'>
+        <h2>INSANE MODE</h2>
+      <table>
+          <thead>
+            <th>Username</th>
+            <th>Highscore</th>
+          </thead>
+          {insaneLeaderboard.map(user => {
+            return (
+              <tr>
+                <td>{user.displayName}</td>
+                <td>{user.insaneMode.highScore}</td>
                 <button>Profile</button>
               </tr>
             )
