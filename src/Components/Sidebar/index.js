@@ -11,6 +11,7 @@ import './styles.css';
 import LogoutButton from '../Auth/LogoutButton';
 import { UserContext } from '../../Context/User';
 import { SettingsContext } from '../../Context/Settings';
+import { Alert } from '@mui/material';
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
@@ -28,16 +29,22 @@ const Sidebar = () => {
   return (
     <div className="root">
       {!open && (
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          onClick={handleDrawerOpen}
-          className="menuButton"
-          sx={{ backgroundColor: 'rgb(33, 70, 40)', border: '2px solid black' }}
+        <>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            className="menuButton"
+            sx={{ backgroundColor: 'rgb(33, 70, 40)', border: '2px solid black' }}
 
-        >
-          <MenuIcon />
-        </IconButton>
+          >
+            <MenuIcon />
+          </IconButton>
+          {
+            !isLoggedIn &&
+            <Alert severity='info'>Log in to save stats!</Alert>
+          }
+        </>
       )}
       <Drawer
         className={`drawer ${open ? 'transparentDrawer' : ''}`}
