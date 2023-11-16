@@ -45,43 +45,59 @@ const Leaderboard = () => {
       <div className='leaderboard-title'>
         <h1>Leaderboard</h1>
       </div>
-       {/* change className */}
+      {/* change className */}
       <div className='under-development'>
         <h2>NORMAL MODE</h2>
-      <table>
+        <table>
           <thead>
-            <th>Username</th>
-            <th>Highscore</th>
+            <tr>
+              <th>Username</th>
+              <th>Highscore</th>
+            </tr>
           </thead>
-          {leaderboard.map(user => {
-            return (
-              <tr>
-                <td>{user.displayName}</td>
-                <td>{user.normalMode.highScore}</td>
-                <button>Profile</button>
-              </tr>
-            )
-          })}
+          <tbody>
+            {leaderboard.map((user, idx) => {
+              return (
+                <tr key={idx}>
+                  <td>{user.displayName}</td>
+                  <td>{user.normalMode.highScore}</td>
+                  <td>
+                    <Link to="/userprofile" state={{ user }}>
+                      Profile
+                    </Link>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
         </table>
       </div>
 
-       {/* change className */}
-       <div className='under-development'>
+      {/* change className */}
+      <div className='under-development'>
         <h2>INSANE MODE</h2>
-      <table>
+        <table>
           <thead>
-            <th>Username</th>
-            <th>Highscore</th>
+            <tr>
+              <th>Username</th>
+              <th>Highscore</th>
+            </tr>
           </thead>
-          {insaneLeaderboard.map(user => {
-            return (
-              <tr>
-                <td>{user.displayName}</td>
-                <td>{user.insaneMode.highScore}</td>
-                <button>Profile</button>
-              </tr>
-            )
-          })}
+          <tbody>
+            {insaneLeaderboard.map((user, idx) => {
+              return (
+                <tr key={idx}>
+                  <td>{user.displayName}</td>
+                  <td>{user.insaneMode.highScore}</td>
+                  <td>
+                    <Link to="/userprofile" state={{ user }}>
+                      Profile
+                    </Link>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
         </table>
       </div>
 
