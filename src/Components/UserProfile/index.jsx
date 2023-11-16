@@ -7,6 +7,7 @@ import click from "../../assets/audio/button_click.mp3";
 import "./styles.css"
 import DisplayName from "../Auth/DisplayName";
 import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const clickAudio = new Audio(click);
 
@@ -17,6 +18,7 @@ const UserProfile = () => {
   const { user } = location.state;
   const { effectVolume } = useContext(SettingsContext);
   const { validUser, setValidUser, displayNamePopup, setDisplayNamePopup } = useContext(UserContext);
+  const { logout } = useAuth0();
 
   const handleClick = () => {
     clickAudio.currentTime = 0;
@@ -28,13 +30,18 @@ const UserProfile = () => {
     setDisplayNamePopup(true);
   }
 
+
   const navigate = useNavigate();
 
   const handleDeleteUser = async () => {
-    navigate('/');
-    setValidUser({});
-    setDisplayNamePopup(true);
-    await axios.delete(`${process.env.REACT_APP_SERVER}/delete/${validUser._id}`);
+    try {
+      logout();
+      navigate('/');
+      setValidUser({});
+      await axios.delete(`${process.env.REACT_APP_SERVER}/delete/${validUser._id}`);
+    } catch (error) {
+      console.log(error);  
+    }
   }
 
   return (
