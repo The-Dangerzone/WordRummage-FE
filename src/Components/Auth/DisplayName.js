@@ -8,6 +8,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const DisplayName = () => {
@@ -20,6 +21,8 @@ const DisplayName = () => {
     setDisplayNamePopup(false);
   };
 
+  const navigate = useNavigate();
+
   const updateUser = async () => {
     let data = { ...validUser, displayName: displayName, nameCheck: displayName.toLowerCase() };
     try {
@@ -31,6 +34,7 @@ const DisplayName = () => {
       setValidUser(updatedUser.data);
       setErrorMessage(false);
       setDisplayNamePopup(false);
+      navigate('/');
 
     } catch (error) {
       console.log('ERROR DUPLICATE DISPLAYNAME')

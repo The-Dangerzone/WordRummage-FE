@@ -18,12 +18,12 @@ const [fourLetterWordArray, fiveLetterWordArray, sixLetterWordArray] = wordsArra
 
 function BoardWindow() {
   const [letters, setLetters] = useState([]);
-  const { 
+  const {
     validUser,
-    setValidUser, 
+    setValidUser,
     updateUser,
     isLoggedIn,
-   } = useContext(UserContext);
+  } = useContext(UserContext);
   let tempLetter = [];
 
 
@@ -86,10 +86,12 @@ function BoardWindow() {
       setGameOver(true);
       setInGame(false);
       // update user
-      if(selectedMode === 1){
-        updateUser({ ...validUser, normalMode: { ...validUser.normalMode, gamesPlayed: validUser.normalMode.gamesPlayed + 1, highScore: Math.max(validUser.normalMode.highScore, score), maxStreak: Math.max(validUser.normalMode.maxStreak, maxStreak), highestRound: Math.max(validUser.normalMode.highestRound, round) }});
-      } else if(selectedMode === 2){
-        updateUser({ ...validUser, insaneMode: { ...validUser.insaneMode, gamesPlayed: validUser.insaneMode.gamesPlayed + 1, highScore: Math.max(validUser.insaneMode.highScore, score), maxStreak: Math.max(validUser.insaneMode.maxStreak, maxStreak), highestRound: Math.max(validUser.insaneMode.highestRound, round) }});
+      if (isLoggedIn) {
+        if (selectedMode === 1) {
+          updateUser({ ...validUser, normalMode: { ...validUser.normalMode, gamesPlayed: validUser.normalMode.gamesPlayed + 1, highScore: Math.max(validUser.normalMode.highScore, score), maxStreak: Math.max(validUser.normalMode.maxStreak, maxStreak), highestRound: Math.max(validUser.normalMode.highestRound, round) } });
+        } else if (selectedMode === 2) {
+          updateUser({ ...validUser, insaneMode: { ...validUser.insaneMode, gamesPlayed: validUser.insaneMode.gamesPlayed + 1, highScore: Math.max(validUser.insaneMode.highScore, score), maxStreak: Math.max(validUser.insaneMode.maxStreak, maxStreak), highestRound: Math.max(validUser.insaneMode.highestRound, round) } });
+        }
       }
     }
   }
@@ -133,7 +135,7 @@ function BoardWindow() {
       setEventLog([...eventLog, [{ round: round, targetWord: answer.join(''), score: score, letters: letters }]])
       setRound(round + 1);
       setStreak(streak + 1);
-      if(streak > maxStreak){
+      if (streak > maxStreak) {
         setMaxStreak(streak);
       }
       if (streak === 2) {
@@ -185,7 +187,7 @@ function BoardWindow() {
     } else {
       if (customWordFlag) {
         if (customSixLetterArray.length > 0 && customFiveLetterArray.length > 0) {
-        
+
           const randomIndex = Math.floor(Math.random() * 3);
           if (randomIndex === 0) {
             selectedArray = customFourLetterArray;
@@ -610,11 +612,11 @@ function BoardWindow() {
         e.target.style.backgroundColor = 'green';
         if (!correctLetters.includes(e.target.id)) {
           setCorrectLetters([...correctLetters, e.target.id]);
-          if(isLoggedIn){
-            if(selectedMode === 1){
-              setValidUser({ ...validUser, normalMode: { ...validUser.normalMode, accuracy: { ...validUser.normalMode.accuracy, correct: validUser.normalMode.accuracy.correct + 1 } }});
-            } else if(selectedMode === 2){
-              setValidUser({ ...validUser, insaneMode: { ...validUser.insaneMode, accuracy: { ...validUser.insaneMode.accuracy, correct: validUser.insaneMode.accuracy.correct + 1 } }});
+          if (isLoggedIn) {
+            if (selectedMode === 1) {
+              setValidUser({ ...validUser, normalMode: { ...validUser.normalMode, accuracy: { ...validUser.normalMode.accuracy, correct: validUser.normalMode.accuracy.correct + 1 } } });
+            } else if (selectedMode === 2) {
+              setValidUser({ ...validUser, insaneMode: { ...validUser.insaneMode, accuracy: { ...validUser.insaneMode.accuracy, correct: validUser.insaneMode.accuracy.correct + 1 } } });
             }
           }
         }
@@ -626,11 +628,11 @@ function BoardWindow() {
       } else {
         e.target.style.backgroundColor = 'red';
         setIncorrectLetters(incorrectLetters + 1);
-        if(isLoggedIn){
-          if(selectedMode === 1){
-            setValidUser({ ...validUser, normalMode: { ...validUser.normalMode, accuracy: { ...validUser.normalMode.accuracy, incorrect: validUser.normalMode.accuracy.incorrect + 1 } }});
-          } else if(selectedMode === 2){
-            setValidUser({ ...validUser, insaneMode: { ...validUser.insaneMode, accuracy: { ...validUser.insaneMode.accuracy, incorrect: validUser.insaneMode.accuracy.incorrect + 1 } }});
+        if (isLoggedIn) {
+          if (selectedMode === 1) {
+            setValidUser({ ...validUser, normalMode: { ...validUser.normalMode, accuracy: { ...validUser.normalMode.accuracy, incorrect: validUser.normalMode.accuracy.incorrect + 1 } } });
+          } else if (selectedMode === 2) {
+            setValidUser({ ...validUser, insaneMode: { ...validUser.insaneMode, accuracy: { ...validUser.insaneMode.accuracy, incorrect: validUser.insaneMode.accuracy.incorrect + 1 } } });
           }
         }
         if (score > 0) {
