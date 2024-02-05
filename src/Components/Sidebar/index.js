@@ -54,6 +54,7 @@ const Sidebar = () => {
         classes={{
           paper: 'drawerPaper',
         }}
+        sx={{}}
       >
         <div className="drawerHeader">
           <AuthProfile />
@@ -61,13 +62,15 @@ const Sidebar = () => {
             <ChevronLeftIcon />
           </IconButton>
         </div>
-        {
-          inGame ?
-            null :
-            isLoggedIn ?
-              <LogoutButton /> :
-              <LoginButton />
-        }
+        <div className='drawer-button'>
+          {
+            inGame ?
+              null :
+              isLoggedIn ?
+                <LogoutButton /> :
+                <LoginButton />
+          }
+        </div>
 
         {/* <Button variant="contained" color="primary" fullWidth className="sidebarButton">
           Sign In

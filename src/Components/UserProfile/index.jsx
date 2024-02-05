@@ -51,8 +51,8 @@ const UserProfile = () => {
       {
         validUser.displayName === user.displayName &&
         <div>
-          <button onClick={handleChangeName}>Change Name</button>
-          <button onClick={handleDeleteUser}>Delete User</button>
+          <button className='pulse-button' onClick={handleChangeName}>Change Name</button>
+          <button className='pulse-button' onClick={handleDeleteUser}>Delete User</button>
         </div>
       }
 
