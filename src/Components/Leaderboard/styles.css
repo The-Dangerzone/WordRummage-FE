@@ -83,4 +83,5 @@
   font-size: clamp(.8rem, 2vw, 1.2rem);
   border-bottom: 1px solid white;
   align-items: center;
+  
 }
