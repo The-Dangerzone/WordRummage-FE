@@ -56,26 +56,36 @@ const Leaderboard = () => {
         <div className='leaderboard-wrapper'>
           <div className='leaderboard'>
             <h2>NORMAL MODE</h2>
-            {leaderboard.map((user, idx) => (
-              <div key={idx} className='leaderboard-item'>
-                <Link to="/userprofile" state={{ user }} style={{ color: 'white' }}>
-                  {user.displayName}
-                </Link>
-                <span>{user.normalMode.highScore}</span>
-              </div>
-            ))}
+            {/* Need to test the slice at some point */}
+            {leaderboard
+              .filter(user => user.normalMode.highScore > 0)
+              .sort((a, b) => b.normalMode.highScore - a.normalMode.highScore)
+              .slice(0, 10)
+              .map((user, idx) => (
+                <div key={idx} className='leaderboard-item'>
+                  <Link to="/userprofile" state={{ user }} style={{ color: 'white' }}>
+                    {user.displayName}
+                  </Link>
+                  <span>{user.normalMode.highScore}</span>
+                </div>
+              ))}
           </div>
 
           <div className='leaderboard'>
             <h2>INSANE MODE</h2>
-            {insaneLeaderboard.map((user, idx) => (
-              <div key={idx} className='leaderboard-item'>
-                <Link to="/userprofile" state={{ user }} style={{ color: 'white' }}>
-                  {user.displayName}
-                </Link>
-                <span>{user.insaneMode.highScore}</span>
-              </div>
-            ))}
+            {/* Need to test the slice at some point */}
+            {insaneLeaderboard
+              .filter(user => user.insaneMode.highScore > 0)
+              .sort((a, b) => b.insaneMode.highScore - a.insaneMode.highScore)
+              .slice(0, 10)
+              .map((user, idx) => (
+                <div key={idx} className='leaderboard-item'>
+                  <Link to="/userprofile" state={{ user }} style={{ color: 'white' }}>
+                    {user.displayName}
+                  </Link>
+                  <span>{user.insaneMode.highScore}</span>
+                </div>
+              ))}
           </div>
         </div>
       )}
