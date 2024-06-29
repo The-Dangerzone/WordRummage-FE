@@ -10,8 +10,8 @@ import { UserContext } from '../../Context/User';
 const clickAudio = new Audio(click);
 
 const Leaderboard = () => {
-
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const { effectVolume } = useContext(SettingsContext);
   const { leaderboard, setLeaderboard, insaneLeaderboard, setInsaneLeaderboard } = useContext(UserContext);
@@ -23,19 +23,21 @@ const Leaderboard = () => {
   };
 
   const getLeaderboard = async () => {
-    let data = await axios.get(`${process.env.REACT_APP_SERVER}/leaderboard`);
-    setLeaderboard(data.data.normalLeaderboard);
-    setInsaneLeaderboard(data.data.insaneLeaderboard);
-  }
+    try {
+      let data = await axios.get(`${process.env.REACT_APP_SERVER}/leaderboard`);
+      setLeaderboard(data.data.normalLeaderboard);
+      setInsaneLeaderboard(data.data.insaneLeaderboard);
+    } catch (err) {
+      setError('Failed to load leaderboard data');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
     setIsLoading(true);
     getLeaderboard();
-    setIsLoading(false);
   }, []);
-
-
-
 
   return (
     <div className='leaderboard-container'>
@@ -45,65 +47,42 @@ const Leaderboard = () => {
       <div className='leaderboard-title'>
         <h1>Leaderboard</h1>
       </div>
-      {/* change className */}
-      <div className='under-development'>
-        <h2>NORMAL MODE</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Username</th>
-              <th>Highscore</th>
-            </tr>
-          </thead>
-          <tbody>
-            {leaderboard.map((user, idx) => {
-              return (
-                <tr key={idx}>
-                  <td>{user.displayName}</td>
-                  <td>{user.normalMode.highScore}</td>
-                  <td>
-                    <Link to="/userprofile" state={{ user }}>
-                      Profile
-                    </Link>
-                  </td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </div>
 
-      {/* change className */}
-      <div className='under-development'>
-        <h2>INSANE MODE</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Username</th>
-              <th>Highscore</th>
-            </tr>
-          </thead>
-          <tbody>
-            {insaneLeaderboard.map((user, idx) => {
-              return (
-                <tr key={idx}>
-                  <td>{user.displayName}</td>
-                  <td>{user.insaneMode.highScore}</td>
-                  <td>
-                    <Link to="/userprofile" state={{ user }}>
-                      Profile
-                    </Link>
-                  </td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </div>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : error ? (
+        <div>{error}</div>
+      ) : (
+        <div className='leaderboard-wrapper'>
+          <div className='leaderboard'>
+            <h2>NORMAL MODE</h2>
+            {leaderboard.map((user, idx) => (
+              <div key={idx} className='leaderboard-item'>
+                <Link to="/userprofile" state={{ user }} style={{ color: 'white' }}>
+                  {user.displayName}
+                </Link>
+                <span>{user.normalMode.highScore}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className='leaderboard'>
+            <h2>INSANE MODE</h2>
+            {insaneLeaderboard.map((user, idx) => (
+              <div key={idx} className='leaderboard-item'>
+                <Link to="/userprofile" state={{ user }} style={{ color: 'white' }}>
+                  {user.displayName}
+                </Link>
+                <span>{user.insaneMode.highScore}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       <Link to="/"><button className="pulse-button" onClick={handleClick}>Back</button></Link>
     </div>
   );
-}
+};
 
 export default Leaderboard;

@@ -4,10 +4,12 @@
   align-items: center;
   height: 100vh;
   background: rgb(55, 106, 75);
-  
+  padding: 1rem;
+  box-sizing: border-box;
+  overflow: auto;
 }
 
-.leaderboard-rain-container{
+.leaderboard-rain-container {
   position: absolute;
   top: 0;
   left: 0;
@@ -16,7 +18,7 @@
   z-index: 0; 
 }
 
-.leaderboard-title{
+.leaderboard-title {
   background: rgb(33, 70, 40);
   display: flex;
   flex-direction: column;
@@ -25,16 +27,35 @@
   color: white;
   border: 3px solid black;
   border-radius: 10px;
-  width: 33vw;
+  width: 90%;
+  max-width: 600px;
   box-shadow: 0 0 10px black;
   overflow: hidden;
   z-index: 1;
-  margin: 30px;
+  margin: 20px 0;
   user-select: none;
-  font-size: 25px;
+  font-size: clamp(2rem, 2vw, 1.5rem);
+  padding: 0.5rem;
+  text-align: center;
 }
 
-.under-development{
+.leaderboard-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  z-index: 1;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .leaderboard-wrapper {
+    flex-direction: row;
+  }
+}
+
+.leaderboard {
   background: rgb(33, 70, 40);
   display: flex;
   flex-direction: column;
@@ -43,11 +64,22 @@
   color: white;
   border: 3px solid black;
   border-radius: 10px;
-  width: 66vw;
+  width: 100%;
+  max-width: 45%;
   box-shadow: 0 0 10px black;
   overflow: hidden;
-  z-index: 1;
-  margin: 30px;
   user-select: none;
-  font-size: 25px;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.leaderboard-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr auto;
+  width: 100%;
+  padding: 0.5rem;
+  font-size: clamp(0.8rem, 2vw, 1.2rem);
+  border-bottom: 1px solid white;
+  align-items: center;
 }
