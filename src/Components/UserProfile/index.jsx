@@ -30,23 +30,33 @@ const UserProfile = () => {
   }
 
   const handleDeleteUser = async () => {
-    try {
-      logout();
-      navigate('/');
-      setValidUser({});
-      await axios.delete(`${process.env.REACT_APP_SERVER}/delete/${validUser._id}`);
-    } catch (error) {
-      console.log(error);  
+    // Display confirmation dialog
+    const confirmDelete = window.confirm("Are you sure you want to delete your account?");
+    
+    if (confirmDelete) {
+      try {
+        // Perform logout
+        logout();
+        // Navigate back to home
+        navigate('/');
+        // Clear user context
+        setValidUser({});
+        // Delete user from server
+        await axios.delete(`${process.env.REACT_APP_SERVER}/delete/${validUser._id}`);
+      } catch (error) {
+        console.log(error);  
+      }
     }
   }
 
   return (
     <div className="user-profile">
-      <h1>{user.displayName}</h1>
+      <h1 className="display-name">{user.displayName}</h1>
       {validUser.displayName === user.displayName && (
         <div>
           <button className='pulse-button' onClick={handleChangeName}>Change Name</button>
-          <button className='pulse-button' onClick={handleDeleteUser}>Delete User</button>
+          {/* Add confirmation to delete button */}
+          <button className='pulse-button' onClick={handleDeleteUser}>Delete Account</button>
         </div>
       )}
 
@@ -55,7 +65,7 @@ const UserProfile = () => {
       )}
       <div className="user-stats-container">
         <div className="user-stats">
-          <h2>Normal Mode Stats</h2>
+          <h2 className="stats-title">Normal Mode Stats</h2>
           <div className="user-accuracy">
             <p>Correct Letters Clicked: {user.normalMode.accuracy.correct}</p>
             <p>Incorrect Letters Clicked: {user.normalMode.accuracy.incorrect}</p>
@@ -66,9 +76,9 @@ const UserProfile = () => {
           </div>
         </div>
         <div className="user-stats">
-          <h2>Insane Mode Stats</h2>
+          <h2 className="stats-title">Insane Mode Stats</h2>
           <div className="user-accuracy">
-          <p>Correct Letters Clicked: {user.insaneMode.accuracy.correct}</p>
+            <p>Correct Letters Clicked: {user.insaneMode.accuracy.correct}</p>
             <p>Incorrect Letters Clicked: {user.insaneMode.accuracy.incorrect}</p>
             <p>Correct Accuracy Percentage: {user.insaneMode.accuracy.percentage}%</p>
             <p>Highest Score: {user.insaneMode.highScore}</p>
@@ -77,9 +87,9 @@ const UserProfile = () => {
           </div>
         </div>
         <div className="user-stats">
-          <h2>Custom Mode Stats</h2>
+          <h2 className="stats-title">Custom Mode Stats</h2>
           <div className="user-accuracy">
-          <p>Correct Letters Clicked: {user.customMode.accuracy.correct}</p>
+            <p>Correct Letters Clicked: {user.customMode.accuracy.correct}</p>
             <p>Incorrect Letters Clicked: {user.customMode.accuracy.incorrect}</p>
             <p>Correct Accuracy Percentage: {user.customMode.accuracy.percentage}%</p>
             <p>Highest Score: {user.customMode.highScore}</p>
@@ -94,3 +104,4 @@ const UserProfile = () => {
 };
 
 export default UserProfile;
+

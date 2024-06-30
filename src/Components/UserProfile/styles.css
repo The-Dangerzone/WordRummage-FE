@@ -42,13 +42,34 @@
   font-size: clamp(1rem, 2vw, 1.5rem);
   padding: 2rem;
   margin: 1rem;
-  min-height: 400px; /* Adjust height as needed */
+  min-height: 400px;
+  position: relative; /* Ensure relative positioning for the ::after pseudo-element */
+  text-align: center; /* Center align text */
+}
+
+.user-stats h2 {
+  position: relative; /* Ensure relative positioning for the ::after pseudo-element */
+}
+
+.user-stats h2::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px; /* Adjust thickness of the underline */
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 
 .user-accuracy {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  text-align: center;
+  text-align: left;
 }
-
+.display-name {
+  font-size: 4rem; /* Adjust as needed */
+  margin-bottom: 1rem; /* Optional: Adds space between h1 and buttons */
+  user-select: none;
+}
