@@ -69,6 +69,14 @@
   text-align: left;
 }
 .display-name {
+  background: rgb(33, 70, 40);
+  align-items: center;
+  color: white;
+  border: 3px solid black;
+  padding: 2rem;
+  margin: 1rem;
+  border-radius: 10px;
+  position: relative;
   font-size: 4rem; /* Adjust as needed */
   margin-bottom: 1rem; /* Optional: Adds space between h1 and buttons */
   user-select: none;
