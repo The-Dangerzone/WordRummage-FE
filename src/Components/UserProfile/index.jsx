@@ -8,6 +8,7 @@ import "./styles.css";
 import DisplayName from "../Auth/DisplayName";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
+import Rain from '../Rain';
 
 const clickAudio = new Audio(click);
 
@@ -51,6 +52,9 @@ const UserProfile = () => {
 
   return (
     <div className="user-profile">
+      <div className='leaderboard-rain-container'>
+        <Rain />
+      </div>
       <h1 className="display-name">{user.displayName}</h1>
       {validUser.displayName === user.displayName && (
         <div>
